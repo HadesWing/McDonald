@@ -191,7 +191,7 @@ tests/                    单元测试
 
 ## 参赛
 
-本项目参加**麦当劳程序员节创意开发大赛**，基于麦当劳官方 MCP Server 开发，非麦当劳官方产品。详细声明见 [CONTEST_DECLARATION.md](CONTEST_DECLARATION.md)，MCP 对接说明见 [docs/MCP_INTEGRATION.md](docs/MCP_INTEGRATION.md)。
+本项目参加**麦当劳程序员节创意开发大赛**，基于麦当劳官方 MCP Server 开发，非麦当劳官方产品。详细声明见 [CONTEST_DECLARATION.md](CONTEST_DECLARATION.md)，MCP 对接说明见 [MCP_INTEGRATION.md](MCP_INTEGRATION.md)，WorkBuddy 开发上下文见 [workbuddy.md](workbuddy.md)。
 
 餐品信息、价格与供应状态以麦当劳官方渠道实时结果为准。
 
