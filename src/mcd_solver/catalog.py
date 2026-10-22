@@ -67,8 +67,11 @@ def _yuan_to_cents(value: Any) -> int:
 
 def load_snapshot(path: str | Path) -> dict:
     """读取快照并转成运行期对象。"""
-    data = json.loads(Path(path).read_text(encoding="utf-8"))
+    return parse_snapshot(json.loads(Path(path).read_text(encoding="utf-8")))
 
+
+def parse_snapshot(data: dict) -> dict:
+    """把快照 dict（磁盘格式或 MCP 实时抓取结果）转成运行期对象。"""
     items: list[MenuItem] = []
     for raw in data.get("items", []):
         items.append(

@@ -202,6 +202,43 @@ def cmd_fetch(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_compare(args: argparse.Namespace) -> int:
+    """跨门店比价：同一份套餐，各家卖多少钱。"""
+    from .compare import build_cross, render_cross, store_payload
+
+    stores = []
+    for spec in args.data:
+        raw, _, label = spec.partition(":")
+        p = Path(raw)
+        label = label or p.stem.replace("store_", "")
+        stores.append(store_payload(load_snapshot(p), label))
+
+    if len(stores) < 2:
+        print("至少给两家门店：--data a.json --data b.json")
+        return 1
+
+    print("=" * 78)
+    for s in stores:
+        st = s["stats"]
+        print(
+            f"{s['label']:<10} {s['meta'].get('store', '')}"
+            f"｜套餐 {st['total']}｜可比 {st['comparable']}｜零折扣 {st['zero']}（{st['zero_ratio']}%）"
+        )
+    print("=" * 78)
+    print(render_cross(build_cross(stores), [s["label"] for s in stores]))
+    print("=" * 78)
+    print("口径：只比同名套餐；两边都必须是官方 calculate-price 报价。")
+    return 0
+
+
+def cmd_serve(args: argparse.Namespace) -> int:
+    """起一个本地服务：静态页 + 现场抓取接口。"""
+    from .serve import serve
+
+    serve(host=args.host, port=args.port)
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="mcd-solver",
@@ -252,6 +289,21 @@ def build_parser() -> argparse.ArgumentParser:
     c.add_argument("--endpoint", default="https://mcp.mcd.cn")
     c.add_argument("--limit", type=int, default=4000, help="输出截断长度")
     c.set_defaults(func=cmd_call)
+
+    cp = sub.add_parser("compare", help="跨门店比价：同一份套餐各家卖多少钱")
+    cp.add_argument(
+        "--data",
+        action="append",
+        required=True,
+        metavar="PATH[:LABEL]",
+        help="门店快照，可重复，至少两个；支持 path:标签",
+    )
+    cp.set_defaults(func=cmd_compare)
+
+    sv = sub.add_parser("serve", help="起本地实时服务：静态页 + 现场抓取接口")
+    sv.add_argument("--host", default="127.0.0.1")
+    sv.add_argument("--port", type=int, default=8765)
+    sv.set_defaults(func=cmd_serve)
     return parser
 
 

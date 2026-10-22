@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>套餐刺客 · 36 个套餐里有几个在刺你</title>
+<title>套餐刺客 · 同一份套餐，两家店差多少钱</title>
 <style>
   :root {
     --bg: #fbfaf7;
@@ -45,7 +45,7 @@
     font-size: 15px;
     line-height: 1.65;
   }
-  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 20px 80px; }
 
   header { padding: 56px 0 32px; border-bottom: 1px solid var(--line); }
   .kicker {
@@ -54,12 +54,62 @@
   }
   h1 { font-size: 38px; line-height: 1.22; margin: 0 0 16px; font-weight: 700; letter-spacing: -.02em; }
   h1 em { font-style: normal; color: var(--mcd); }
-  .lede { font-size: 16px; color: var(--muted); margin: 0; max-width: 62ch; }
+  .lede { font-size: 16px; color: var(--muted); margin: 0; max-width: 64ch; }
   .lede b { color: var(--ink); font-weight: 600; }
   .snap { font-size: 12px; color: var(--muted); margin: 14px 0 0; }
   .snap b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
 
-  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0 8px; }
+  .live {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    margin: 18px 0 0; padding: 10px 14px; border-radius: 10px;
+    background: var(--save-bg); border: 1px solid rgba(31, 122, 77, .22);
+    font-size: 13px;
+  }
+  .live.off { background: var(--card); border-color: var(--line); color: var(--muted); }
+  .live .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--save); flex: none; }
+  .live.off .dot { background: var(--gray-bar); }
+  .live b { font-weight: 600; }
+  .live input {
+    font: inherit; font-size: 13px; padding: 5px 10px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--bg); color: var(--ink); width: 120px;
+  }
+  .live button {
+    font: inherit; font-size: 13px; padding: 5px 14px; border-radius: 8px; cursor: pointer;
+    border: 1px solid var(--mcd); background: var(--mcd); color: #fff;
+  }
+  .live button[disabled] { opacity: .55; cursor: default; }
+  .live code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+  .live .msg { color: var(--muted); }
+
+  h2.sec { font-size: 19px; margin: 44px 0 6px; font-weight: 650; letter-spacing: -.01em; }
+  .sub { font-size: 13px; color: var(--muted); margin: 0 0 14px; }
+
+  .cross { border-top: 1px solid var(--line); }
+  .cr {
+    display: grid; gap: 8px; align-items: center;
+    padding: 9px 2px; border-bottom: 1px solid var(--line-soft); font-size: 13.5px;
+  }
+  .cr.h { color: var(--muted); font-size: 11.5px; letter-spacing: .03em; padding-bottom: 6px; }
+  .cr .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cr .p { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+  .cr .p.hi { color: var(--mcd); font-weight: 600; }
+  .cr .p.lo { color: var(--save); font-weight: 600; }
+  .cr .d { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; color: var(--mcd); }
+  .more {
+    display: inline-block; margin-top: 12px; font-size: 12.5px; color: var(--muted);
+    border: 1px solid var(--line); background: transparent; border-radius: 999px;
+    padding: 4px 14px; cursor: pointer; font-family: inherit;
+  }
+
+  .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 20px 0 0; }
+  .tab {
+    font: inherit; font-size: 13px; padding: 6px 15px; border-radius: 999px;
+    border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer;
+  }
+  .tab[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+  .tab .k { font-size: 11px; opacity: .65; margin-left: 5px; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0 8px; }
   .stat { background: var(--card); border: 1px solid var(--line-soft); border-radius: 12px; padding: 16px 18px; }
   .stat .num { font-size: 30px; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
   .stat .num small { font-size: 15px; font-weight: 500; color: var(--muted); margin-left: 2px; }
@@ -67,7 +117,7 @@
   .stat.hot .num { color: var(--mcd); }
   .stat.good .num { color: var(--save); }
 
-  .toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin: 32px 0 14px; align-items: center; }
+  .toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin: 28px 0 14px; align-items: center; }
   .toolbar .hint { font-size: 12.5px; color: var(--muted); margin-left: auto; }
   button.f {
     font: inherit; font-size: 13px; padding: 6px 14px; border-radius: 999px;
@@ -147,6 +197,8 @@
     .row .v.c1::before { content: "套餐 "; }
     .row .v.c2::before { content: "单点 "; }
     .row .v.c3::before { content: "差 "; }
+    .cr { font-size: 12.5px; gap: 5px; }
+    .cr .nm { white-space: normal; }
   }
 </style>
 </head>
@@ -155,11 +207,20 @@
 
 <header>
   <div class="kicker">Combo Assassin · 套餐刺客</div>
-  <h1><span id="h1-total">36</span> 个套餐，<br><em><span id="h1-zero">11</span> 个在刺你。</em></h1>
+  <h1>同一份套餐，<br><em id="h1-gap">两家店差 26.10 元。</em></h1>
   <p class="lede" id="lede"></p>
   <p class="snap" id="snap"></p>
+  <div class="live" id="live" hidden></div>
 </header>
 
+<h2 class="sec">跨店比价：同一份套餐，你在哪家买</h2>
+<p class="sub" id="cross-sub"></p>
+<div class="cross" id="cross"></div>
+<button class="more" id="cross-more" hidden>展开全部</button>
+
+<h2 class="sec">分店审计：套餐到底有没有便宜</h2>
+<p class="sub">同样的东西单点一遍要多少钱，和套餐价一比就知道。点任意一行看它由哪几样单品拼成。</p>
+<div class="tabs" id="tabs"></div>
 <section class="stats" id="stats"></section>
 
 <div class="toolbar">
@@ -184,10 +245,11 @@
 <footer>
   <h2>这个数字是怎么来的</h2>
   <ol>
-    <li>通过麦当劳官方 MCP 拉取门店菜单、每个套餐的组成结构与可换选项。</li>
+    <li>通过麦当劳官方 MCP 拉取每家门店的菜单、每个套餐的组成结构与可换选项。</li>
     <li>用官方 <span class="mono">calculate-price</span> 分别对「套餐编码」和「套餐内各单品编码」询价，两边都是官方实付金额。</li>
     <li>相减得到差价。<b>没有估算、没有按菜单标价推算。</b></li>
     <li>套餐里有商品在该门店无法单点（很多套餐专属饮料就是这样），该套餐直接判为「不可比」并列出缺哪一项，不填估值凑数。</li>
+    <li>跨店比价只比同名套餐，且每家都必须是官方报价；同名但默认配置不同的会标注。</li>
   </ol>
   <p>你也可以自己复核：<code>python mcd.py audit --verify 5</code> 会重新调官方接口比对前 5 个结论。</p>
   <a class="cta" href="https://github.com/HadesWing/McDonald">在 GitHub 上看源码与完整数据 →</a>
@@ -199,43 +261,101 @@
 <script>
 (function () {
   var D = JSON.parse(document.getElementById('AUDIT').textContent);
-  var S = D.stats;
+  var stores = D.stores || [];
+  var CR = D.cross || { rows: [], stats: {} };
+  var cur = 0, filter = 'all', crossOpen = false, LIVE = false;
 
   function yuan(c) { return (c / 100).toFixed(2); }
+  function esc(s) {
+    return String(s).replace(/[&<>"]/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
+    });
+  }
 
-  document.getElementById('h1-total').textContent = S.total;
-  document.getElementById('h1-zero').textContent = S.zero;
+  /* ---------- 头部 ---------- */
 
+  var cs = CR.stats || {};
+  if (cs.max_diff) {
+    document.getElementById('h1-gap').textContent =
+      '两家店差 ' + yuan(cs.max_diff) + ' 元。';
+  }
+
+  var nd = stores.length;
+  var total = stores.reduce(function (a, s) { return a + s.stats.total; }, 0);
+  var zero = stores.reduce(function (a, s) { return a + s.stats.zero; }, 0);
   document.getElementById('lede').innerHTML =
-    '拿官方计价接口，把 <b>' + (D.meta.store || '这家门店') + '</b> 的 <b>' + S.total +
-    ' 个套餐</b>逐个拆开，和「同样的东西单独点一遍」比价。' +
-    '其中 <b>' + S.comparable + ' 个</b>能逐项对上，结果是 <b>' + S.zero +
-    ' 个套餐的价格与单品原价合计完全相等</b> —— 一分钱都没便宜。' +
-    (S.reverse ? '还有 <b>' + S.reverse + ' 个套餐反而比单点更贵</b>。' : '') +
-    '真正便宜的只有 ' + S.real + ' 个。';
+    '抓了 <b>' + nd + ' 家杭州门店</b>、共 <b>' + total + ' 个套餐</b>，把「套餐」和「同样的东西单点一遍」' +
+    '分别用官方接口报价。其中 <b>' + cs.shared + ' 个套餐</b>在多家门店同时出现，' +
+    '<b>' + cs.diff + ' 个价格不一样</b>，最大差 <b>' + yuan(cs.max_diff) + ' 元</b>。' +
+    '而在景区店，' + zero + ' 个套餐干脆按单品原价卖，一分不省。';
 
-  var at = (D.meta.fetched_at || '').replace('T', ' ').slice(0, 16);
-  document.getElementById('snap').innerHTML =
-    '数据快照：<b>' + (at || '未知时间') + '</b> 抓取，门店编码 <b>' +
-    (D.meta.store_code || '—') + '</b>，来源麦当劳官方 MCP。' +
-    '本页展示的就是这份快照，打开时不发起任何数据请求、也不实时刷新——' +
-    '要让数字变新，得重新抓一次再生成页面。';
+  document.getElementById('cross-sub').innerHTML =
+    '只比同名套餐。绿色 = 这家最便宜，红色 = 这家最贵。' +
+    (cs.composition_diff ? '另有 ' + cs.composition_diff + ' 个同名套餐的默认配置在不同门店不一致。' : '');
 
-  var cards = [
-    { num: S.zero + '/' + S.comparable, lab: '套餐价 = 单品原价相加（零折扣）', cls: 'hot' },
-    { num: S.zero_ratio + '<small>%</small>', lab: '可比套餐里的零折扣占比', cls: 'hot' },
-    { num: S.real, lab: '真打折的套餐，合计最多省 ' + yuan(S.savings) + ' 元', cls: 'good' }
-  ];
-  document.getElementById('stats').innerHTML = cards.map(function (c) {
-    return '<div class="stat ' + c.cls + '"><div class="num">' + c.num +
-      '</div><div class="lab">' + c.lab + '</div></div>';
-  }).join('');
+  /* ---------- 跨店表 ---------- */
 
-  var max = 0;
-  D.rows.forEach(function (r) {
-    max = Math.max(max, r.combo, r.single || 0);
+  var labels = stores.map(function (s) { return s.label; });
+  var cols = 'minmax(0,1fr) repeat(' + labels.length + ', 76px) 72px';
+
+  function crossRows() {
+    var rows = CR.rows || [];
+    return crossOpen ? rows : rows.slice(0, 12);
+  }
+
+  function renderCross() {
+    var el = document.getElementById('cross');
+    var head = '<div class="cr h" style="grid-template-columns:' + cols + '">' +
+      '<div class="nm">套餐</div>' +
+      labels.map(function (l) { return '<div class="p">' + esc(l) + '</div>'; }).join('') +
+      '<div class="d">价差</div></div>';
+
+    var body = crossRows().map(function (r) {
+      var cells = labels.map(function (l) {
+        var v = r.prices[l];
+        if (v == null) return '<div class="p">—</div>';
+        var cls = v === r.dear_price && r.diff > 0 ? ' hi' : (v === r.cheap_price && r.diff > 0 ? ' lo' : '');
+        return '<div class="p' + cls + '">' + yuan(v) + '</div>';
+      }).join('');
+      var note = r.same_parts ? '' : ' <span class="tag zero">配置不同</span>';
+      return '<div class="cr" style="grid-template-columns:' + cols + '">' +
+        '<div class="nm">' + esc(r.name) + note + '</div>' + cells +
+        '<div class="d">' + (r.diff > 0 ? yuan(r.diff) : '—') + '</div></div>';
+    }).join('');
+
+    el.innerHTML = head + body;
+    var more = document.getElementById('cross-more');
+    more.hidden = (CR.rows || []).length <= 12;
+    more.textContent = crossOpen ? '收起' : '展开全部 ' + (CR.rows || []).length + ' 个';
+  }
+
+  document.getElementById('cross-more').addEventListener('click', function () {
+    crossOpen = !crossOpen;
+    renderCross();
   });
-  max = max || 1;
+
+  /* ---------- 门店 tab + 明细 ---------- */
+
+  function renderTabs() {
+    document.getElementById('tabs').innerHTML = stores.map(function (s, i) {
+      var st = s.stats;
+      return '<button class="tab" data-i="' + i + '" aria-pressed="' + (i === cur) + '">' +
+        esc(s.label) + '<span class="k">' + st.zero + '/' + st.comparable + ' 零折扣</span></button>';
+    }).join('');
+  }
+
+  function renderStats(s) {
+    var st = s.stats;
+    var cards = [
+      { num: st.zero + '/' + st.comparable, lab: '套餐价 = 单品原价相加（零折扣）', cls: 'hot' },
+      { num: st.zero_ratio + '<small>%</small>', lab: '可比套餐里的零折扣占比', cls: 'hot' },
+      { num: st.real, lab: '真打折的套餐，合计最多省 ' + yuan(st.savings) + ' 元', cls: 'good' }
+    ];
+    document.getElementById('stats').innerHTML = cards.map(function (c) {
+      return '<div class="stat ' + c.cls + '"><div class="num">' + c.num +
+        '</div><div class="lab">' + c.lab + '</div></div>';
+    }).join('');
+  }
 
   var TAG = {
     zero: ['zero', '零折扣'],
@@ -244,43 +364,90 @@
     unknown: ['zero', '不可比']
   };
 
-  function rowHtml(r, i) {
-    var t = TAG[r.verdict];
-    var single = r.single == null ? '—' : yuan(r.single);
-    var diff, diffCls;
-    if (r.diff == null) { diff = '—'; diffCls = ''; }
-    else if (r.diff === 0) { diff = '0.00'; diffCls = 'strong'; }
-    else if (r.diff < 0) { diff = '−' + yuan(-r.diff); diffCls = 'neg'; }
-    else { diff = '+' + yuan(r.diff); diffCls = 'pos'; }
+  function renderRows(s) {
+    var rows = s.rows || [];
+    var max = 0;
+    rows.forEach(function (r) { max = Math.max(max, r.combo, r.single || 0); });
+    max = max || 1;
 
-    var parts = r.parts.map(function (p) {
-      return p[1] == null
-        ? '<span class="miss">' + p[0] + '（门店不可单点）</span>'
-        : p[0] + ' ' + yuan(p[1]);
-    }).join(' + ');
+    function rowHtml(r, i) {
+      var t = TAG[r.verdict] || TAG.unknown;
+      var single = r.single == null ? '—' : yuan(r.single);
+      var diff, diffCls;
+      if (r.diff == null) { diff = '—'; diffCls = ''; }
+      else if (r.diff === 0) { diff = '0.00'; diffCls = 'strong'; }
+      else if (r.diff < 0) { diff = '−' + yuan(-r.diff); diffCls = 'neg'; }
+      else { diff = '+' + yuan(r.diff); diffCls = 'pos'; }
 
-    var note = r.missing && r.missing.length
-      ? '<br><span class="miss">不可比原因：' + r.missing.join('；') + '</span>' : '';
+      var parts = (r.parts || []).map(function (p) {
+        return p[1] == null
+          ? '<span class="miss">' + esc(p[0]) + '（门店不可单点）</span>'
+          : esc(p[0]) + ' ' + yuan(p[1]);
+      }).join(' + ');
 
-    return '<div class="row" data-v="' + r.verdict + '" data-i="' + i + '">' +
-      '<div class="name">' + r.name + '<span class="tag ' + t[0] + '">' + t[1] + '</span></div>' +
-      '<div class="v c1 strong">' + yuan(r.combo) + '</div>' +
-      '<div class="v c2">' + single + '</div>' +
-      '<div class="v c3 ' + diffCls + '">' + diff + '</div>' +
-      '<div class="bars">' +
-        '<div class="bar-line"><span class="k">套餐</span><div class="track"><div class="fill combo" style="width:' +
-          (r.combo / max * 100).toFixed(2) + '%"></div></div></div>' +
-        '<div class="bar-line"><span class="k">单点</span><div class="track"><div class="fill single" style="width:' +
-          ((r.single || 0) / max * 100).toFixed(2) + '%"></div></div></div>' +
-      '</div>' +
-      '<div class="detail"><code>' + parts + '</code>' + note + '</div>' +
-    '</div>';
+      var note = r.missing && r.missing.length
+        ? '<br><span class="miss">不可比原因：' + esc(r.missing.join('；')) + '</span>' : '';
+
+      return '<div class="row" data-v="' + r.verdict + '" data-i="' + i + '">' +
+        '<div class="name">' + esc(r.name) + '<span class="tag ' + t[0] + '">' + t[1] + '</span></div>' +
+        '<div class="v c1 strong">' + yuan(r.combo) + '</div>' +
+        '<div class="v c2">' + single + '</div>' +
+        '<div class="v c3 ' + diffCls + '">' + diff + '</div>' +
+        '<div class="bars">' +
+          '<div class="bar-line"><span class="k">套餐</span><div class="track"><div class="fill combo" style="width:' +
+            (r.combo / max * 100).toFixed(2) + '%"></div></div></div>' +
+          '<div class="bar-line"><span class="k">单点</span><div class="track"><div class="fill single" style="width:' +
+            ((r.single || 0) / max * 100).toFixed(2) + '%"></div></div></div>' +
+        '</div>' +
+        '<div class="detail"><code>' + parts + '</code>' + note + '</div>' +
+      '</div>';
+    }
+
+    var el = document.getElementById('rows');
+    el.innerHTML = rows.map(rowHtml).join('');
+    applyFilter();
   }
 
-  var rowsEl = document.getElementById('rows');
-  rowsEl.innerHTML = D.rows.map(rowHtml).join('');
+  function applyFilter() {
+    document.querySelectorAll('#rows .row').forEach(function (r) {
+      r.style.display = (filter === 'all' || r.dataset.v === filter) ? '' : 'none';
+    });
+  }
 
-  rowsEl.addEventListener('click', function (e) {
+  function renderSnap(s) {
+    var at = (s.meta.fetched_at || '').replace('T', ' ').slice(0, 16);
+    var live = s.live ? '<b>刚刚实时抓取</b>，' : '数据快照：<b>' + (at || '未知时间') + '</b> 抓取，';
+    document.getElementById('snap').innerHTML = live +
+      '门店 <b>' + esc(s.meta.store || '—') + '</b>（' + esc(s.meta.store_code || '—') + '），来源麦当劳官方 MCP。' +
+      '静态页面不发起数据请求、也不自动刷新。';
+  }
+
+  function render(i) {
+    if (!stores.length) return;
+    cur = Math.max(0, Math.min(i, stores.length - 1));
+    var s = stores[cur];
+    renderTabs();
+    renderStats(s);
+    renderRows(s);
+    renderSnap(s);
+    document.querySelectorAll('.tab').forEach(function (b) {
+      b.setAttribute('aria-pressed', String(Number(b.dataset.i) === cur));
+    });
+  }
+
+  /* ---------- 交互 ---------- */
+
+  document.getElementById('tabs').addEventListener('click', function (e) {
+    var b = e.target.closest('.tab');
+    if (!b) return;
+    filter = 'all';
+    document.querySelectorAll('button.f').forEach(function (x) {
+      x.setAttribute('aria-pressed', String(x.dataset.filter === 'all'));
+    });
+    render(Number(b.dataset.i));
+  });
+
+  document.getElementById('rows').addEventListener('click', function (e) {
     var row = e.target.closest('.row');
     if (row) row.classList.toggle('open');
   });
@@ -289,14 +456,88 @@
     b.addEventListener('click', function () {
       document.querySelectorAll('button.f').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
       b.setAttribute('aria-pressed', 'true');
-      var f = b.dataset.filter;
-      document.querySelectorAll('.row').forEach(function (r) {
-        r.style.display = (f === 'all' || r.dataset.v === f) ? '' : 'none';
-      });
+      filter = b.dataset.filter;
+      applyFilter();
     });
   });
 
   var want = new URLSearchParams(location.search).get('filter');
+  var wantStore = new URLSearchParams(location.search).get('store');
+
+  /* ---------- 实时模式 ---------- */
+
+  var liveEl = document.getElementById('live');
+
+  function showOffline() {
+    liveEl.hidden = false;
+    liveEl.className = 'live off';
+    liveEl.innerHTML = '<span class="dot"></span>' +
+      '现在是<b>静态快照</b>。想现场重抓一家店？在本机跑 <code>python mcd.py serve</code>，' +
+      '再用它给出的地址打开本页，这里会出现「实时抓取」按钮。';
+  }
+
+  function showOnline() {
+    LIVE = true;
+    liveEl.hidden = false;
+    liveEl.className = 'live';
+    liveEl.innerHTML =
+      '<span class="dot"></span><b>本地实时服务已连接</b>' +
+      '<input id="kw" value="西湖" aria-label="门店关键词">' +
+      '<button id="go">实时抓取</button>' +
+      '<span class="msg" id="live-msg">输入门店关键词（如 西湖 / 武林广场 / 滨江），现场重抓整份菜单</span>';
+
+    document.getElementById('go').addEventListener('click', function () {
+      var kw = (document.getElementById('kw').value || '').trim() || '西湖';
+      var btn = document.getElementById('go');
+      var msg = document.getElementById('live-msg');
+      btn.disabled = true;
+      var t0 = Date.now();
+      msg.textContent = '正在抓取「' + kw + '」的整份菜单，约 10–60 秒…';
+      var timer = setInterval(function () {
+        msg.textContent = '正在抓取「' + kw + '」，已用 ' + Math.round((Date.now() - t0) / 1000) + ' 秒…';
+      }, 1000);
+
+      fetch('/api/audit?city=' + encodeURIComponent('杭州') + '&keyword=' + encodeURIComponent(kw))
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          if (!res.ok || !res.j.store) throw new Error(res.j.error || '抓取失败');
+          clearInterval(timer);
+          var s = res.j.store;
+          s.live = true;
+          var at = stores.findIndex(function (x) { return x.meta.store_code === s.meta.store_code; });
+          if (at >= 0) stores[at] = s; else stores.push(s);
+          var idx = stores.indexOf(s);
+          filter = 'all';
+          render(idx);
+          document.getElementById('snap').innerHTML =
+            '<b>刚刚实时抓取</b>（' + new Date().toLocaleTimeString('zh-CN') + '），门店 <b>' +
+            esc(s.meta.store) + '</b>（' + esc(s.meta.store_code) + '），来源麦当劳官方 MCP。';
+          msg.innerHTML = '已更新：<b>' + esc(s.label) + '</b> ｜ 套餐 ' + s.stats.total +
+            ' 个，可比 ' + s.stats.comparable + ' 个，零折扣 ' + s.stats.zero + ' 个';
+          btn.disabled = false;
+        })
+        .catch(function (err) {
+          clearInterval(timer);
+          msg.textContent = '失败：' + err.message + '（token 是否配置？看终端日志）';
+          btn.disabled = false;
+        });
+    });
+  }
+
+  fetch('/api/health', { cache: 'no-store' })
+    .then(function (r) { return r.ok ? r.json() : null; })
+    .then(function (j) { if (j && j.ok) showOnline(); else showOffline(); })
+    .catch(showOffline);
+
+  /* ---------- 启动 ---------- */
+
+  renderCross();
+  var start = 0;
+  if (wantStore) {
+    var hit = stores.findIndex(function (s) { return s.meta.store_code === wantStore || s.label === wantStore; });
+    if (hit >= 0) start = hit;
+  }
+  render(start);
   if (want) {
     var btn = document.querySelector('button.f[data-filter="' + want + '"]');
     if (btn) btn.click();

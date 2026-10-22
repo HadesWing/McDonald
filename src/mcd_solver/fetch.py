@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import re
+import threading
 import time
 from pathlib import Path
 from typing import Any
@@ -118,9 +119,14 @@ def fetch_snapshot(
     be_type: int = BE_STORE,
     token: str | None = None,
     pause: float = 0.08,
+    workers: int = 8,
     log=print,
 ) -> dict:
-    """拉取一家门店的完整快照。"""
+    """拉取一家门店的完整快照。
+
+    workers > 1 时，逐个 SKU 的详情查询和套餐选项补价走线程池并发，
+    把「实时抓一家店」从一分钟级压到十几秒——本地 serve 模式要靠这个才可用。
+    """
     client = MCDMCPClient(token)
 
     stores = client.call_tool(
@@ -173,18 +179,24 @@ def fetch_snapshot(
         time.sleep(pause)
     log(f"计价完成：{len(price_map)} 个 SKU 有价")
 
-    # 逐个取详情：套餐拿 rounds，单品拿特制项
+    # 逐个取详情：套餐拿 rounds，单品拿特制项。
+    # MCP 是 HTTP 的，串行一轮要一分钟；这里按 SKU 并发，实时模式才勉强可用。
     details: dict[str, dict] = {}
-    for idx, code in enumerate(codes, 1):
-        try:
-            d = client.call_tool("query-meal-detail", {**scope, "code": code}).get("data") or {}
-            details[code] = d
-        except Exception as exc:  # 单个失败不该拖垮整轮
-            log(f"  ! 详情失败 {code}: {str(exc)[:80]}")
-        if pause:
-            time.sleep(pause)
-        if idx % 25 == 0:
-            log(f"  详情 {idx}/{len(codes)}")
+    done = 0
+    for code, detail, err in _map_parallel(
+        codes,
+        lambda c, cl: cl.call_tool("query-meal-detail", {**scope, "code": c}).get("data") or {},
+        workers=workers,
+        token=token,
+        pause=pause,
+    ):
+        if err:
+            log(f"  ! 详情失败 {code}: {err[:80]}")
+        else:
+            details[code] = detail
+        done += 1
+        if done % 25 == 0:
+            log(f"  详情 {done}/{len(codes)}")
 
     nutrition = parse_nutrition(client.call_tool("list-nutrition-foods", {}))
     log(f"营养表：{len(nutrition)} 条")
@@ -229,15 +241,19 @@ def fetch_snapshot(
                     extra[ch["code"]] = ch["name"]
     if extra:
         log(f"套餐选项补充计价：{len(extra)} 个")
-        for c_code, c_name in extra.items():
-            try:
-                resp = client.call_tool(
-                    "calculate-price",
-                    {**scope, "items": [{"productCode": c_code, "quantity": 1}]},
-                ).get("data") or {}
-            except Exception:
-                resp = {}
-            plist = resp.get("productList") or []
+        priced = _map_parallel(
+            sorted(extra),
+            lambda c, cl: cl.call_tool(
+                "calculate-price", {**scope, "items": [{"productCode": c, "quantity": 1}]}
+            ).get("data")
+            or {},
+            workers=workers,
+            token=token,
+            pause=pause,
+        )
+        for c_code, resp, _err in priced:
+            c_name = extra[c_code]
+            plist = (resp or {}).get("productList") or []
             if not plist:
                 # 该编码在本店不可单点（多见于套餐专属饮料），跳过
                 continue
@@ -257,7 +273,6 @@ def fetch_snapshot(
                     "standalone": True,
                 }
             )
-            time.sleep(pause)
         log(f"补充后共 {len(items)} 个 SKU")
 
     snapshot = {
@@ -327,3 +342,48 @@ def save_snapshot(snapshot: dict, path: str | Path) -> Path:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(snapshot, ensure_ascii=False, indent=1), encoding="utf-8")
     return path
+
+
+def _map_parallel(items, fn, workers: int = 8, token: str | None = None, pause: float = 0.0):
+    """按 SKU 并发跑 fn(code, client)，产出 (code, result, error)。
+
+    每个线程拿自己的 client：MCP 客户端持有 session id 与自增 id，
+    共用一份在并发下会互相踩。失败重试两次，仍失败就返回错误让调用方记日志。
+    """
+    from concurrent.futures import ThreadPoolExecutor
+
+    if workers <= 1 or len(items) <= 1:
+        client = MCDMCPClient(token)
+        for code in items:
+            try:
+                yield code, fn(code, client), None
+            except Exception as exc:  # noqa: BLE001
+                yield code, None, str(exc)
+            if pause:
+                time.sleep(pause)
+        return
+
+    local = threading.local()
+
+    def client() -> MCDMCPClient:
+        cl = getattr(local, "cl", None)
+        if cl is None:
+            cl = MCDMCPClient(token)
+            local.cl = cl
+        return cl
+
+    def run(code):
+        last = ""
+        for attempt in range(3):
+            try:
+                return code, fn(code, client()), None
+            except Exception as exc:  # noqa: BLE001
+                last = str(exc)
+                if "429" not in last and attempt == 0:
+                    break  # 非限流错误没必要重试
+                time.sleep(0.8 * (attempt + 1))
+        return code, None, last
+
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        for code, result, err in pool.map(run, items):
+            yield code, result, err
