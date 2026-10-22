@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>麦当劳定价审计 · 套餐到底有没有折扣</title>
+<title>套餐刺客 · 36 个套餐里有几个在刺你</title>
 <style>
   :root {
     --bg: #fbfaf7;
@@ -152,8 +152,8 @@
 <div class="wrap">
 
 <header>
-  <div class="kicker">McDonald's pricing audit · 实测数据</div>
-  <h1>你以为套餐是折扣，<br><em id="h1-fig">其实六成套餐一分没省。</em></h1>
+  <div class="kicker">Combo Assassin · 套餐刺客</div>
+  <h1><span id="h1-total">36</span> 个套餐，<br><em><span id="h1-zero">11</span> 个在刺你。</em></h1>
   <p class="lede" id="lede"></p>
 </header>
 
@@ -200,11 +200,11 @@
 
   function yuan(c) { return (c / 100).toFixed(2); }
 
-  document.getElementById('h1-fig').textContent =
-    '其实 ' + S.zero_ratio + '% 的套餐一分没省。';
+  document.getElementById('h1-total').textContent = S.total;
+  document.getElementById('h1-zero').textContent = S.zero;
 
   document.getElementById('lede').innerHTML =
-    '我们拿官方计价接口，把 <b>' + (D.meta.store || '这家门店') + '</b> 的 <b>' + S.total +
+    '拿官方计价接口，把 <b>' + (D.meta.store || '这家门店') + '</b> 的 <b>' + S.total +
     ' 个套餐</b>逐个拆开，和「同样的东西单独点一遍」比价。' +
     '其中 <b>' + S.comparable + ' 个</b>能逐项对上，结果是 <b>' + S.zero +
     ' 个套餐的价格与单品原价合计完全相等</b> —— 一分钱都没便宜。' +

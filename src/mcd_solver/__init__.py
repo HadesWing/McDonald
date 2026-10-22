@@ -1,4 +1,4 @@
-"""麦麦凑单最优解 —— 基于麦当劳 MCP 的凑单精确求解器。"""
+"""套餐刺客（Combo Assassin）—— 基于麦当劳 MCP 的套餐定价审计工具。"""
 
 from .models import (
     CATEGORY_LABELS,

@@ -1,8 +1,10 @@
-# 麦麦定价审计 · Mcd Audit
+# 套餐刺客 · Combo Assassin
 
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB) ![零依赖](https://img.shields.io/badge/dependencies-0-success) ![License](https://img.shields.io/badge/license-MIT-black)
 
-**麦当劳的套餐不是折扣，是打包。**
+**把套餐拆开算一遍，看它到底刺没刺你。**
+
+麦当劳的套餐不是折扣，是打包。
 
 我把「麦当劳杭州灵隐景区餐厅」的 36 个套餐逐个拆开，用官方计价接口分别给「套餐」和「同样的东西单点一遍」报价，然后相减。
 

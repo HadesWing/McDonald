@@ -205,7 +205,7 @@ def cmd_fetch(args: argparse.Namespace) -> int:
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="mcd-solver",
-        description="麦麦凑单最优解：加最少冤枉钱，精确跨过免配送费 / 券门槛。",
+        description="套餐刺客：把套餐拆开算一遍，看它到底有没有便宜。",
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
