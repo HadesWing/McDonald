@@ -68,6 +68,37 @@ def cmd_solve(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_tools(args: argparse.Namespace) -> int:
+    """列出麦当劳 MCP 提供的全部工具及其入参，便于对接与排查。"""
+    from .mcp_client import MCDMCPClient
+
+    client = MCDMCPClient(args.token, endpoint=args.endpoint)
+    tools = client.list_tools()
+    print(f"共 {len(tools)} 个工具：")
+    for t in tools:
+        schema = t.get("inputSchema") or {}
+        props = sorted((schema.get("properties") or {}).keys())
+        required = set(schema.get("required") or [])
+        names = [f"{p}*" if p in required else p for p in props]
+        print(f"  · {t['name']:<26} {t.get('description', '')[:48]}")
+        if names:
+            print(f"      params: {', '.join(names)}")
+    return 0
+
+
+def cmd_call(args: argparse.Namespace) -> int:
+    """直接调用单个工具，原样打印返回，用于取数与调试。"""
+    import json
+
+    from .mcp_client import MCDMCPClient
+
+    client = MCDMCPClient(args.token, endpoint=args.endpoint)
+    payload = json.loads(args.args) if args.args else {}
+    result = client.call_tool(args.tool, payload)
+    print(json.dumps(result, ensure_ascii=False, indent=2)[: args.limit])
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="mcd-solver",
@@ -85,6 +116,19 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--no-coupon", action="store_true", help="不考虑优惠券")
     p.add_argument("-v", "--verbose", action="store_true", help="输出全部候选方案")
     p.set_defaults(func=cmd_solve)
+
+    t = sub.add_parser("tools", help="列出麦当劳 MCP 的全部工具")
+    t.add_argument("--token", default=None, help="MCP Token，缺省读环境变量 MCD_MCP_TOKEN")
+    t.add_argument("--endpoint", default="https://mcp.mcd.cn")
+    t.set_defaults(func=cmd_tools)
+
+    c = sub.add_parser("call", help="直接调用某个 MCP 工具，原样输出结果")
+    c.add_argument("tool", help="工具名，如 query-meals")
+    c.add_argument("--args", default=None, help="JSON 字符串参数")
+    c.add_argument("--token", default=None)
+    c.add_argument("--endpoint", default="https://mcp.mcd.cn")
+    c.add_argument("--limit", type=int, default=4000, help="输出截断长度")
+    c.set_defaults(func=cmd_call)
     return parser
 
 
