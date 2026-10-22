@@ -5,6 +5,9 @@
 而是想知道「这玩意儿到底说了什么」。所以把审计结果编译成一个
 零依赖、双击就能开的单文件 HTML，数据全部内嵌（避免 file:// 的 CORS 问题）。
 
+页面只保留两个核心功能：单店套餐审计（套餐 vs 单点）、选中套餐后的
+实时跨店比价（走 /api/combo）。构建期的静态跨店大表已经按用户要求移除。
+
 用法：
     python tools/build_demo.py                       # 自动吃 data/store_*.json
     python tools/build_demo.py --store data/store_hangzhou.json:灵隐景区店
@@ -23,7 +26,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from mcd_solver.catalog import load_snapshot  # noqa: E402
-from mcd_solver.compare import build_cross, store_payload  # noqa: E402
+from mcd_solver.compare import store_payload  # noqa: E402
 
 # 门店标签：文件名 -> 人话。没有命中的用门店名兜底。
 LABELS = {
@@ -45,11 +48,9 @@ def build_payload(stores: list[tuple[Path, str]]) -> dict:
     payloads = []
     for path, label in stores:
         payloads.append(store_payload(load_snapshot(path), label))
-    cross = build_cross(payloads)
     return {
         "generated_at": time.strftime("%Y-%m-%dT%H:%M:%S+08:00"),
         "stores": payloads,
-        "cross": cross,
         "mode": "static",
     }
 
@@ -87,10 +88,9 @@ def main(argv: list[str] | None = None) -> int:
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(html, encoding="utf-8")
 
-    c = payload["cross"]["stats"]
+    c = payload["stores"][0]["stats"]
     print(f"已生成：{out}")
-    print(f"  门店 {len(payload['stores'])} 家｜同名套餐 {c['shared']} 个｜价格不同 {c['diff']} 个")
-    print(f"  最大价差 {c['max_diff'] / 100:.2f} 元")
+    print(f"  门店 {len(payload['stores'])} 家（静态跨店大表已移除，跨店比价走实时接口 /api/combo）")
     for s in payload["stores"]:
         st = s["stats"]
         print(

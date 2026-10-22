@@ -123,7 +123,7 @@
 
   .cmp { border-top: 1px solid var(--line); margin-top: 4px; }
   .cmp .ci {
-    display: grid; grid-template-columns: minmax(0, 1fr) 96px 88px; gap: 10px; align-items: center;
+    display: grid; grid-template-columns: minmax(0, 1fr) 96px 88px 96px; gap: 10px; align-items: center;
     padding: 9px 2px; border-bottom: 1px solid var(--line-soft); font-size: 13.5px;
   }
   .cmp .ci.h { color: var(--muted); font-size: 11.5px; letter-spacing: .03em; padding-bottom: 6px; }
@@ -134,6 +134,11 @@
   .cmp .ci .p.hi { color: var(--mcd); }
   .cmp .ci .d { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); font-size: 12.5px; }
   .cmp .ci.na .p { color: var(--muted); font-weight: 400; font-size: 12px; }
+  .gostore {
+    font: inherit; font-size: 12px; padding: 3px 10px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--save); background: transparent; color: var(--save); white-space: nowrap;
+  }
+  .gostore:hover { background: var(--save); color: #fff; }
   .cmp-note { font-size: 12.5px; color: var(--muted); margin: 10px 0 0; }
   .cmp-note b { color: var(--mcd); }
 
@@ -146,23 +151,6 @@
 
   h2.sec { font-size: 19px; margin: 44px 0 6px; font-weight: 650; letter-spacing: -.01em; }
   .sub { font-size: 13px; color: var(--muted); margin: 0 0 14px; }
-
-  .cross { border-top: 1px solid var(--line); }
-  .cr {
-    display: grid; gap: 8px; align-items: center;
-    padding: 9px 2px; border-bottom: 1px solid var(--line-soft); font-size: 13.5px;
-  }
-  .cr.h { color: var(--muted); font-size: 11.5px; letter-spacing: .03em; padding-bottom: 6px; }
-  .cr .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .cr .p { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
-  .cr .p.hi { color: var(--mcd); font-weight: 600; }
-  .cr .p.lo { color: var(--save); font-weight: 600; }
-  .cr .d { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; color: var(--mcd); }
-  .more {
-    display: inline-block; margin-top: 12px; font-size: 12.5px; color: var(--muted);
-    border: 1px solid var(--line); background: transparent; border-radius: 999px;
-    padding: 4px 14px; cursor: pointer; font-family: inherit;
-  }
 
   .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 20px 0 0; }
   .tab {
@@ -270,7 +258,7 @@
 
 <header>
   <div class="kicker">Combo Assassin · 套餐刺客</div>
-  <h1>同一份套餐，<br><em id="h1-gap">两家店差 26.10 元。</em></h1>
+  <h1>这份套餐，<br><em id="h1-gap">可能一分都不便宜。</em></h1>
   <p class="lede" id="lede"></p>
   <p class="snap" id="snap"></p>
   <div class="live" id="live" hidden></div>
@@ -285,11 +273,6 @@
   <p class="sub" id="cmp-sub"></p>
   <div class="cmp" id="cmp"></div>
 </section>
-
-<h2 class="sec">跨店比价：同一份套餐，你在哪家买</h2>
-<p class="sub" id="cross-sub"></p>
-<div class="cross" id="cross"></div>
-<button class="more" id="cross-more" hidden>展开全部</button>
 
 <h2 class="sec">分店审计：套餐到底有没有便宜</h2>
 <p class="sub">同样的东西单点一遍要多少钱，和套餐价一比就知道。点任意一行看它由哪几样单品拼成。</p>
@@ -322,7 +305,6 @@
     <li>用官方 <span class="mono">calculate-price</span> 分别对「套餐编码」和「套餐内各单品编码」询价，两边都是官方实付金额。</li>
     <li>相减得到差价。<b>没有估算、没有按菜单标价推算。</b></li>
     <li>套餐里有商品在该门店无法单点（很多套餐专属饮料就是这样），该套餐直接判为「不可比」并列出缺哪一项，不填估值凑数。</li>
-    <li>跨店比价只比同名套餐，且每家都必须是官方报价；同名但默认配置不同的会标注。</li>
   </ol>
   <p>你也可以自己复核：<code>python mcd.py audit --verify 5</code> 会重新调官方接口比对前 5 个结论。</p>
   <a class="cta" href="https://github.com/HadesWing/McDonald">在 GitHub 上看源码与完整数据 →</a>
@@ -335,8 +317,7 @@
 (function () {
   var D = JSON.parse(document.getElementById('AUDIT').textContent);
   var stores = D.stores || [];
-  var CR = D.cross || { rows: [], stats: {} };
-  var cur = 0, filter = 'all', crossOpen = false, LIVE = false;
+  var cur = 0, filter = 'all', LIVE = false;
   /* 用户一旦自己动手（选店 / 搜店 / 定位），后台那个自动刷新就别再抢画面了。 */
   var userActed = false;
 
@@ -357,65 +338,13 @@
 
   /* ---------- 头部 ---------- */
 
-  var cs = CR.stats || {};
-  if (cs.max_diff) {
-    document.getElementById('h1-gap').textContent =
-      '两家店差 ' + yuan(cs.max_diff) + ' 元。';
-  }
-
   var nd = stores.length;
   var total = stores.reduce(function (a, s) { return a + s.stats.total; }, 0);
   var zero = stores.reduce(function (a, s) { return a + s.stats.zero; }, 0);
   document.getElementById('lede').innerHTML =
-    '抓了 <b>' + nd + ' 家杭州门店</b>、共 <b>' + total + ' 个套餐</b>，把「套餐」和「同样的东西单点一遍」' +
-    '分别用官方接口报价。其中 <b>' + cs.shared + ' 个套餐</b>在多家门店同时出现，' +
-    '<b>' + cs.diff + ' 个价格不一样</b>，最大差 <b>' + yuan(cs.max_diff) + ' 元</b>。' +
-    '而在景区店，' + zero + ' 个套餐干脆按单品原价卖，一分不省。';
-
-  document.getElementById('cross-sub').innerHTML =
-    '只比同名套餐。绿色 = 这家最便宜，红色 = 这家最贵。' +
-    (cs.composition_diff ? '另有 ' + cs.composition_diff + ' 个同名套餐的默认配置在不同门店不一致。' : '');
-
-  /* ---------- 跨店表 ---------- */
-
-  var labels = stores.map(function (s) { return s.label; });
-  var cols = 'minmax(0,1fr) repeat(' + labels.length + ', 76px) 72px';
-
-  function crossRows() {
-    var rows = CR.rows || [];
-    return crossOpen ? rows : rows.slice(0, 12);
-  }
-
-  function renderCross() {
-    var el = document.getElementById('cross');
-    var head = '<div class="cr h" style="grid-template-columns:' + cols + '">' +
-      '<div class="nm">套餐</div>' +
-      labels.map(function (l) { return '<div class="p">' + esc(l) + '</div>'; }).join('') +
-      '<div class="d">价差</div></div>';
-
-    var body = crossRows().map(function (r) {
-      var cells = labels.map(function (l) {
-        var v = r.prices[l];
-        if (v == null) return '<div class="p">—</div>';
-        var cls = v === r.dear_price && r.diff > 0 ? ' hi' : (v === r.cheap_price && r.diff > 0 ? ' lo' : '');
-        return '<div class="p' + cls + '">' + yuan(v) + '</div>';
-      }).join('');
-      var note = r.same_parts ? '' : ' <span class="tag zero">配置不同</span>';
-      return '<div class="cr" style="grid-template-columns:' + cols + '">' +
-        '<div class="nm">' + esc(r.name) + note + '</div>' + cells +
-        '<div class="d">' + (r.diff > 0 ? yuan(r.diff) : '—') + '</div></div>';
-    }).join('');
-
-    el.innerHTML = head + body;
-    var more = document.getElementById('cross-more');
-    more.hidden = (CR.rows || []).length <= 12;
-    more.textContent = crossOpen ? '收起' : '展开全部 ' + (CR.rows || []).length + ' 个';
-  }
-
-  document.getElementById('cross-more').addEventListener('click', function () {
-    crossOpen = !crossOpen;
-    renderCross();
-  });
+    '抓了 <b>' + nd + ' 家门店</b>、共 <b>' + total + ' 个套餐</b>，把「套餐」和「同样的东西单点一遍」' +
+    '分别用官方接口报价：有 <b>' + zero + ' 个套餐</b>的套餐价正好等于单品原价相加，一分不省。' +
+    '选个套餐，还能马上看到附近几家店各卖多少钱。';
 
   /* ---------- 门店 tab + 明细 ---------- */
 
@@ -505,8 +434,7 @@
     var at = (s.meta.fetched_at || '').replace('T', ' ').slice(0, 16);
     var live = s.live ? '<b>刚刚实时抓取</b>，' : '数据快照：<b>' + (at || '未知时间') + '</b> 抓取，';
     document.getElementById('snap').innerHTML = live +
-      '门店 <b>' + esc(s.meta.store || '—') + '</b>（' + esc(s.meta.store_code || '—') + '），来源麦当劳官方 MCP。' +
-      '静态页面不发起数据请求、也不自动刷新。';
+      '门店 <b>' + esc(s.meta.store || '—') + '</b>（' + esc(s.meta.store_code || '—') + '），来源麦当劳官方 MCP。';
   }
 
   function render(i) {
@@ -913,10 +841,10 @@
     }
     sub.innerHTML = '同一份套餐，<b>' + s.available + '</b> 家店可售' +
       (s.max_diff > 0 ? '，最贵比最便宜贵 <b>' + yuan(s.max_diff) + ' 元</b>' : '，价格一致') +
-      '。询价 ' + (d.elapsed_ms || 0) + ' 毫秒，每家店一次官方 calculate-price。';
+      '。询价 ' + (d.elapsed_ms || 0) + ' 毫秒，每家店一次官方 calculate-price。点「在这家买」就换到那家店。';
 
     document.getElementById('cmp').innerHTML =
-      '<div class="ci h"><div class="nm">门店</div><div class="p">套餐价</div><div class="d">比最低</div></div>' +
+      '<div class="ci h"><div class="nm">门店</div><div class="p">套餐价</div><div class="d">比最低</div><div class="d"></div></div>' +
       rows.map(function (r) {
         var cls = r.is_cheapest ? 'lo' : (r.is_dearest ? 'hi' : '');
         var price = r.price_cents
@@ -927,11 +855,27 @@
           : '<div class="d">' + (r.price_cents ? '最低' : '—') + '</div>';
         var pill = r.open_now === false ? ' <span class="pill cl">已打烊</span>'
           : (r.closing_soon ? ' <span class="pill soon">快关门</span>' : '');
+        var go = r.price_cents
+          ? '<button class="gostore" data-code="' + esc(r.storeCode) + '" data-name="' + esc(r.storeName || '') + '">在这家买 →</button>'
+          : '<span class="d"> </span>';
         return '<div class="ci' + (r.price_cents ? '' : ' na') + '">' +
           '<div class="nm">' + esc(r.storeName) + pill + '<br><small>' + esc(r.address || '') + '</small></div>' +
-          price + delta + '</div>';
+          price + delta + go + '</div>';
       }).join('');
   }
+
+  /* 点了别家店的同一份套餐 → 当前门店就换成那家：重抓它的整份菜单、
+     门店卡和 tab 都跟着换，套餐列表也变成那家店的。 */
+  document.getElementById('cmp').addEventListener('click', function (e) {
+    var b = e.target.closest('.gostore');
+    if (!b) return;
+    userActed = true;
+    var code = b.dataset.code;
+    var obj = (lastStores || []).filter(function (s) { return String(s.storeCode) === code; })[0] ||
+      { storeCode: code, storeName: b.getAttribute('data-name') || '' };
+    var c = (document.getElementById('city').value || CITY).trim() || '杭州';
+    audit(code, c, lastKeyword, obj);
+  });
 
   function locateMe() {
     userActed = true;
@@ -980,7 +924,6 @@
 
   /* ---------- 启动 ---------- */
 
-  renderCross();
   var start = 0;
   if (wantStore) {
     var hit = stores.findIndex(function (s) { return s.meta.store_code === wantStore || s.label === wantStore; });
