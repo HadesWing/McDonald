@@ -120,12 +120,16 @@ def fetch_snapshot(
     token: str | None = None,
     pause: float = 0.08,
     workers: int = 8,
+    store_code: str | None = None,
     log=print,
 ) -> dict:
     """拉取一家门店的完整快照。
 
     workers > 1 时，逐个 SKU 的详情查询和套餐选项补价走线程池并发，
     把「实时抓一家店」从一分钟级压到十几秒——本地 serve 模式要靠这个才可用。
+
+    store_code 用于「到店」场景：用户已经从候选列表里点明了是哪家店，
+    这时按编码精确命中，而不是靠 store_index 撞运气。
     """
     client = MCDMCPClient(token)
 
@@ -134,7 +138,13 @@ def fetch_snapshot(
     ).get("data") or []
     if not stores:
         raise RuntimeError(f"没找到门店：{city} {keyword}")
-    store = stores[store_index]
+    if store_code:
+        hit = next((s for s in stores if str(s.get("storeCode")) == str(store_code)), None)
+        if hit is None:
+            raise RuntimeError(f"门店 {store_code} 不在「{city} {keyword}」的搜索结果里，请换个关键词再试")
+        store = hit
+    else:
+        store = stores[store_index]
     store_code = str(store["storeCode"])
     be_code = store.get("beCode")
     log(f"门店：{store['storeName']}（{store_code}）{store.get('address', '')}")

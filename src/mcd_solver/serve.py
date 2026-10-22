@@ -25,11 +25,12 @@ from urllib.parse import parse_qs, unquote, urlparse
 
 from .compare import store_payload
 from .fetch import fetch_snapshot
+from .geo import guess_city, search_stores
 
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / "docs"
 
-_CACHE: dict[tuple[str, str], tuple[float, dict]] = {}
+_CACHE: dict[tuple[str, str, str], tuple[float, dict]] = {}
 _CACHE_TTL = 180.0
 _LOCK = threading.Lock()
 
@@ -50,8 +51,8 @@ def short_label(store_name: str) -> str:
     return name or store_name
 
 
-def live_audit(city: str, keyword: str, workers: int = 8) -> dict:
-    key = (city, keyword)
+def live_audit(city: str, keyword: str, workers: int = 8, store_code: str | None = None) -> dict:
+    key = (city, keyword, store_code or "")
     now = time.time()
     with _LOCK:
         hit = _CACHE.get(key)
@@ -60,7 +61,7 @@ def live_audit(city: str, keyword: str, workers: int = 8) -> dict:
             payload["cached"] = True
             return payload
 
-    snapshot = fetch_snapshot(city, keyword, workers=workers)
+    snapshot = fetch_snapshot(city, keyword, workers=workers, store_code=store_code)
     payload = store_payload(snapshot, short_label(snapshot["meta"].get("store", "")))
 
     with _LOCK:
@@ -108,23 +109,49 @@ class Handler(BaseHTTPRequestHandler):
 
         if route == "/api/health":
             has_token = bool(os.environ.get("MCD_MCP_TOKEN"))
-            self._json({"ok": True, "token": has_token, "cached": list(_CACHE.keys())})
+            self._json({"ok": True, "token": has_token, "cached": len(_CACHE)})
+            return
+
+        if route == "/api/geo":
+            # 按出口 IP 猜城市，用于预填搜索框；拿不到就让前端留空，不编。
+            self._json({"ok": True, "location": guess_city()})
+            return
+
+        if route == "/api/stores":
+            q = parse_qs(parsed.query)
+            city = (q.get("city") or [""])[0].strip()
+            keyword = (q.get("keyword") or [""])[0].strip()
+            be_type = int((q.get("beType") or ["1"])[0])
+            if not os.environ.get("MCD_MCP_TOKEN"):
+                self._json({"error": "本地没有配置 MCD_MCP_TOKEN，门店搜索不可用"}, 503)
+                return
+            if not city and not keyword:
+                self._json({"error": "城市和关键词至少要给一个"}, 400)
+                return
+            try:
+                stores = search_stores(city or "杭州", keyword, be_type=be_type)
+            except Exception as exc:  # noqa: BLE001
+                self._json({"error": f"{type(exc).__name__}: {str(exc)[:200]}"}, 500)
+                return
+            self._json({"ok": True, "city": city, "keyword": keyword, "stores": stores})
             return
 
         if route == "/api/audit":
             q = parse_qs(parsed.query)
             city = (q.get("city") or ["杭州"])[0]
             keyword = (q.get("keyword") or ["西湖"])[0]
+            store_code = (q.get("storeCode") or [None])[0]
             if not os.environ.get("MCD_MCP_TOKEN"):
                 self._json({"error": "本地没有配置 MCD_MCP_TOKEN，实时抓取不可用"}, 503)
                 return
             t0 = time.time()
             try:
-                payload = live_audit(city, keyword)
+                payload = live_audit(city, keyword, store_code=store_code)
             except Exception as exc:  # noqa: BLE001
                 self._json({"error": f"{type(exc).__name__}: {str(exc)[:200]}"}, 500)
                 return
             payload["elapsed_ms"] = int((time.time() - t0) * 1000)
+            payload["keyword"] = keyword
             self._json({"ok": True, "store": payload})
             return
 

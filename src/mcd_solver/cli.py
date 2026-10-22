@@ -7,9 +7,11 @@ from __future__ import annotations
 
 import argparse
 import sys
+from datetime import datetime
 from pathlib import Path
 
 from .catalog import load_snapshot
+from .geo import CST
 from .models import MenuItem, yuan
 from .optimizer import ComboSolver, explain
 
@@ -185,6 +187,49 @@ def cmd_slot(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_locate(args: argparse.Namespace) -> int:
+    """到店锁店：列出候选门店，并告诉你现在开着没有。"""
+    from .geo import guess_city, search_stores
+
+    city = args.city
+    if not city:
+        loc = guess_city()
+        if loc:
+            city = loc["city"]
+            print(f"按出口 IP 猜的城市：{city}（{loc.get('region') or ''}）——不准就直接用 --city 指定")
+        else:
+            print("拿不到城市，请用 --city 指定，例如 --city 杭州")
+            return 2
+
+    stores = search_stores(city, args.keyword, be_type=args.be_type, token=args.token)
+    if not stores:
+        print(f"没搜到门店：{city} {args.keyword}")
+        return 1
+
+    now = datetime.now(CST)
+    print(f"\n{now:%H:%M} · {city}「{args.keyword}」附近 {len(stores)} 家\n")
+    for i, s in enumerate(stores):
+        if s["open_now"] is None:
+            mark, state = "·", "营业时间未知"
+        elif s["open_now"]:
+            left = int(s["minutes_left"] or 0)
+            h, m = divmod(left, 60)
+            state = f"营业中，还有 {h} 小时 {m} 分关门" if h else f"营业中，还有 {m} 分钟关门"
+            mark = "!" if s["closing_soon"] else "●"
+        else:
+            mark, state = "○", "已打烊"
+        extra = " · 可预约" if s["reservation"] else ""
+        print(f"  {mark} [{i}] {s['storeName']}")
+        print(f"        {s['businessStartTime']}–{s['businessEndTime']}  {state}{extra}")
+        print(f"        {s['address']}  (编码 {s['storeCode']})")
+
+    if any(s["closing_soon"] for s in stores):
+        print("\n  ! 有门店 45 分钟内打烊，别走错门。")
+    print("\n  distance 字段没打印：MCP 返回的是「到你输入的关键词那个地点」的距离，不是到你。")
+    print(f"  选好之后跑：python mcd.py fetch --city {city} --keyword {args.keyword} --store-code <编码>")
+    return 0
+
+
 def cmd_fetch(args: argparse.Namespace) -> int:
     """从麦当劳 MCP 拉取真实门店快照。"""
     from .fetch import fetch_snapshot, save_snapshot
@@ -196,6 +241,7 @@ def cmd_fetch(args: argparse.Namespace) -> int:
         order_type=args.order_type,
         be_type=args.be_type,
         token=args.token,
+        store_code=getattr(args, "store_code", None),
     )
     path = save_snapshot(snapshot, args.out)
     print(f"已保存：{path}")
@@ -267,10 +313,18 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("--data", default=str(DEFAULT_STORE), help="门店快照 JSON 路径")
     s.set_defaults(func=cmd_slot)
 
+    lc = sub.add_parser("locate", help="到店锁店：列候选门店，并告知现在开着没有")
+    lc.add_argument("--city", default=None, help="城市名；不填则按出口 IP 猜")
+    lc.add_argument("--keyword", default="", help="商圈 / 路名 / 门店名关键词")
+    lc.add_argument("--be-type", type=int, default=1, choices=[1, 5], help="1-到店自取（默认） 5-得来速")
+    lc.add_argument("--token", default=None)
+    lc.set_defaults(func=cmd_locate)
+
     f = sub.add_parser("fetch", help="从麦当劳 MCP 拉取真实门店快照")
     f.add_argument("--city", required=True)
     f.add_argument("--keyword", required=True)
     f.add_argument("--index", type=int, default=0, help="同名门店取第几个")
+    f.add_argument("--store-code", default=None, help="门店编码，指定后精确命中（到店场景用 locate 拿）")
     f.add_argument("--order-type", type=int, default=1, choices=[1, 2])
     f.add_argument("--be-type", type=int, default=1, choices=[1, 2, 5, 6])
     f.add_argument("--out", default=str(DEFAULT_STORE))

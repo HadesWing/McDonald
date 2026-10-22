@@ -21,7 +21,7 @@
 
 🖼️ 不想开网页：直接看 [`docs/preview-cross.png`](docs/preview-cross.png)
 💻 想完全离线：下载仓库后双击 [`docs/index.html`](docs/index.html)，同一份页面，数据全部内嵌
-⚡ 想要实时：本机跑 `python mcd.py serve`，再用它给出的地址打开——页面会出现「实时抓取」按钮，输入门店关键词，约 10 秒现场重抓整份菜单
+⚡ 想要实时：本机跑 `python mcd.py serve`，再用它给出的地址打开——页面会出现「到店找店」面板，输商圈关键词列门店、标注营业状态，约 10 秒现场重抓整份菜单
 
 ![跨店比价：同一份套餐三家门店并排报价](docs/preview-cross.png)
 
@@ -87,7 +87,7 @@ python mcd.py audit --verify 5   # 重新调 calculate-price，并排打印官�
 
 ---
 
-## 实时模式
+## 实时模式与到店锁店
 
 线上页面是构建期快照（打开即看，零请求）；想知道**此刻**的价格，跑本地服务：
 
@@ -96,8 +96,28 @@ set MCD_MCP_TOKEN=你的token      # https://open.mcd.cn/mcp 申请
 python mcd.py serve              # → http://127.0.0.1:8765
 ```
 
-浏览器直连不了 MCP（端点不开放 CORS，token 也不该进网页），所以实时能力做在本地服务里：
-页面探测到 `/api/health` 就亮出「实时抓取」按钮，输入门店关键词，**约 10 秒**现场抓完一家店的整份菜单并出审计结果（同一份 HTML，静态快照与实时两种模式自动切换）。服务端只做抓取与审计，token 不出服务端，结果有 3 分钟缓存。
+浏览器直连不了 MCP（端点不开放 CORS，token 也不该进网页），所以实时能力做在本地服务里：页面探测到 `/api/health` 就亮出「**到店找店**」面板——输入商圈或路名，列出候选门店**并标注现在开着没有、还有多久关门**，点一家就现场抓完整份菜单出审计（**约 10 秒**，token 不出服务端，结果缓存 3 分钟）。
+
+### 关于定位：MCP 没有定位能力，我们不装
+
+实测结论，写在这里免得被问：
+
+- `query-nearby-stores` **没有经纬度入参**（只有 `city + keyword`，`searchType` 只是枚举）；
+- 返回体里门店的 `longitude` / `latitude` **恒为 0.0**，坐标不下发；
+- 返回的 `distance` 不是到你的距离，是**到关键词解析出的地点**的距离——同一家店搜「灵隐」431 米、搜「西湖」2545 米。
+
+所以「自动算出最近门店」在 MCP 层面做不到，硬做就是编数据。我们做的是诚实可用的替代：
+
+1. **城市自动预填**：按出口 IP 猜（免费无 key，只到城市级，`GET /api/geo`）；
+2. **门店靠关键词**：MCP 只认「城市+关键词」，到店看一眼招牌输 2 个字就够；
+3. **到店记忆**：第一次选店后，浏览器把「当时拿到的 GPS 坐标 ↔ 这家店」记进 `localStorage`（不上传）；下次走到同一家店附近 400 米内，点「定位我附近的店」直接认出这家店，不用再搜。常去的店从此零输入。
+
+命令行等价物：
+
+```bash
+python mcd.py locate --keyword 灵隐        # 列候选门店 + 营业状态 + 还有多久关门
+python mcd.py fetch --city 杭州 --keyword 灵隐 --store-code 3330372   # 按编码精确抓取
+```
 
 ---
 
@@ -141,7 +161,7 @@ python mcd.py solve --cart 巨无霸
 ## 项目结构
 
 ```
-mcd.py                    CLI 入口（compare / audit / slot / solve / fetch / serve / tools / call）
+mcd.py                    CLI 入口（compare / audit / slot / solve / locate / fetch / serve / tools / call）
 src/mcd_solver/
   mcp_client.py           零依赖 MCP 客户端（Streamable HTTP + SSE，含 429 退避）
   fetch.py                从官方 MCP 抓门店快照；SKU 级并发，单店约 10 秒
@@ -150,6 +170,7 @@ src/mcd_solver/
   audit.py                套餐差价审计 + 配菜位定价分析
   optimizer.py            凑单 0-1 背包精确求解
   serve.py                本地实时服务（静态页 + /api/audit 现场抓取，token 不出服务端）
+  geo.py                  到店定位补丁：IP 猜城市 / 门店营业状态 / 到店记忆距离比对
   catalog.py models.py    数据模型与快照加载
 data/store_*.json         三家真实门店快照，离线可跑全部审计命令
 tools/build_demo.py       把审计结果编译成单文件 HTML

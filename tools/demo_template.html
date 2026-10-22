@@ -80,6 +80,29 @@
   .live button[disabled] { opacity: .55; cursor: default; }
   .live code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
   .live .msg { color: var(--muted); }
+  .live .msg b { color: var(--ink); }
+
+  /* 到店模式：找店 → 看营业状态 → 抓这一家 */
+  .live.panel { flex-direction: column; align-items: stretch; gap: 10px; padding: 13px 14px; }
+  .live-head { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; }
+  .live-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .live input.city { width: 78px; }
+  .live input.kw { width: 168px; }
+  .live button.ghost { background: transparent; color: var(--mcd); border-color: var(--line); }
+  .cands { display: flex; flex-direction: column; gap: 6px; }
+  .live button.cand {
+    display: flex; flex-direction: column; gap: 3px; text-align: left; width: 100%;
+    padding: 8px 11px; border-radius: 9px; cursor: pointer; font: inherit;
+    border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  }
+  .live button.cand:hover { border-color: var(--mcd); }
+  .live button.cand[disabled] { opacity: .5; cursor: default; }
+  .cand .cn { font-weight: 600; font-size: 13.5px; }
+  .cand .cm { display: flex; gap: 9px; flex-wrap: wrap; align-items: center; font-size: 12px; color: var(--muted); }
+  .pill { font-size: 11px; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
+  .pill.op { background: var(--save-bg); color: var(--save); }
+  .pill.soon { background: var(--zero-bg); color: var(--mcd); }
+  .pill.cl { background: var(--line-soft); color: var(--muted); }
 
   h2.sec { font-size: 19px; margin: 44px 0 6px; font-weight: 650; letter-spacing: -.01em; }
   .sub { font-size: 13px; color: var(--muted); margin: 0 0 14px; }
@@ -464,64 +487,224 @@
   var want = new URLSearchParams(location.search).get('filter');
   var wantStore = new URLSearchParams(location.search).get('store');
 
-  /* ---------- 实时模式 ---------- */
+  /* ---------- 到店模式 ---------- */
 
   var liveEl = document.getElementById('live');
+  var CITY = '杭州';
+  var PLACES_KEY = 'assassin.places.v1';
+  var pendingGeo = null;
+
+  function loadPlaces() {
+    try { return JSON.parse(localStorage.getItem(PLACES_KEY) || '[]') || []; } catch (e) { return []; }
+  }
+
+  function rememberPlace(p) {
+    var list = loadPlaces().filter(function (x) { return x.storeCode !== p.storeCode; });
+    list.unshift(p);
+    try { localStorage.setItem(PLACES_KEY, JSON.stringify(list.slice(0, 8))); } catch (e) { /* 无痕模式 */ }
+  }
+
+  /* 到店记忆里的距离判断，和服务端 geo.haversine 同一套公式 */
+  function meters(lat1, lon1, lat2, lon2) {
+    var R = 6371000, r = Math.PI / 180;
+    var dLat = (lat2 - lat1) * r, dLon = (lon2 - lon1) * r;
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(lat1 * r) * Math.cos(lat2 * r) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    return Math.round(2 * R * Math.asin(Math.sqrt(a)));
+  }
 
   function showOffline() {
     liveEl.hidden = false;
     liveEl.className = 'live off';
     liveEl.innerHTML = '<span class="dot"></span>' +
       '现在是<b>静态快照</b>。想现场重抓一家店？在本机跑 <code>python mcd.py serve</code>，' +
-      '再用它给出的地址打开本页，这里会出现「实时抓取」按钮。';
+      '再用它给出的地址打开本页，这里会出现「到店找店」面板。';
+  }
+
+  function storePill(s) {
+    if (s.open_now === null || s.open_now === undefined) return '<span class="pill">营业时间未知</span>';
+    if (!s.open_now) return '<span class="pill cl">已打烊</span>';
+    if (s.closing_soon) return '<span class="pill soon">还剩 ' + Math.round(s.minutes_left) + ' 分钟关门</span>';
+    return '<span class="pill op">营业中</span>';
+  }
+
+  function bindCands(city) {
+    var kw = (document.getElementById('kw').value || '').trim();
+    Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) {
+      b.addEventListener('click', function () { audit(b.dataset.code, city, kw); });
+    });
   }
 
   function showOnline() {
     LIVE = true;
     liveEl.hidden = false;
-    liveEl.className = 'live';
+    liveEl.className = 'live panel';
     liveEl.innerHTML =
-      '<span class="dot"></span><b>本地实时服务已连接</b>' +
-      '<input id="kw" value="西湖" aria-label="门店关键词">' +
-      '<button id="go">实时抓取</button>' +
-      '<span class="msg" id="live-msg">输入门店关键词（如 西湖 / 武林广场 / 滨江），现场重抓整份菜单</span>';
+      '<div class="live-head"><span class="dot"></span><b>到店找店</b>' +
+      '<span class="msg" id="live-msg">输入商圈或路名，我列出候选门店——顺便告诉你现在开着没有</span></div>' +
+      '<div class="live-row">' +
+      '<input id="city" class="city" aria-label="城市">' +
+      '<input id="kw" class="kw" placeholder="商圈 / 路名，如 灵隐" aria-label="门店关键词">' +
+      '<button id="go">找店</button>' +
+      '<button id="geo" class="ghost">📍 定位我附近的店</button>' +
+      '</div><div class="cands" id="cands"></div>';
+
+    var cityEl = document.getElementById('city');
+    cityEl.value = CITY;
+
+    /* 城市按出口 IP 预填，只是省一次输入；用户随时可改 */
+    fetch('/api/geo', { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (j && j.location && j.location.city) {
+          CITY = j.location.city;
+          if (document.getElementById('city')) document.getElementById('city').value = CITY;
+        }
+      })
+      .catch(function () { });
 
     document.getElementById('go').addEventListener('click', function () {
-      var kw = (document.getElementById('kw').value || '').trim() || '西湖';
-      var btn = document.getElementById('go');
-      var msg = document.getElementById('live-msg');
-      btn.disabled = true;
-      var t0 = Date.now();
-      msg.textContent = '正在抓取「' + kw + '」的整份菜单，约 10–60 秒…';
-      var timer = setInterval(function () {
-        msg.textContent = '正在抓取「' + kw + '」，已用 ' + Math.round((Date.now() - t0) / 1000) + ' 秒…';
-      }, 1000);
-
-      fetch('/api/audit?city=' + encodeURIComponent('杭州') + '&keyword=' + encodeURIComponent(kw))
-        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
-        .then(function (res) {
-          if (!res.ok || !res.j.store) throw new Error(res.j.error || '抓取失败');
-          clearInterval(timer);
-          var s = res.j.store;
-          s.live = true;
-          var at = stores.findIndex(function (x) { return x.meta.store_code === s.meta.store_code; });
-          if (at >= 0) stores[at] = s; else stores.push(s);
-          var idx = stores.indexOf(s);
-          filter = 'all';
-          render(idx);
-          document.getElementById('snap').innerHTML =
-            '<b>刚刚实时抓取</b>（' + new Date().toLocaleTimeString('zh-CN') + '），门店 <b>' +
-            esc(s.meta.store) + '</b>（' + esc(s.meta.store_code) + '），来源麦当劳官方 MCP。';
-          msg.innerHTML = '已更新：<b>' + esc(s.label) + '</b> ｜ 套餐 ' + s.stats.total +
-            ' 个，可比 ' + s.stats.comparable + ' 个，零折扣 ' + s.stats.zero + ' 个';
-          btn.disabled = false;
-        })
-        .catch(function (err) {
-          clearInterval(timer);
-          msg.textContent = '失败：' + err.message + '（token 是否配置？看终端日志）';
-          btn.disabled = false;
-        });
+      searchStores((document.getElementById('city').value || '杭州').trim() ||
+        '杭州', (document.getElementById('kw').value || '').trim());
     });
+    document.getElementById('kw').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        searchStores((document.getElementById('city').value || '杭州').trim() ||
+          '杭州', (document.getElementById('kw').value || '').trim());
+      }
+    });
+    document.getElementById('geo').addEventListener('click', locateMe);
+
+    /* 去过的店：直接从记忆里列出来，不用再输关键词 */
+    var known = loadPlaces();
+    if (known.length) {
+      var box = document.getElementById('cands');
+      box.innerHTML = '<span class="msg" id="mem-title">你去过的店（点一下直接抓）</span>' +
+        known.slice(0, 4).map(function (p) {
+          return '<button class="cand" data-code="' + esc(p.storeCode) + '">' +
+            '<span class="cn">' + esc(p.label) + '</span>' +
+            '<span class="cm"><span>上次来过 · ' + esc(p.storeCode) + '</span></span></button>';
+        }).join('');
+      Array.prototype.forEach.call(box.querySelectorAll('.cand'), function (b) {
+        b.addEventListener('click', function () {
+          var hit = loadPlaces().filter(function (p) { return p.storeCode === b.dataset.code; })[0] || {};
+          audit(b.dataset.code, CITY, hit.keyword || '');
+        });
+      });
+    }
+  }
+
+  function searchStores(city, kw) {
+    var msg = document.getElementById('live-msg');
+    var box = document.getElementById('cands');
+    if (!kw) {
+      msg.innerHTML = '关键词必填——<b>MCP 不接受空关键词，也不接受按坐标搜店</b>。填 2 个字就够，比如「灵隐」「滨江」。';
+      document.getElementById('kw').focus();
+      return;
+    }
+    msg.textContent = '正在搜「' + kw + '」…';
+    box.innerHTML = '';
+    var btn = document.getElementById('go');
+    btn.disabled = true;
+
+    fetch('/api/stores?city=' + encodeURIComponent(city) + '&keyword=' + encodeURIComponent(kw), { cache: 'no-store' })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        btn.disabled = false;
+        if (!res.ok) throw new Error(res.j.error || '搜索失败');
+        var list = res.j.stores || [];
+        if (!list.length) { msg.textContent = '没找到门店，换个关键词试试'; return; }
+        msg.innerHTML = '共 <b>' + list.length + '</b> 家，点一家开始审计';
+        box.innerHTML = list.map(function (s) {
+          return '<button class="cand" data-code="' + esc(s.storeCode) + '">' +
+            '<span class="cn">' + esc(s.storeName) + '</span>' +
+            '<span class="cm">' + storePill(s) +
+            '<span>' + esc(s.businessStartTime || '?') + '–' + esc(s.businessEndTime || '?') + '</span>' +
+            '<span>' + esc(s.address || '') + '</span></span></button>';
+        }).join('');
+        bindCands(city);
+      })
+      .catch(function (e) {
+        btn.disabled = false;
+        msg.textContent = '失败：' + e.message + '（token 配了吗？看终端日志）';
+      });
+  }
+
+  function audit(code, city, kw) {
+    var msg = document.getElementById('live-msg');
+    var t0 = Date.now();
+    Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) { b.disabled = true; });
+    msg.textContent = '正在抓这家的整份菜单，已用 0 秒…';
+    var timer = setInterval(function () {
+      msg.textContent = '正在抓这家的整份菜单，已用 ' + Math.round((Date.now() - t0) / 1000) + ' 秒…';
+    }, 1000);
+
+    var url = '/api/audit?city=' + encodeURIComponent(city) +
+      '&keyword=' + encodeURIComponent(kw || '') + '&storeCode=' + encodeURIComponent(code);
+    fetch(url, { cache: 'no-store' })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        clearInterval(timer);
+        if (!res.ok || !res.j.store) throw new Error(res.j.error || '抓取失败');
+        var s = res.j.store;
+        s.live = true;
+        var at = stores.findIndex(function (x) { return x.meta.store_code === s.meta.store_code; });
+        if (at >= 0) stores[at] = s; else stores.push(s);
+        filter = 'all';
+        render(stores.indexOf(s));
+        document.getElementById('snap').innerHTML =
+          '<b>刚刚实时抓取</b>（' + new Date().toLocaleTimeString('zh-CN') + '），门店 <b>' +
+          esc(s.meta.store) + '</b>（' + esc(s.meta.store_code) + '），来源麦当劳官方 MCP。';
+        msg.innerHTML = '已更新 <b>' + esc(s.label) + '</b> ｜ 套餐 ' + s.stats.total +
+          ' 个，可比 ' + s.stats.comparable + ' 个，零折扣 ' + s.stats.zero + ' 个';
+        rememberPlace({ storeCode: s.meta.store_code, label: s.label, keyword: kw || '', at: Date.now() });
+        Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) { b.disabled = false; });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      })
+      .catch(function (e) {
+        clearInterval(timer);
+        msg.textContent = '失败：' + e.message;
+        Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) { b.disabled = false; });
+      });
+  }
+
+  function locateMe() {
+    var msg = document.getElementById('live-msg');
+    var box = document.getElementById('cands');
+    if (!navigator.geolocation) { msg.textContent = '这台浏览器不支持定位'; return; }
+    msg.textContent = '正在获取定位…';
+
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      var lat = pos.coords.latitude, lon = pos.coords.longitude;
+      var acc = Math.round(pos.coords.accuracy || 0);
+      pendingGeo = { lat: lat, lon: lon };
+
+      var near = loadPlaces().map(function (p) {
+        return { p: p, d: meters(lat, lon, p.lat, p.lon) };
+      }).filter(function (x) { return x.d <= 400; }).sort(function (a, b) { return a.d - b.d; });
+
+      if (near.length) {
+        msg.innerHTML = '你在 <b>' + esc(near[0].p.label) + '</b> 附近（约 ' + near[0].d + ' 米）——去过的店，直接抓？';
+        box.innerHTML = near.map(function (x) {
+          return '<button class="cand" data-code="' + esc(x.p.storeCode) + '">' +
+            '<span class="cn">' + esc(x.p.label) + '</span>' +
+            '<span class="cm"><span>约 ' + x.d + ' 米 · 上次来过</span></span></button>';
+        }).join('');
+        Array.prototype.forEach.call(box.querySelectorAll('.cand'), function (b) {
+          b.addEventListener('click', function () {
+            var hit = loadPlaces().filter(function (p) { return p.storeCode === b.dataset.code; })[0] || {};
+            audit(b.dataset.code, (document.getElementById('city').value || '杭州'), hit.keyword || '');
+          });
+        });
+        return;
+      }
+
+      msg.innerHTML = '定位成功（精度约 ' + acc + ' 米）。但 <b>MCP 不支持按坐标搜店</b>，' +
+        '请在关键词里填店名或路名（2 个字就够）——选完店我会记住这个位置，下次走到这儿自动认出。';
+      document.getElementById('kw').focus();
+    }, function (err) {
+      msg.textContent = '拿不到定位（' + err.message + '）。直接输关键词也一样。';
+    }, { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 });
   }
 
   fetch('/api/health', { cache: 'no-store' })
