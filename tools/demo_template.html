@@ -189,6 +189,32 @@
     padding: 13px 4px 11px; border-bottom: 1px solid var(--line-soft);
     cursor: pointer; position: relative;
   }
+  .rows-empty { font-size: 13px; color: var(--muted); padding: 22px 4px; }
+
+  /* 抓取中的等待效果：候选按钮转圈 + 列表变骨架屏 + 顶部扫光条 */
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes sweep { 0% { background-position: -220px 0; } 100% { background-position: 220px 0; } }
+  .live button.cand.loading { border-color: var(--mcd); background: #fff; box-shadow: 0 0 0 3px rgba(218, 41, 28, .12); }
+  .cand.loading .cn::before {
+    content: ''; display: inline-block; width: 10px; height: 10px; margin-right: 7px;
+    border: 2px solid rgba(218, 41, 28, .22); border-top-color: var(--mcd);
+    border-radius: 50%; animation: spin .65s linear infinite; vertical-align: 0;
+  }
+  .loading-bar {
+    height: 3px; border-radius: 2px; margin: 12px 0 6px; background: var(--line-soft);
+    background-image: linear-gradient(90deg, transparent 0%, var(--mcd) 50%, transparent 100%);
+    background-size: 220px 100%; background-repeat: no-repeat;
+    animation: sweep 1.15s linear infinite;
+  }
+  .skrow {
+    display: grid; grid-template-columns: minmax(0, 1fr) 78px 84px; gap: 10px;
+    align-items: center; padding: 16px 4px; border-bottom: 1px solid var(--line-soft);
+  }
+  .skrow i {
+    display: block; height: 11px; border-radius: 6px;
+    background: linear-gradient(90deg, var(--line-soft) 25%, var(--line) 37%, var(--line-soft) 63%);
+    background-size: 420px 100%; animation: sweep 1.4s linear infinite;
+  }
   .row:hover { background: var(--card); }
   .row .name { font-size: 14.5px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .row .name .tag {
@@ -275,12 +301,12 @@
 </section>
 
 <h2 class="sec">分店审计：套餐到底有没有便宜</h2>
-<p class="sub">同样的东西单点一遍要多少钱，和套餐价一比就知道。点任意一行看它由哪几样单品拼成。</p>
+<p class="sub">同样的东西单点一遍要多少钱，和套餐价一比就知道。默认只列<b>能定论的</b>套餐，点任意一行看它由哪几样单品拼成。</p>
 <div class="tabs" id="tabs"></div>
 <section class="stats" id="stats"></section>
 
 <div class="toolbar">
-  <button class="f" data-filter="all" aria-pressed="true">全部</button>
+  <button class="f" data-filter="all" aria-pressed="true">有结论</button>
   <button class="f" data-filter="zero" aria-pressed="false">零折扣</button>
   <button class="f" data-filter="real" aria-pressed="false">真有折扣</button>
   <button class="f" data-filter="unknown" aria-pressed="false">不可比</button>
@@ -291,6 +317,7 @@
   <span>套餐</span><span>套餐价</span><span>单点合计</span><span>差价</span>
 </div>
 <div id="rows"></div>
+<p class="rows-empty" id="rows-empty" hidden></p>
 
 <div class="legend">
   <span><i style="background:var(--mcd)"></i>套餐价</span>
@@ -367,6 +394,13 @@
       return '<div class="stat ' + c.cls + '"><div class="num">' + c.num +
         '</div><div class="lab">' + c.lab + '</div></div>';
     }).join('');
+
+    /* 不可比的套餐占一半上下、又给不出结论，默认不进列表；
+       按钮上带数量，点一下才展开（数据没丢，缺哪一项都写着）。 */
+    var allBtn = document.querySelector('button.f[data-filter="all"]');
+    if (allBtn) allBtn.textContent = '有结论 ' + st.comparable;
+    var ubBtn = document.querySelector('button.f[data-filter="unknown"]');
+    if (ubBtn) ubBtn.textContent = '不可比 ' + st.unknown;
   }
 
   var TAG = {
@@ -425,9 +459,20 @@
   }
 
   function applyFilter() {
+    var shown = 0;
     document.querySelectorAll('#rows .row').forEach(function (r) {
-      r.style.display = (filter === 'all' || r.dataset.v === filter) ? '' : 'none';
+      /* 「有结论」= 除了不可比以外的全部 */
+      var show = filter === 'all' ? r.dataset.v !== 'unknown' : r.dataset.v === filter;
+      r.style.display = show ? '' : 'none';
+      if (show) shown++;
     });
+    var empty = document.getElementById('rows-empty');
+    if (empty) {
+      empty.hidden = shown > 0;
+      empty.innerHTML = filter === 'unknown'
+        ? '这家店没有不可比的套餐。'
+        : '这家店没有能定论的套餐——点上面「不可比」看它缺哪一样单品。';
+    }
   }
 
   function renderSnap(s) {
@@ -620,18 +665,8 @@
     var cityEl = document.getElementById('city');
     cityEl.value = CITY;
 
-    /* 城市按出口 IP 预填，只是省一次输入；用户随时可改 */
-    fetch(api('/api/geo'), { cache: 'no-store' })
-      .then(function (r) { return r.json(); })
-      .then(function (j) {
-        if (j && j.location && j.location.city) {
-          CITY = j.location.city;
-          if (document.getElementById('city')) document.getElementById('city').value = CITY;
-          loadChips(CITY);
-        }
-      })
-      .catch(function () { loadChips(CITY); });
-
+    /* 默认杭州：这个项目的三店快照和结论都是杭州跑出来的，按出口 IP 猜成
+       别的城市，会让人以为抓错了店才发现没数据。要换城市直接改输入框。 */
     loadChips(CITY);
 
     document.getElementById('go').addEventListener('click', function () {
@@ -734,6 +769,22 @@
       });
   }
 
+  /* 抓一家店的整份菜单要 8–10 秒。这期间把列表换成骨架屏：
+     一是让用户看见「在动」，二是别让人把上一家店的数据当成这家的。 */
+  function showSkeleton() {
+    var el = document.getElementById('rows');
+    var html = '<div class="loading-bar"></div>';
+    for (var i = 0; i < 7; i++) {
+      html += '<div class="skrow">' +
+        '<i style="width:' + (48 + (i * 11) % 34) + '%"></i>' +
+        '<i style="width:56px;justify-self:end"></i>' +
+        '<i style="width:44px;justify-self:end"></i></div>';
+    }
+    el.innerHTML = html;
+    var empty = document.getElementById('rows-empty');
+    if (empty) empty.hidden = true;
+  }
+
   /* silent = true：打开页面时后台自己刷一次。不抢按钮、不滚屏、不动引导语，
      只把顶部那行「这是几点抓的快照」换成「已换成现在这一刻」。 */
   function audit(code, city, kw, obj, silent) {
@@ -744,16 +795,20 @@
     if (silent) {
       if (snapEl) snapEl.innerHTML = '<b>正在取现在这一刻的价格…</b>（先显示的是构建时抓的快照）';
     } else {
-      Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) { b.disabled = true; });
-      msg.textContent = '正在抓这家的整份菜单，已用 0 秒…';
+      Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) {
+        b.disabled = true;
+        if (b.dataset.code === String(code)) b.classList.add('loading');
+      });
+      msg.textContent = '正在抓这家店的整份菜单，已用 1 秒…';
+      showSkeleton();
     }
     var timer = setInterval(function () {
+      var sec = Math.round((Date.now() - t0) / 1000);
       if (silent) {
-        if (snapEl) snapEl.innerHTML = '<b>正在取现在这一刻的价格…</b>已用 ' +
-          Math.round((Date.now() - t0) / 1000) + ' 秒';
+        if (snapEl) snapEl.innerHTML = '<b>正在取现在这一刻的价格…</b>已用 ' + sec + ' 秒';
         return;
       }
-      msg.textContent = '正在抓这家的整份菜单，已用 ' + Math.round((Date.now() - t0) / 1000) + ' 秒…';
+      msg.textContent = '正在抓这家店的整份菜单，已用 ' + sec + ' 秒…（一家店约 8–10 秒）';
     }, 1000);
 
     var url = '/api/audit?city=' + encodeURIComponent(city) +
@@ -793,7 +848,10 @@
             }
           }, 250);
         }
-        Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) { b.disabled = false; });
+        Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) {
+          b.disabled = false;
+          b.classList.remove('loading');
+        });
         if (!silent) window.scrollTo({ top: 0, behavior: 'smooth' });
       })
       .catch(function (e) {
@@ -803,7 +861,11 @@
           return;
         }
         msg.textContent = '失败：' + e.message;
-        Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) { b.disabled = false; });
+        Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) {
+          b.disabled = false;
+          b.classList.remove('loading');
+        });
+        render(cur);  // 骨架屏换回原来的列表
       });
   }
 
