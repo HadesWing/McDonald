@@ -339,6 +339,14 @@
   var cur = 0, filter = 'all', crossOpen = false, LIVE = false;
 
   function yuan(c) { return (c / 100).toFixed(2); }
+
+  /* 线上分享链接是代理模式：子路径请求必须带上页面自己的 sharecode，
+     否则被平台拦成「链接不完整」。本地开发没有这些参数，原样透传。 */
+  function api(url) {
+    var qs = location.search.replace(/^\?/, '');
+    if (!qs) return url;
+    return url + (url.indexOf('?') >= 0 ? '&' : '?') + qs;
+  }
   function esc(s) {
     return String(s).replace(/[&<>"]/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c];
@@ -605,7 +613,7 @@
   function loadChips(city) {
     var box = document.getElementById('chips');
     if (!box) return;
-    fetch('/api/districts?city=' + encodeURIComponent(city), { cache: 'no-store' })
+    fetch(api('/api/districts?city=' + encodeURIComponent(city)), { cache: 'no-store' })
       .then(function (r) { return r.json(); })
       .then(function (j) {
         var areas = (j && j.areas) || [];
@@ -682,7 +690,7 @@
     cityEl.value = CITY;
 
     /* 城市按出口 IP 预填，只是省一次输入；用户随时可改 */
-    fetch('/api/geo', { cache: 'no-store' })
+    fetch(api('/api/geo'), { cache: 'no-store' })
       .then(function (r) { return r.json(); })
       .then(function (j) {
         if (j && j.location && j.location.city) {
@@ -751,7 +759,7 @@
     var btn = document.getElementById('go');
     btn.disabled = true;
 
-    fetch('/api/stores?city=' + encodeURIComponent(city) + '&keyword=' + encodeURIComponent(kw), { cache: 'no-store' })
+    fetch(api('/api/stores?city=' + encodeURIComponent(city) + '&keyword=' + encodeURIComponent(kw)), { cache: 'no-store' })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
       .then(function (res) {
         btn.disabled = false;
@@ -791,7 +799,7 @@
 
     var url = '/api/audit?city=' + encodeURIComponent(city) +
       '&keyword=' + encodeURIComponent(kw || '') + '&storeCode=' + encodeURIComponent(code);
-    fetch(url, { cache: 'no-store' })
+    fetch(api(url), { cache: 'no-store' })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
       .then(function (res) {
         clearInterval(timer);
@@ -838,9 +846,9 @@
     document.getElementById('cmp-sub').textContent = '正在逐店询价…';
     box.innerHTML = '';
 
-    fetch('/api/combo?code=' + encodeURIComponent(code) +
+    fetch(api('/api/combo?code=' + encodeURIComponent(code) +
       '&city=' + encodeURIComponent(CITY) +
-      '&keyword=' + encodeURIComponent(lastKeyword), { cache: 'no-store' })
+      '&keyword=' + encodeURIComponent(lastKeyword)), { cache: 'no-store' })
       .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
       .then(function (res) {
         if (!res.ok) throw new Error(res.j.error || '比价失败');
@@ -922,7 +930,7 @@
     }, { enableHighAccuracy: true, timeout: 8000, maximumAge: 60000 });
   }
 
-  fetch('/api/health', { cache: 'no-store' })
+  fetch(api('/api/health'), { cache: 'no-store' })
     .then(function (r) { return r.ok ? r.json() : null; })
     .then(function (j) { if (j && j.ok) showOnline(); else showOffline(); })
     .catch(showOffline);
