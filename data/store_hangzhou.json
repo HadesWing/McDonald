@@ -1,0 +1,6722 @@
+{
+ "meta": {
+  "store": "麦当劳杭州灵隐景区餐厅",
+  "store_code": "3330257",
+  "address": "天竺路15号",
+  "city": "杭州",
+  "keyword": "西湖",
+  "order_type": 1,
+  "be_type": 1,
+  "fetched_at": "2026-10-22T11:16:21+08:00",
+  "source": "mcd-mcp",
+  "mcp_endpoint": "https://mcp.mcd.cn",
+  "tools": [
+   "query-nearby-stores",
+   "query-meals",
+   "calculate-price",
+   "query-meal-detail",
+   "list-nutrition-foods"
+  ]
+ },
+ "delivery": {
+  "fee_cents": 0,
+  "free_threshold_cents": 0
+ },
+ "items": [
+  {
+   "code": "9900016076",
+   "name": "“我就喜欢”鸡薯双全盒",
+   "price_cents": 3100,
+   "category": "other",
+   "raw_category": "人气热卖",
+   "tags": [
+    "心形薯饼同款比心",
+    "上新"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900016075",
+   "name": "龙焰芝士棒鸡腿堡三件套",
+   "price_cents": 5600,
+   "category": "staple",
+   "raw_category": "人气热卖",
+   "tags": [
+    "浓郁奶香拉丝芝士",
+    "上新"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900016073",
+   "name": "龙焰鸡腿堡三件套",
+   "price_cents": 5300,
+   "category": "staple",
+   "raw_category": "人气热卖",
+   "tags": [
+    "韩式辣椒黄油风味",
+    "上新"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900016077",
+   "name": "蘸酱炸鸡",
+   "price_cents": 1850,
+   "category": "side",
+   "raw_category": "人气热卖",
+   "tags": [
+    "韩式芝士风味酱上新"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "521952",
+   "name": "龙焰鸡腿堡",
+   "price_cents": 2750,
+   "category": "staple",
+   "raw_category": "人气热卖",
+   "tags": [
+    "韩式辣椒黄油风味",
+    "上新"
+   ],
+   "kcal": null
+  },
+  {
+   "code": "9900016566",
+   "name": "心形薯饼8块",
+   "price_cents": 2400,
+   "category": "side",
+   "raw_category": "人气热卖",
+   "tags": [
+    "含一份蘸酱",
+    "上新"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "521950",
+   "name": "蓝莓爆爆珠麦旋风",
+   "price_cents": 1750,
+   "category": "dessert",
+   "raw_category": "人气热卖",
+   "tags": [
+    "蓝莓",
+    "上新"
+   ],
+   "kcal": null
+  },
+  {
+   "code": "521953",
+   "name": "龙焰芝士棒鸡腿堡",
+   "price_cents": 3050,
+   "category": "staple",
+   "raw_category": "鸡肉汉堡 /卷",
+   "tags": [
+    "上新",
+    "浓郁奶香拉丝芝士"
+   ],
+   "kcal": null
+  },
+  {
+   "code": "9900005462",
+   "name": "板烧鸡腿堡三件套",
+   "price_cents": 5250,
+   "category": "staple",
+   "raw_category": "鸡肉汉堡 /卷",
+   "tags": [
+    "套餐",
+    "新升级",
+    "更多汁"
+   ],
+   "kcal": 391,
+   "nutrition": {
+    "kcal": 391,
+    "protein_g": 23.0,
+    "fat_g": 17.0,
+    "carb_g": 35.0,
+    "sodium_mg": 1041.0,
+    "calcium_mg": 93.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "9900005456",
+   "name": "麦辣鸡腿汉堡三件套",
+   "price_cents": 4900,
+   "category": "staple",
+   "raw_category": "鸡肉汉堡 /卷",
+   "tags": [
+    "套餐"
+   ],
+   "kcal": 485,
+   "nutrition": {
+    "kcal": 485,
+    "protein_g": 24.0,
+    "fat_g": 24.0,
+    "carb_g": 42.0,
+    "sodium_mg": 1208.0,
+    "calcium_mg": 154.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "9900005453",
+   "name": "麦香鸡中套餐",
+   "price_cents": 4500,
+   "category": "staple",
+   "raw_category": "鸡肉汉堡 /卷",
+   "tags": [
+    "套餐"
+   ],
+   "kcal": 369,
+   "nutrition": {
+    "kcal": 369,
+    "protein_g": 15.0,
+    "fat_g": 17.0,
+    "carb_g": 39.0,
+    "sodium_mg": 731.0,
+    "calcium_mg": 73.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "1440",
+   "name": "麦辣鸡腿汉堡",
+   "price_cents": 2600,
+   "category": "staple",
+   "raw_category": "鸡肉汉堡 /卷",
+   "tags": [
+    "单品",
+    "人气经典",
+    "外酥里嫩"
+   ],
+   "kcal": 485,
+   "nutrition": {
+    "kcal": 485,
+    "protein_g": 24.0,
+    "fat_g": 24.0,
+    "carb_g": 42.0,
+    "sodium_mg": 1208.0,
+    "calcium_mg": 154.0
+   }
+  },
+  {
+   "code": "1406",
+   "name": "板烧鸡腿堡",
+   "price_cents": 2700,
+   "category": "staple",
+   "raw_category": "鸡肉汉堡 /卷",
+   "tags": [
+    "单品",
+    "板烧滋滋",
+    "多汁惹味"
+   ],
+   "kcal": 391,
+   "nutrition": {
+    "kcal": 391,
+    "protein_g": 23.0,
+    "fat_g": 17.0,
+    "carb_g": 35.0,
+    "sodium_mg": 1041.0,
+    "calcium_mg": 93.0
+   }
+  },
+  {
+   "code": "1450",
+   "name": "麦香鸡",
+   "price_cents": 1950,
+   "category": "staple",
+   "raw_category": "鸡肉汉堡 /卷",
+   "tags": [
+    "单品"
+   ],
+   "kcal": 369,
+   "nutrition": {
+    "kcal": 369,
+    "protein_g": 15.0,
+    "fat_g": 17.0,
+    "carb_g": 39.0,
+    "sodium_mg": 731.0,
+    "calcium_mg": 73.0
+   }
+  },
+  {
+   "code": "9900008746",
+   "name": "鸡肉堡单品精选",
+   "price_cents": 2700,
+   "category": "staple",
+   "raw_category": "鸡肉汉堡 /卷",
+   "tags": [
+    "单品",
+    "人气"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900006332",
+   "name": "薄皮V翅双拼十翅",
+   "price_cents": 6100,
+   "category": "other",
+   "raw_category": "小食拼盘 /多人餐",
+   "tags": [
+    "小食拼盘",
+    "超值"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900015730",
+   "name": "BFF四宫格小食盘",
+   "price_cents": 5900,
+   "category": "other",
+   "raw_category": "小食拼盘 /多人餐",
+   "tags": [
+    "小食拼盘",
+    "随心拼"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900004066",
+   "name": "堡堡随心拼（7件任选）",
+   "price_cents": 8500,
+   "category": "staple",
+   "raw_category": "小食拼盘 /多人餐",
+   "tags": [
+    "小食拼盘",
+    "万种组合"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900016078",
+   "name": "蘸酱麦麦脆汁鸡",
+   "price_cents": 1900,
+   "category": "drink",
+   "raw_category": "蘸酱炸鸡",
+   "tags": [
+    "蘸酱炸鸡",
+    "韩式芝士风味酱上新"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900016079",
+   "name": "蘸酱脆皮鸡柳",
+   "price_cents": 1850,
+   "category": "side",
+   "raw_category": "蘸酱炸鸡",
+   "tags": [
+    "蘸酱炸鸡",
+    "韩式芝士风味酱上新"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900015729",
+   "name": "蘸酱BFF四宫格小食盘",
+   "price_cents": 6200,
+   "category": "side",
+   "raw_category": "蘸酱炸鸡",
+   "tags": [
+    "蘸酱炸鸡",
+    "蘸酱炸鸡新吃法"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "521797",
+   "name": "北美招牌牧场酱",
+   "price_cents": 300,
+   "category": "other",
+   "raw_category": "蘸酱炸鸡",
+   "tags": [
+    "蘸酱",
+    "使用动物奶油"
+   ],
+   "kcal": null
+  },
+  {
+   "code": "9900005411",
+   "name": "不素之霸双层牛堡三件套",
+   "price_cents": 5500,
+   "category": "staple",
+   "raw_category": "巨无霸 牛鱼肉堡",
+   "tags": [
+    "套餐",
+    "100%纯牛肉"
+   ],
+   "kcal": 493,
+   "nutrition": {
+    "kcal": 493,
+    "protein_g": 28.0,
+    "fat_g": 27.0,
+    "carb_g": 34.0,
+    "sodium_mg": 1012.0,
+    "calcium_mg": 75.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "9900005466",
+   "name": "巨无霸三件套",
+   "price_cents": 5450,
+   "category": "other",
+   "raw_category": "巨无霸 牛鱼肉堡",
+   "tags": [
+    "套餐",
+    "100%纯牛肉"
+   ],
+   "kcal": 513,
+   "nutrition": {
+    "kcal": 513,
+    "protein_g": 27.0,
+    "fat_g": 26.0,
+    "carb_g": 42.0,
+    "sodium_mg": 961.0,
+    "calcium_mg": 171.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "9900005468",
+   "name": "培根蔬萃双层牛堡三件套",
+   "price_cents": 5200,
+   "category": "staple",
+   "raw_category": "巨无霸 牛鱼肉堡",
+   "tags": [
+    "套餐",
+    "100%纯牛肉"
+   ],
+   "kcal": 442,
+   "nutrition": {
+    "kcal": 442,
+    "protein_g": 24.0,
+    "fat_g": 23.0,
+    "carb_g": 34.0,
+    "sodium_mg": 728.0,
+    "calcium_mg": 73.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "9900005413",
+   "name": "双层深海鳕鱼堡三件套",
+   "price_cents": 5350,
+   "category": "staple",
+   "raw_category": "巨无霸 牛鱼肉堡",
+   "tags": [
+    "套餐",
+    "麦香鱼系列"
+   ],
+   "kcal": 485,
+   "nutrition": {
+    "kcal": 485,
+    "protein_g": 28.0,
+    "fat_g": 21.0,
+    "carb_g": 46.0,
+    "sodium_mg": 917.0,
+    "calcium_mg": 147.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "9900005460",
+   "name": "麦香鱼中套餐",
+   "price_cents": 5050,
+   "category": "other",
+   "raw_category": "巨无霸 牛鱼肉堡",
+   "tags": [
+    "套餐",
+    "麦香鱼系列"
+   ],
+   "kcal": 325,
+   "nutrition": {
+    "kcal": 325,
+    "protein_g": 16.0,
+    "fat_g": 13.0,
+    "carb_g": 35.0,
+    "sodium_mg": 556.0,
+    "calcium_mg": 99.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "9900005464",
+   "name": "双层吉士汉堡中套餐",
+   "price_cents": 5000,
+   "category": "staple",
+   "raw_category": "巨无霸 牛鱼肉堡",
+   "tags": [
+    "套餐",
+    "100%纯牛肉"
+   ],
+   "kcal": 429,
+   "nutrition": {
+    "kcal": 429,
+    "protein_g": 27.0,
+    "fat_g": 22.0,
+    "carb_g": 31.0,
+    "sodium_mg": 1017.0,
+    "calcium_mg": 232.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "9900005449",
+   "name": "吉士汉堡包中套餐",
+   "price_cents": 4500,
+   "category": "staple",
+   "raw_category": "巨无霸 牛鱼肉堡",
+   "tags": [
+    "套餐",
+    "100%纯牛肉"
+   ],
+   "kcal": 294,
+   "nutrition": {
+    "kcal": 294,
+    "protein_g": 16.0,
+    "fat_g": 12.0,
+    "carb_g": 30.0,
+    "sodium_mg": 673.0,
+    "calcium_mg": 144.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "1100",
+   "name": "巨无霸",
+   "price_cents": 2900,
+   "category": "other",
+   "raw_category": "巨无霸 牛鱼肉堡",
+   "tags": [
+    "单品",
+    "100%纯牛肉"
+   ],
+   "kcal": 513,
+   "nutrition": {
+    "kcal": 513,
+    "protein_g": 27.0,
+    "fat_g": 26.0,
+    "carb_g": 42.0,
+    "sodium_mg": 961.0,
+    "calcium_mg": 171.0
+   }
+  },
+  {
+   "code": "9900003586",
+   "name": "双层深海鳕鱼堡",
+   "price_cents": 2800,
+   "category": "staple",
+   "raw_category": "巨无霸 牛鱼肉堡",
+   "tags": [
+    "单品",
+    "麦香鱼系列"
+   ],
+   "kcal": 485,
+   "nutrition": {
+    "kcal": 485,
+    "protein_g": 28.0,
+    "fat_g": 21.0,
+    "carb_g": 46.0,
+    "sodium_mg": 917.0,
+    "calcium_mg": 147.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "1600",
+   "name": "麦香鱼",
+   "price_cents": 2500,
+   "category": "other",
+   "raw_category": "巨无霸 牛鱼肉堡",
+   "tags": [
+    "单品",
+    "麦香鱼系列"
+   ],
+   "kcal": 325,
+   "nutrition": {
+    "kcal": 325,
+    "protein_g": 16.0,
+    "fat_g": 13.0,
+    "carb_g": 35.0,
+    "sodium_mg": 556.0,
+    "calcium_mg": 99.0
+   }
+  },
+  {
+   "code": "4648",
+   "name": "不素之霸双层牛堡",
+   "price_cents": 2950,
+   "category": "staple",
+   "raw_category": "巨无霸 牛鱼肉堡",
+   "tags": [
+    "单品",
+    "100%纯牛肉"
+   ],
+   "kcal": 493,
+   "nutrition": {
+    "kcal": 493,
+    "protein_g": 28.0,
+    "fat_g": 27.0,
+    "carb_g": 34.0,
+    "sodium_mg": 1012.0,
+    "calcium_mg": 75.0
+   }
+  },
+  {
+   "code": "1106",
+   "name": "培根蔬萃双层牛堡",
+   "price_cents": 2650,
+   "category": "staple",
+   "raw_category": "巨无霸 牛鱼肉堡",
+   "tags": [
+    "单品",
+    "100%纯牛肉"
+   ],
+   "kcal": 442,
+   "nutrition": {
+    "kcal": 442,
+    "protein_g": 24.0,
+    "fat_g": 23.0,
+    "carb_g": 34.0,
+    "sodium_mg": 728.0,
+    "calcium_mg": 73.0
+   }
+  },
+  {
+   "code": "1120",
+   "name": "双层吉士汉堡",
+   "price_cents": 2650,
+   "category": "staple",
+   "raw_category": "巨无霸 牛鱼肉堡",
+   "tags": [
+    "单品",
+    "100%纯牛肉"
+   ],
+   "kcal": 429,
+   "nutrition": {
+    "kcal": 429,
+    "protein_g": 27.0,
+    "fat_g": 22.0,
+    "carb_g": 31.0,
+    "sodium_mg": 1017.0,
+    "calcium_mg": 232.0
+   }
+  },
+  {
+   "code": "521316",
+   "name": "高达吉士双牛堡",
+   "price_cents": 2600,
+   "category": "staple",
+   "raw_category": "巨无霸 牛鱼肉堡",
+   "tags": [
+    "单品",
+    "100%纯牛肉",
+    "人气"
+   ],
+   "kcal": null
+  },
+  {
+   "code": "9900008747",
+   "name": "牛肉堡单品精选",
+   "price_cents": 1550,
+   "category": "staple",
+   "raw_category": "巨无霸 牛鱼肉堡",
+   "tags": [
+    "单品",
+    "100%纯牛肉"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900005428",
+   "name": "培根安格斯厚牛堡三件套",
+   "price_cents": 6350,
+   "category": "staple",
+   "raw_category": "安格斯MAX 厚牛堡",
+   "tags": [
+    "套餐",
+    "100%安格斯牛肉"
+   ],
+   "kcal": 707,
+   "nutrition": {
+    "kcal": 707,
+    "protein_g": 34.0,
+    "fat_g": 44.0,
+    "carb_g": 43.0,
+    "sodium_mg": 1037.0,
+    "calcium_mg": 161.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "9900005430",
+   "name": "芝士安格斯厚牛堡三件套",
+   "price_cents": 6050,
+   "category": "staple",
+   "raw_category": "安格斯MAX 厚牛堡",
+   "tags": [
+    "套餐",
+    "100%安格斯牛肉"
+   ],
+   "kcal": 696,
+   "nutrition": {
+    "kcal": 696,
+    "protein_g": 32.0,
+    "fat_g": 44.0,
+    "carb_g": 43.0,
+    "sodium_mg": 897.0,
+    "calcium_mg": 150.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "511781",
+   "name": "培根安格斯厚牛堡",
+   "price_cents": 3900,
+   "category": "staple",
+   "raw_category": "安格斯MAX 厚牛堡",
+   "tags": [
+    "单品",
+    "100%安格斯牛肉"
+   ],
+   "kcal": 707,
+   "nutrition": {
+    "kcal": 707,
+    "protein_g": 34.0,
+    "fat_g": 44.0,
+    "carb_g": 43.0,
+    "sodium_mg": 1037.0,
+    "calcium_mg": 161.0
+   }
+  },
+  {
+   "code": "511782",
+   "name": "芝士安格斯厚牛堡",
+   "price_cents": 3550,
+   "category": "staple",
+   "raw_category": "安格斯MAX 厚牛堡",
+   "tags": [
+    "单品",
+    "100%安格斯牛肉"
+   ],
+   "kcal": 696,
+   "nutrition": {
+    "kcal": 696,
+    "protein_g": 32.0,
+    "fat_g": 44.0,
+    "carb_g": 43.0,
+    "sodium_mg": 897.0,
+    "calcium_mg": 150.0
+   }
+  },
+  {
+   "code": "9900005451",
+   "name": "麦辣鸡翅4块中套餐",
+   "price_cents": 5500,
+   "category": "side",
+   "raw_category": "炸鸡",
+   "tags": [
+    "套餐"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900004835",
+   "name": "麦乐鸡经典中套餐",
+   "price_cents": 4050,
+   "category": "other",
+   "raw_category": "炸鸡",
+   "tags": [
+    "套餐"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "1700",
+   "name": "麦辣鸡翅2块",
+   "price_cents": 1550,
+   "category": "side",
+   "raw_category": "炸鸡",
+   "tags": [
+    "单品",
+    "黄金酥脆",
+    "鲜嫩多汁"
+   ],
+   "kcal": 224,
+   "nutrition": {
+    "kcal": 224,
+    "protein_g": 13.0,
+    "fat_g": 15.0,
+    "carb_g": 9.0,
+    "sodium_mg": 537.0,
+    "calcium_mg": 13.0
+   }
+  },
+  {
+   "code": "520445",
+   "name": "薄皮焦香V翅",
+   "price_cents": 1650,
+   "category": "other",
+   "raw_category": "炸鸡",
+   "tags": [
+    "单品",
+    "人气"
+   ],
+   "kcal": 192,
+   "nutrition": {
+    "kcal": 192,
+    "protein_g": 17.0,
+    "fat_g": 11.0,
+    "carb_g": 6.0,
+    "sodium_mg": 594.0,
+    "calcium_mg": 15.0
+   }
+  },
+  {
+   "code": "1401",
+   "name": "麦乐鸡5块",
+   "price_cents": 1550,
+   "category": "other",
+   "raw_category": "炸鸡",
+   "tags": [
+    "单品",
+    "喜欢您来玩",
+    "金黄酥脆"
+   ],
+   "kcal": 213,
+   "nutrition": {
+    "kcal": 213,
+    "protein_g": 12.0,
+    "fat_g": 12.0,
+    "carb_g": 13.0,
+    "sodium_mg": 422.0,
+    "calcium_mg": 9.0
+   }
+  },
+  {
+   "code": "521156",
+   "name": "那么大鸡排（椒盐风味）",
+   "price_cents": 1500,
+   "category": "side",
+   "raw_category": "炸鸡",
+   "tags": [
+    "单品"
+   ],
+   "kcal": 385,
+   "nutrition": {
+    "kcal": 385,
+    "protein_g": 24.0,
+    "fat_g": 21.0,
+    "carb_g": 24.0,
+    "sodium_mg": 996.0,
+    "calcium_mg": 13.0
+   }
+  },
+  {
+   "code": "9900005432",
+   "name": "麦麦脆汁鸡1块(鸡腿或带骨里脊)",
+   "price_cents": 1600,
+   "category": "drink",
+   "raw_category": "炸鸡",
+   "tags": [
+    "单品"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "521986",
+   "name": "马苏里拉拉丝芝士条",
+   "price_cents": 1600,
+   "category": "other",
+   "raw_category": "小食甜品 /其他",
+   "tags": [
+    "上新",
+    "趁热拉丝",
+    "奶香醇厚"
+   ],
+   "kcal": null
+  },
+  {
+   "code": "9900016082",
+   "name": "心形薯饼5块",
+   "price_cents": 1550,
+   "category": "side",
+   "raw_category": "小食甜品 /其他",
+   "tags": [
+    "上新",
+    "口口酥脆",
+    "含一份蘸酱"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "521951",
+   "name": "灰焰圆筒",
+   "price_cents": 500,
+   "category": "dessert",
+   "raw_category": "小食甜品 /其他",
+   "tags": [
+    "上新",
+    "灰焰"
+   ],
+   "kcal": null
+  },
+  {
+   "code": "4810",
+   "name": "中薯条",
+   "price_cents": 1450,
+   "category": "side",
+   "raw_category": "小食甜品 /其他",
+   "tags": [
+    "小食"
+   ],
+   "kcal": 289,
+   "nutrition": {
+    "kcal": 289,
+    "protein_g": 4.0,
+    "fat_g": 12.0,
+    "carb_g": 38.0,
+    "sodium_mg": 165.0,
+    "calcium_mg": 18.0
+   }
+  },
+  {
+   "code": "514782",
+   "name": "脆脆薯条",
+   "price_cents": 1700,
+   "category": "side",
+   "raw_category": "小食甜品 /其他",
+   "tags": [
+    "小食"
+   ],
+   "kcal": 279,
+   "nutrition": {
+    "kcal": 279,
+    "protein_g": 4.0,
+    "fat_g": 14.0,
+    "carb_g": 32.0,
+    "sodium_mg": 540.0,
+    "calcium_mg": 13.0
+   }
+  },
+  {
+   "code": "4437",
+   "name": "小杯玉米杯",
+   "price_cents": 1450,
+   "category": "side",
+   "raw_category": "小食甜品 /其他",
+   "tags": [
+    "小食"
+   ],
+   "kcal": 53,
+   "nutrition": {
+    "kcal": 53,
+    "protein_g": 2.0,
+    "fat_g": 1.0,
+    "carb_g": 7.0,
+    "sodium_mg": 1.0,
+    "calcium_mg": 6.0
+   }
+  },
+  {
+   "code": "6102",
+   "name": "苹果片一袋(60g)",
+   "price_cents": 750,
+   "category": "other",
+   "raw_category": "小食甜品 /其他",
+   "tags": [
+    "小食"
+   ],
+   "kcal": 32,
+   "nutrition": {
+    "kcal": 32,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carb_g": 7.0,
+    "sodium_mg": 0.0,
+    "calcium_mg": 18.0
+   }
+  },
+  {
+   "code": "521750",
+   "name": "泷盐星星麦旋风",
+   "price_cents": 1750,
+   "category": "dessert",
+   "raw_category": "小食甜品 /其他",
+   "tags": [
+    "冰淇淋",
+    "素龙饼干"
+   ],
+   "kcal": null
+  },
+  {
+   "code": "9900008745",
+   "name": "新地",
+   "price_cents": 1450,
+   "category": "dessert",
+   "raw_category": "小食甜品 /其他",
+   "tags": [
+    "冰淇淋"
+   ],
+   "kcal": 282,
+   "nutrition": {
+    "kcal": 282,
+    "protein_g": 5.0,
+    "fat_g": 9.0,
+    "carb_g": 44.0,
+    "sodium_mg": 126.0,
+    "calcium_mg": 182.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "515837",
+   "name": "圆筒冰淇淋",
+   "price_cents": 500,
+   "category": "dessert",
+   "raw_category": "小食甜品 /其他",
+   "tags": [
+    "冰淇淋"
+   ],
+   "kcal": 93,
+   "nutrition": {
+    "kcal": 93,
+    "protein_g": 2.0,
+    "fat_g": 3.0,
+    "carb_g": 14.0,
+    "sodium_mg": 36.0,
+    "calcium_mg": 77.0
+   }
+  },
+  {
+   "code": "9900008752",
+   "name": "派",
+   "price_cents": 950,
+   "category": "dessert",
+   "raw_category": "小食甜品 /其他",
+   "tags": [
+    "派",
+    "第二份优惠"
+   ],
+   "kcal": 232,
+   "nutrition": {
+    "kcal": 232,
+    "protein_g": 2.0,
+    "fat_g": 12.0,
+    "carb_g": 28.0,
+    "sodium_mg": 159.0,
+    "calcium_mg": 7.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "9900016057",
+   "name": "汉堡开心乐园餐",
+   "price_cents": 2550,
+   "category": "staple",
+   "raw_category": "开心乐园",
+   "tags": [
+    "开心乐园餐",
+    "童年童款"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900016058",
+   "name": "鱼排堡开心乐园餐",
+   "price_cents": 2900,
+   "category": "staple",
+   "raw_category": "开心乐园",
+   "tags": [
+    "开心乐园餐",
+    "童年童款"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900016056",
+   "name": "麦乐鸡开心乐园餐",
+   "price_cents": 2700,
+   "category": "other",
+   "raw_category": "开心乐园",
+   "tags": [
+    "开心乐园餐",
+    "童年童款"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900016055",
+   "name": "开心亲子双人餐",
+   "price_cents": 7850,
+   "category": "other",
+   "raw_category": "开心乐园",
+   "tags": [
+    "开心亲子餐",
+    "童年童款"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900011128",
+   "name": "“堡”你欢乐套餐",
+   "price_cents": 4600,
+   "category": "staple",
+   "raw_category": "500 大卡套餐",
+   "tags": [
+    "粉丝之选"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900011121",
+   "name": "“苹”水相“鱼”套餐",
+   "price_cents": 5550,
+   "category": "drink",
+   "raw_category": "500 大卡套餐",
+   "tags": [
+    "粉丝之选"
+   ],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900011126",
+   "name": "酥脆无双套餐",
+   "price_cents": 3100,
+   "category": "other",
+   "raw_category": "500 大卡套餐",
+   "tags": [],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900011123",
+   "name": "“辣”么快乐套餐",
+   "price_cents": 3950,
+   "category": "other",
+   "raw_category": "500 大卡套餐",
+   "tags": [],
+   "kcal": null,
+   "is_combo": true
+  },
+  {
+   "code": "9900009245",
+   "name": "牛气满满套餐",
+   "price_cents": 5200,
+   "category": "other",
+   "raw_category": "500 大卡套餐",
+   "tags": [],
+   "kcal": 495,
+   "nutrition": {
+    "kcal": 495,
+    "protein_g": 26.0,
+    "fat_g": 24.0,
+    "carb_g": 42.0,
+    "sodium_mg": 764.0,
+    "calcium_mg": 79.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "9900009242",
+   "name": "“苹板”支撑Pro套餐",
+   "price_cents": 5800,
+   "category": "other",
+   "raw_category": "500 大卡套餐",
+   "tags": [],
+   "kcal": 476,
+   "nutrition": {
+    "kcal": 476,
+    "protein_g": 25.0,
+    "fat_g": 18.0,
+    "carb_g": 50.0,
+    "sodium_mg": 1077.0,
+    "calcium_mg": 117.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "521817",
+   "name": "【美汁源】“多汁柠柠”",
+   "price_cents": 1350,
+   "category": "drink",
+   "raw_category": "饮品",
+   "tags": [
+    "上新",
+    "清爽上新"
+   ],
+   "kcal": null
+  },
+  {
+   "code": "9900008751",
+   "name": "可乐",
+   "price_cents": 1100,
+   "category": "drink",
+   "raw_category": "饮品",
+   "tags": [
+    "冷饮"
+   ],
+   "kcal": 147,
+   "nutrition": {
+    "kcal": 147,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carb_g": 36.0,
+    "sodium_mg": 0.0,
+    "calcium_mg": 10.0
+   },
+   "is_combo": true
+  },
+  {
+   "code": "3010",
+   "name": "雪碧小杯",
+   "price_cents": 1100,
+   "category": "drink",
+   "raw_category": "饮品",
+   "tags": [
+    "冷饮"
+   ],
+   "kcal": 76,
+   "nutrition": {
+    "kcal": 76,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carb_g": 19.0,
+    "sodium_mg": 21.0,
+    "calcium_mg": 0.0
+   }
+  },
+  {
+   "code": "515520",
+   "name": "中杯怡泉+C",
+   "price_cents": 1350,
+   "category": "other",
+   "raw_category": "饮品",
+   "tags": [
+    "冷饮"
+   ],
+   "kcal": 110,
+   "nutrition": {
+    "kcal": 110,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carb_g": 27.0,
+    "sodium_mg": 0.0,
+    "calcium_mg": 0.0
+   }
+  },
+  {
+   "code": "2430",
+   "name": "【美汁源】“黄金橙橙”",
+   "price_cents": 1500,
+   "category": "drink",
+   "raw_category": "饮品",
+   "tags": [
+    "冷饮"
+   ],
+   "kcal": 165,
+   "nutrition": {
+    "kcal": 165,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carb_g": 41.0,
+    "sodium_mg": 53.0,
+    "calcium_mg": 0.0
+   }
+  },
+  {
+   "code": "515280",
+   "name": "阳光柠檬红茶小杯",
+   "price_cents": 1100,
+   "category": "drink",
+   "raw_category": "饮品",
+   "tags": [
+    "冷饮"
+   ],
+   "kcal": 85,
+   "nutrition": {
+    "kcal": 85,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carb_g": 21.0,
+    "sodium_mg": 12.0,
+    "calcium_mg": 0.0
+   }
+  },
+  {
+   "code": "3755",
+   "name": "纯牛奶",
+   "price_cents": 1250,
+   "category": "other",
+   "raw_category": "饮品",
+   "tags": [
+    "冷饮"
+   ],
+   "kcal": 129,
+   "nutrition": {
+    "kcal": 129,
+    "protein_g": 7.0,
+    "fat_g": 7.0,
+    "carb_g": 10.0,
+    "sodium_mg": 73.0,
+    "calcium_mg": 231.0
+   }
+  },
+  {
+   "code": "6362",
+   "name": "100%苹果汁",
+   "price_cents": 1250,
+   "category": "drink",
+   "raw_category": "饮品",
+   "tags": [
+    "冷饮"
+   ],
+   "kcal": 88,
+   "nutrition": {
+    "kcal": 88,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carb_g": 21.0,
+    "sodium_mg": 0.0,
+    "calcium_mg": 0.0
+   }
+  },
+  {
+   "code": "3757",
+   "name": "纯悦",
+   "price_cents": 900,
+   "category": "other",
+   "raw_category": "饮品",
+   "tags": [
+    "冷饮"
+   ],
+   "kcal": 0,
+   "nutrition": {
+    "kcal": 0,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carb_g": 0.0,
+    "sodium_mg": 0.0,
+    "calcium_mg": 0.0
+   }
+  },
+  {
+   "code": "520689",
+   "name": "小杯鲜萃咖啡",
+   "price_cents": 1100,
+   "category": "drink",
+   "raw_category": "饮品",
+   "tags": [
+    "热饮",
+    "鲜萃咖啡"
+   ],
+   "kcal": 15,
+   "nutrition": {
+    "kcal": 15,
+    "protein_g": 1.0,
+    "fat_g": 0.0,
+    "carb_g": 3.0,
+    "sodium_mg": 2.0,
+    "calcium_mg": 6.0
+   }
+  },
+  {
+   "code": "3505",
+   "name": "锡兰红茶",
+   "price_cents": 1250,
+   "category": "drink",
+   "raw_category": "饮品",
+   "tags": [
+    "热饮"
+   ],
+   "kcal": 2,
+   "nutrition": {
+    "kcal": 2,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carb_g": 0.0,
+    "sodium_mg": 0.0,
+    "calcium_mg": 5.0
+   }
+  },
+  {
+   "code": "4820",
+   "name": "大薯条",
+   "price_cents": 1700,
+   "category": "side",
+   "raw_category": "套餐选项",
+   "tags": [
+    "套餐选项"
+   ],
+   "kcal": 379,
+   "nutrition": {
+    "kcal": 379,
+    "protein_g": 6.0,
+    "fat_g": 16.0,
+    "carb_g": 50.0,
+    "sodium_mg": 216.0,
+    "calcium_mg": 23.0
+   },
+   "standalone": true
+  },
+  {
+   "code": "4438",
+   "name": "大杯玉米杯",
+   "price_cents": 1750,
+   "category": "side",
+   "raw_category": "套餐选项",
+   "tags": [
+    "套餐选项"
+   ],
+   "kcal": 87,
+   "nutrition": {
+    "kcal": 87,
+    "protein_g": 4.0,
+    "fat_g": 1.0,
+    "carb_g": 12.0,
+    "sodium_mg": 2.0,
+    "calcium_mg": 10.0
+   },
+   "standalone": true
+  },
+  {
+   "code": "3060",
+   "name": "雪碧中杯",
+   "price_cents": 1150,
+   "category": "drink",
+   "raw_category": "套餐选项",
+   "tags": [
+    "套餐选项"
+   ],
+   "kcal": 105,
+   "nutrition": {
+    "kcal": 105,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carb_g": 26.0,
+    "sodium_mg": 29.0,
+    "calcium_mg": 0.0
+   },
+   "standalone": true
+  },
+  {
+   "code": "515281",
+   "name": "阳光柠檬红茶中杯",
+   "price_cents": 1150,
+   "category": "drink",
+   "raw_category": "套餐选项",
+   "tags": [
+    "套餐选项"
+   ],
+   "kcal": 117,
+   "nutrition": {
+    "kcal": 117,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carb_g": 29.0,
+    "sodium_mg": 17.0,
+    "calcium_mg": 0.0
+   },
+   "standalone": true
+  },
+  {
+   "code": "520688",
+   "name": "大杯鲜萃咖啡",
+   "price_cents": 1300,
+   "category": "drink",
+   "raw_category": "套餐选项",
+   "tags": [
+    "套餐选项"
+   ],
+   "kcal": 13,
+   "nutrition": {
+    "kcal": 13,
+    "protein_g": 1.0,
+    "fat_g": 0.0,
+    "carb_g": 0.0,
+    "sodium_mg": 3.0,
+    "calcium_mg": 8.0
+   },
+   "standalone": true
+  },
+  {
+   "code": "515521",
+   "name": "大杯怡泉+C",
+   "price_cents": 1550,
+   "category": "other",
+   "raw_category": "套餐选项",
+   "tags": [
+    "套餐选项"
+   ],
+   "kcal": 168,
+   "nutrition": {
+    "kcal": 168,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carb_g": 41.0,
+    "sodium_mg": 0.0,
+    "calcium_mg": 0.0
+   },
+   "standalone": true
+  },
+  {
+   "code": "3110",
+   "name": "雪碧大杯",
+   "price_cents": 1350,
+   "category": "drink",
+   "raw_category": "套餐选项",
+   "tags": [
+    "套餐选项"
+   ],
+   "kcal": 160,
+   "nutrition": {
+    "kcal": 160,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carb_g": 39.0,
+    "sodium_mg": 45.0,
+    "calcium_mg": 0.0
+   },
+   "standalone": true
+  },
+  {
+   "code": "515282",
+   "name": "阳光柠檬红茶大杯",
+   "price_cents": 1350,
+   "category": "drink",
+   "raw_category": "套餐选项",
+   "tags": [
+    "套餐选项"
+   ],
+   "kcal": 178,
+   "nutrition": {
+    "kcal": 178,
+    "protein_g": 0.0,
+    "fat_g": 0.0,
+    "carb_g": 43.0,
+    "sodium_mg": 25.0,
+    "calcium_mg": 0.0
+   },
+   "standalone": true
+  },
+  {
+   "code": "1705",
+   "name": "麦辣鸡翅4块",
+   "price_cents": 2950,
+   "category": "side",
+   "raw_category": "套餐选项",
+   "tags": [
+    "套餐选项"
+   ],
+   "kcal": null,
+   "nutrition": null,
+   "standalone": true
+  }
+ ],
+ "combos": [
+  {
+   "code": "9900016076",
+   "name": "“我就喜欢”鸡薯双全盒",
+   "price_cents": 3100,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "5块心形薯饼(不含酱)",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521962",
+       "name": "5块心形薯饼",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "韩式辣椒黄油风味酱",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521965",
+       "name": "韩式辣椒黄油风味酱",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "5块麦乐鸡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521959",
+       "name": "5块麦乐鸡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900016076_600.png"
+  },
+  {
+   "code": "9900016075",
+   "name": "龙焰芝士棒鸡腿堡三件套",
+   "price_cents": 5600,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "龙焰芝士棒鸡腿堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521953",
+       "name": "龙焰芝士棒鸡腿堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900016075_600.png"
+  },
+  {
+   "code": "9900016073",
+   "name": "龙焰鸡腿堡三件套",
+   "price_cents": 5300,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "龙焰鸡腿堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521952",
+       "name": "龙焰鸡腿堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900016073_600.png"
+  },
+  {
+   "code": "9900016077",
+   "name": "蘸酱炸鸡",
+   "price_cents": 1850,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "选择小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521823",
+       "name": "脆皮鸡柳3根",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "505416",
+       "name": "麦麦脆汁鸡-琵琶腿",
+       "diff_cents": 50,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择蘸酱",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521797",
+       "name": "北美招牌牧场酱",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": null
+  },
+  {
+   "code": "9900016566",
+   "name": "心形薯饼8块",
+   "price_cents": 2400,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "8块心形薯饼",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "522029",
+       "name": "8块心形薯饼",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择蘸酱",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521965",
+       "name": "韩式辣椒黄油风味酱",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521960",
+       "name": "甜酸酱",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900016566_600.png"
+  },
+  {
+   "code": "9900005462",
+   "name": "板烧鸡腿堡三件套",
+   "price_cents": 5250,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "板烧鸡腿堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1406",
+       "name": "板烧鸡腿堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260824/product/MS_9900005462_600.png"
+  },
+  {
+   "code": "9900005456",
+   "name": "麦辣鸡腿汉堡三件套",
+   "price_cents": 4900,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "麦辣鸡腿汉堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1440",
+       "name": "麦辣鸡腿汉堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260824/product/MS_9900005456_600.png"
+  },
+  {
+   "code": "9900005453",
+   "name": "麦香鸡中套餐",
+   "price_cents": 4500,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "麦香鸡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1450",
+       "name": "麦香鸡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260824/product/MS_9900005453_600.png"
+  },
+  {
+   "code": "9900008746",
+   "name": "鸡肉堡单品精选",
+   "price_cents": 2700,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "选择主食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "515295",
+       "name": "双层脆鸡堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521147",
+       "name": "Hold不住鸡排堡（椒盐风味）",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260708/product/MS_9900008746_600.png"
+  },
+  {
+   "code": "9900006332",
+   "name": "薄皮V翅双拼十翅",
+   "price_cents": 6100,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "麦辣鸡翅-2块",
+     "min": 3,
+     "max": 3,
+     "choices": [
+      {
+       "code": "516013",
+       "name": "麦辣鸡翅-2块",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择小食",
+     "min": 2,
+     "max": 2,
+     "choices": [
+      {
+       "code": "520450",
+       "name": "薄皮焦香V翅",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20250423/product/MS_9900006332_600_1745288015452.png"
+  },
+  {
+   "code": "9900015730",
+   "name": "BFF四宫格小食盘",
+   "price_cents": 5900,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "选择小食",
+     "min": 3,
+     "max": 3,
+     "choices": [
+      {
+       "code": "516013",
+       "name": "麦辣鸡翅-2块",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "516014",
+       "name": "麦乐鸡-5块",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521824",
+       "name": "脆皮鸡柳3根",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "516012",
+       "name": "麦麦脆汁鸡-琵琶腿",
+       "diff_cents": 50,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521157",
+       "name": "那么大鸡排（椒盐风味）",
+       "diff_cents": -50,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520450",
+       "name": "薄皮焦香V翅",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "522012",
+       "name": "小薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "516020",
+       "name": "中薯条",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "522013",
+       "name": "大薯条",
+       "diff_cents": 450,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900015730_600.png"
+  },
+  {
+   "code": "9900004066",
+   "name": "堡堡随心拼（7件任选）",
+   "price_cents": 8500,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "主食任意选",
+     "min": 2,
+     "max": 2,
+     "choices": [
+      {
+       "code": "1440",
+       "name": "麦辣鸡腿汉堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "1406",
+       "name": "板烧鸡腿堡",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "1600",
+       "name": "麦香鱼",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "1100",
+       "name": "巨无霸",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "1120",
+       "name": "双层吉士汉堡",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择随心配小食",
+     "min": 3,
+     "max": 3,
+     "choices": [
+      {
+       "code": "1700",
+       "name": "麦辣鸡翅2块",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "1401",
+       "name": "麦乐鸡5块",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "505416",
+       "name": "麦麦脆汁鸡-琵琶腿",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521156",
+       "name": "那么大鸡排（椒盐风味）",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 2,
+     "max": 2,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20250420/product/MS_9900004066_600_0_1744772565664.png"
+  },
+  {
+   "code": "9900016078",
+   "name": "蘸酱麦麦脆汁鸡",
+   "price_cents": 1900,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "麦麦脆汁鸡-琵琶腿",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "505416",
+       "name": "麦麦脆汁鸡-琵琶腿",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择蘸酱",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521797",
+       "name": "北美招牌牧场酱",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900016078_600.png"
+  },
+  {
+   "code": "9900016079",
+   "name": "蘸酱脆皮鸡柳",
+   "price_cents": 1850,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "脆皮鸡柳",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521823",
+       "name": "脆皮鸡柳3根",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择蘸酱",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521797",
+       "name": "北美招牌牧场酱",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900016079_600.png"
+  },
+  {
+   "code": "9900015729",
+   "name": "蘸酱BFF四宫格小食盘",
+   "price_cents": 6200,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "选择小食",
+     "min": 3,
+     "max": 3,
+     "choices": [
+      {
+       "code": "516013",
+       "name": "麦辣鸡翅-2块",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "516014",
+       "name": "麦乐鸡-5块",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521824",
+       "name": "脆皮鸡柳3根",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "516012",
+       "name": "麦麦脆汁鸡-琵琶腿",
+       "diff_cents": 50,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521157",
+       "name": "那么大鸡排（椒盐风味）",
+       "diff_cents": -50,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520450",
+       "name": "薄皮焦香V翅",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择蘸酱",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521797",
+       "name": "北美招牌牧场酱",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "522012",
+       "name": "小薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "516020",
+       "name": "中薯条",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "522013",
+       "name": "大薯条",
+       "diff_cents": 450,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900015729_600.png"
+  },
+  {
+   "code": "9900005411",
+   "name": "不素之霸双层牛堡三件套",
+   "price_cents": 5500,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "不素之霸双层牛堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4648",
+       "name": "不素之霸双层牛堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260824/product/MS_9900005411_600.png"
+  },
+  {
+   "code": "9900005466",
+   "name": "巨无霸三件套",
+   "price_cents": 5450,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "新升级巨无霸",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1100",
+       "name": "巨无霸",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260824/product/MS_9900005466_600.png"
+  },
+  {
+   "code": "9900005468",
+   "name": "培根蔬萃双层牛堡三件套",
+   "price_cents": 5200,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "培根蔬萃双层牛堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1106",
+       "name": "培根蔬萃双层牛堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260824/product/MS_9900005468_600.png"
+  },
+  {
+   "code": "9900005413",
+   "name": "双层深海鳕鱼堡三件套",
+   "price_cents": 5350,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "选择双层深海鳕鱼堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "520312",
+       "name": "原味双层深海鳕鱼堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "8317",
+       "name": "风味双层深海鳕鱼堡",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260824/product/MS_9900005413_600.png"
+  },
+  {
+   "code": "9900005460",
+   "name": "麦香鱼中套餐",
+   "price_cents": 5050,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "麦香鱼",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1600",
+       "name": "麦香鱼",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260824/product/MS_9900005460_600.png"
+  },
+  {
+   "code": "9900005464",
+   "name": "双层吉士汉堡中套餐",
+   "price_cents": 5000,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "双层吉士汉堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1120",
+       "name": "双层吉士汉堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260824/product/MS_9900005464_600.png"
+  },
+  {
+   "code": "9900005449",
+   "name": "吉士汉堡包中套餐",
+   "price_cents": 4500,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "吉士汉堡包",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1010",
+       "name": "吉士汉堡包",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260824/product/MS_9900005449_600.png"
+  },
+  {
+   "code": "9900003586",
+   "name": "双层深海鳕鱼堡",
+   "price_cents": 2800,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "选择双层深海鳕鱼堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "520312",
+       "name": "原味双层深海鳕鱼堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "8317",
+       "name": "风味双层深海鳕鱼堡",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900003586_600.png"
+  },
+  {
+   "code": "9900008747",
+   "name": "牛肉堡单品精选",
+   "price_cents": 1550,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "选择汉堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1000",
+       "name": "汉堡包",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "1010",
+       "name": "吉士汉堡包",
+       "diff_cents": 450,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900008747_600.png"
+  },
+  {
+   "code": "9900005428",
+   "name": "培根安格斯厚牛堡三件套",
+   "price_cents": 6350,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "培根安格斯厚牛堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "511781",
+       "name": "培根安格斯厚牛堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260824/product/MS_9900005428_600.png"
+  },
+  {
+   "code": "9900005430",
+   "name": "芝士安格斯厚牛堡三件套",
+   "price_cents": 6050,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "芝士安格斯厚牛堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "511782",
+       "name": "芝士安格斯厚牛堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260824/product/MS_9900005430_600.png"
+  },
+  {
+   "code": "9900005451",
+   "name": "麦辣鸡翅4块中套餐",
+   "price_cents": 5500,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "麦辣鸡翅-4块",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1705",
+       "name": "麦辣鸡翅4块",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260824/product/MS_9900005451_600.png"
+  },
+  {
+   "code": "9900004835",
+   "name": "麦乐鸡经典中套餐",
+   "price_cents": 4050,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "麦乐鸡5块",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1401",
+       "name": "麦乐鸡5块",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "521983",
+       "name": "5块心形薯饼+韩式辣椒黄油风味酱",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260824/product/MS_9900004835_600.png"
+  },
+  {
+   "code": "9900005432",
+   "name": "麦麦脆汁鸡1块(鸡腿或带骨里脊)",
+   "price_cents": 1600,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "选择麦麦脆汁鸡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "505416",
+       "name": "麦麦脆汁鸡-琵琶腿",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20241204/product/MS_9900005432_600.png"
+  },
+  {
+   "code": "9900016082",
+   "name": "心形薯饼5块",
+   "price_cents": 1550,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "5块心形薯饼（不含酱）",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521961",
+       "name": "5块心形薯饼",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "韩式辣椒黄油风味酱",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521965",
+       "name": "韩式辣椒黄油风味酱",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900016082_600.png"
+  },
+  {
+   "code": "9900008745",
+   "name": "新地",
+   "price_cents": 1450,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "选择新地",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4410",
+       "name": "朱古力新地",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "4416",
+       "name": "草莓新地",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900008745_600.png"
+  },
+  {
+   "code": "9900008752",
+   "name": "派",
+   "price_cents": 950,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "选择派",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4105",
+       "name": "菠萝派",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "4106",
+       "name": "香芋派",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900008752_600.png"
+  },
+  {
+   "code": "9900016057",
+   "name": "汉堡开心乐园餐",
+   "price_cents": 2550,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "汉堡包",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1000",
+       "name": "汉堡包",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "迷你薯条",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "504643",
+       "name": "迷你薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择开心乐园餐小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "6102",
+       "name": "苹果片一袋(60g)",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "name": "选择开心乐园餐饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "3757",
+       "name": "纯悦",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 5,
+     "name": "海绵宝宝×航海王系列玩具",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521991",
+       "name": "海绵宝宝×航海王系列玩具",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900016057_600.png"
+  },
+  {
+   "code": "9900016058",
+   "name": "鱼排堡开心乐园餐",
+   "price_cents": 2900,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "鱼排堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "504642",
+       "name": "鱼排堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "迷你薯条",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "504643",
+       "name": "迷你薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择开心乐园餐小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "6102",
+       "name": "苹果片一袋(60g)",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "name": "选择开心乐园餐饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "3757",
+       "name": "纯悦",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 5,
+     "name": "海绵宝宝×航海王系列玩具",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521991",
+       "name": "海绵宝宝×航海王系列玩具",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900016058_600.png"
+  },
+  {
+   "code": "9900016056",
+   "name": "麦乐鸡开心乐园餐",
+   "price_cents": 2700,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "麦乐鸡-4块",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "2846",
+       "name": "麦乐鸡-4块",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "开心乐园餐苹果片",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "6102",
+       "name": "苹果片一袋(60g)",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "开心乐园餐小玉米",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "name": "选择开心乐园餐饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "3757",
+       "name": "纯悦",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 5,
+     "name": "海绵宝宝×航海王系列玩具",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521991",
+       "name": "海绵宝宝×航海王系列玩具",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900016056_600.png"
+  },
+  {
+   "code": "9900016055",
+   "name": "开心亲子双人餐",
+   "price_cents": 7850,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "板烧鸡腿堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1406",
+       "name": "板烧鸡腿堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "4麦乐鸡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "2846",
+       "name": "麦乐鸡-4块",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "开心乐园餐小玉米",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "name": "开心乐园餐苹果片",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "6102",
+       "name": "苹果片一袋(60g)",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 5,
+     "name": "选择套餐内小食",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4810",
+       "name": "中薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "4820",
+       "name": "大薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "4438",
+       "name": "大杯玉米杯",
+       "diff_cents": 300,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "514782",
+       "name": "脆脆薯条",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 6,
+     "name": "选择开心乐园餐饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "3757",
+       "name": "纯悦",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 7,
+     "name": "选择套餐内饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "521817",
+       "name": "【美汁源】“多汁柠柠”",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3060",
+       "name": "雪碧中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515281",
+       "name": "阳光柠檬红茶中杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3755",
+       "name": "纯牛奶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "521360",
+       "name": "鲜萃冰咖",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "520688",
+       "name": "大杯鲜萃咖啡",
+       "diff_cents": 150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "515521",
+       "name": "大杯怡泉+C",
+       "diff_cents": 400,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3110",
+       "name": "雪碧大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "2430",
+       "name": "【美汁源】“黄金橙橙”",
+       "diff_cents": 350,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515282",
+       "name": "阳光柠檬红茶大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "6362",
+       "name": "100%苹果汁",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "515520",
+       "name": "中杯怡泉+C",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 8,
+     "name": "海绵宝宝×航海王系列玩具",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "521991",
+       "name": "海绵宝宝×航海王系列玩具",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900016055_600.png"
+  },
+  {
+   "code": "9900011128",
+   "name": "“堡”你欢乐套餐",
+   "price_cents": 4600,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "汉堡包",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1000",
+       "name": "汉堡包",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "麦乐鸡4块",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "515106",
+       "name": "麦乐鸡4块",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "苹果片一袋(60g)",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "6102",
+       "name": "苹果片一袋(60g)",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "name": "选择饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "3021",
+       "name": "无糖可口可乐小杯",
+       "diff_cents": -50,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "3757",
+       "name": "纯悦",
+       "diff_cents": -250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900011128_600.png"
+  },
+  {
+   "code": "9900011121",
+   "name": "“苹”水相“鱼”套餐",
+   "price_cents": 5550,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "麦香鱼",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1600",
+       "name": "麦香鱼",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "小杯玉米杯",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "苹果片一袋(60g)",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "6102",
+       "name": "苹果片一袋(60g)",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "name": "选择饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": -100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3021",
+       "name": "无糖可口可乐小杯",
+       "diff_cents": -150,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3757",
+       "name": "纯悦",
+       "diff_cents": -350,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900011121_600.png"
+  },
+  {
+   "code": "9900011126",
+   "name": "酥脆无双套餐",
+   "price_cents": 3100,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "选择炸鸡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "505416",
+       "name": "麦麦脆汁鸡-琵琶腿",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "迷你薯条",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "504643",
+       "name": "迷你薯条",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "3021",
+       "name": "无糖可口可乐小杯",
+       "diff_cents": -50,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "3757",
+       "name": "纯悦",
+       "diff_cents": -250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/20260701/product/MS_9900011126_600.png"
+  },
+  {
+   "code": "9900011123",
+   "name": "“辣”么快乐套餐",
+   "price_cents": 3950,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "麦辣鸡翅-2块",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1700",
+       "name": "麦辣鸡翅2块",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "麦乐鸡4块",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "515106",
+       "name": "麦乐鸡4块",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "3021",
+       "name": "无糖可口可乐小杯",
+       "diff_cents": -50,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 200,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "3757",
+       "name": "纯悦",
+       "diff_cents": -250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900011123_600.png"
+  },
+  {
+   "code": "9900009245",
+   "name": "牛气满满套餐",
+   "price_cents": 5200,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "培根蔬萃双层牛堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1106",
+       "name": "培根蔬萃双层牛堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "小杯玉米杯",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "选择饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "3021",
+       "name": "无糖可口可乐小杯",
+       "diff_cents": -50,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "3757",
+       "name": "纯悦",
+       "diff_cents": -250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900009245_600.png"
+  },
+  {
+   "code": "9900009242",
+   "name": "“苹板”支撑Pro套餐",
+   "price_cents": 5800,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "新升级板烧鸡腿堡",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "1406",
+       "name": "板烧鸡腿堡",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      }
+     ]
+    },
+    {
+     "id": 2,
+     "name": "小杯玉米杯",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "4437",
+       "name": "小杯玉米杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 3,
+     "name": "苹果片一袋(60g)",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "6102",
+       "name": "苹果片一袋(60g)",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": false
+      }
+     ]
+    },
+    {
+     "id": 4,
+     "name": "选择饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "3021",
+       "name": "无糖可口可乐小杯",
+       "diff_cents": -50,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3505",
+       "name": "锡兰红茶",
+       "diff_cents": 100,
+       "is_default": false,
+       "support_modify": false
+      },
+      {
+       "code": "3757",
+       "name": "纯悦",
+       "diff_cents": -250,
+       "is_default": false,
+       "support_modify": false
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900009242_600.png"
+  },
+  {
+   "code": "9900008751",
+   "name": "可乐",
+   "price_cents": 1100,
+   "rounds": [
+    {
+     "id": 1,
+     "name": "选择饮料",
+     "min": 1,
+     "max": 1,
+     "choices": [
+      {
+       "code": "3000",
+       "name": "可乐小杯",
+       "diff_cents": 0,
+       "is_default": true,
+       "support_modify": true
+      },
+      {
+       "code": "3021",
+       "name": "无糖可口可乐小杯",
+       "diff_cents": 0,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3050",
+       "name": "可乐中杯",
+       "diff_cents": 50,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3071",
+       "name": "无糖可口可乐中杯",
+       "diff_cents": 50,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3100",
+       "name": "可乐大杯",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": true
+      },
+      {
+       "code": "3111",
+       "name": "无糖可口可乐大杯",
+       "diff_cents": 250,
+       "is_default": false,
+       "support_modify": true
+      }
+     ]
+    }
+   ],
+   "image": "https://menu-img.mcd.cn/pcm/prod/menu/ProductPool/product/MS_9900008751_600.png"
+  }
+ ],
+ "coupons": []
+}

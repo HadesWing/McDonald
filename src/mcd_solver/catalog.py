@@ -103,6 +103,7 @@ def load_snapshot(path: str | Path) -> dict:
     return {
         "meta": data.get("meta", {}),
         "items": items,
+        "combos": data.get("combos", []),
         "coupons": coupons,
         "delivery": delivery,
         "by_code": {it.code: it for it in items},

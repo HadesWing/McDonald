@@ -14,6 +14,7 @@ from .models import MenuItem, yuan
 from .optimizer import ComboSolver, explain
 
 DEFAULT_DATA = Path(__file__).resolve().parents[2] / "data" / "sample_menu.json"
+DEFAULT_STORE = Path(__file__).resolve().parents[2] / "data" / "store_hangzhou.json"
 
 
 def _resolve_cart(snapshot: dict, names: list[str]) -> list[tuple[MenuItem, int]]:
@@ -99,6 +100,88 @@ def cmd_call(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_audit(args: argparse.Namespace) -> int:
+    """审计门店全部套餐：套餐价 vs 单品原价合计。"""
+    from .audit import audit_all, explain_audit, render_table, summarize
+    from .decompiler import load_combos
+
+    snapshot = load_snapshot(args.data)
+    combos, _ = load_combos(snapshot)
+    audits = audit_all(combos, snapshot["items"])
+
+    meta = snapshot["meta"]
+    print("=" * 68)
+    print(explain_audit(audits, meta.get("store", "")))
+    print("=" * 68)
+    print(render_table(audits, only_comparable=not args.all))
+    print("=" * 68)
+    print(f"单价来源：{meta.get('source', 'unknown')}｜抓取时间：{meta.get('fetched_at', '')}")
+
+    if args.verify:
+        _verify_online(snapshot, audits, args.verify)
+    return 0
+
+
+def _verify_online(snapshot: dict, audits: list, limit: int) -> None:
+    """拿官方 calculate-price 现场复核前 N 个结论，证明不是本地估算。"""
+    from .mcp_client import MCDMCPClient
+    from .models import yuan
+
+    meta = snapshot["meta"]
+    scope = {
+        "storeCode": meta["store_code"],
+        "orderType": meta.get("order_type", 1),
+        "beType": meta.get("be_type", 1),
+    }
+    client = MCDMCPClient()
+
+    def price(items: list[dict]) -> int | None:
+        data = client.call_tool("calculate-price", {**scope, "items": items}).get("data") or {}
+        return data.get("price")
+
+    rows = [a for a in audits if a.comparable]
+    rows.sort(key=lambda a: a.diff_cents or 0)
+    sample = rows[:limit]
+    print(f"\n官方复核（取差价最小的 {len(sample)} 个，重新向 calculate-price 询价）：")
+    ok = 0
+    checked = 0
+    for a in sample:
+        codes = []
+        for name, _ in a.parts:
+            hit = next((it for it in snapshot["items"] if it.name == name), None)
+            if hit:
+                codes.append(hit.code)
+        if len(codes) != len(a.parts):
+            continue
+        single = price([{"productCode": c, "quantity": 1} for c in codes])
+        combo_now = price([{"productCode": a.combo.code, "quantity": 1}])
+        match = single == a.single_cents and combo_now == a.combo.price_cents
+        checked += 1
+        ok += 1 if match else 0
+        print(
+            f"  {'✓' if match else '✗'} {a.combo.name}｜官方套餐 {yuan(combo_now or 0)}"
+            f" / 官方单点 {yuan(single or 0)}｜本地 {yuan(a.combo.price_cents)} / {yuan(a.single_cents or 0)}"
+        )
+    print(f"  一致性：{ok}/{checked}")
+
+
+def cmd_fetch(args: argparse.Namespace) -> int:
+    """从麦当劳 MCP 拉取真实门店快照。"""
+    from .fetch import fetch_snapshot, save_snapshot
+
+    snapshot = fetch_snapshot(
+        city=args.city,
+        keyword=args.keyword,
+        store_index=args.index,
+        order_type=args.order_type,
+        be_type=args.be_type,
+        token=args.token,
+    )
+    path = save_snapshot(snapshot, args.out)
+    print(f"已保存：{path}")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="mcd-solver",
@@ -116,6 +199,22 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--no-coupon", action="store_true", help="不考虑优惠券")
     p.add_argument("-v", "--verbose", action="store_true", help="输出全部候选方案")
     p.set_defaults(func=cmd_solve)
+
+    a = sub.add_parser("audit", help="审计门店全部套餐：套餐价 vs 单品原价合计")
+    a.add_argument("--data", default=str(DEFAULT_STORE), help="门店快照 JSON 路径")
+    a.add_argument("--all", action="store_true", help="连不可比的套餐一起列出")
+    a.add_argument("--verify", type=int, default=0, metavar="N", help="用官方接口现场复核前 N 个结论")
+    a.set_defaults(func=cmd_audit)
+
+    f = sub.add_parser("fetch", help="从麦当劳 MCP 拉取真实门店快照")
+    f.add_argument("--city", required=True)
+    f.add_argument("--keyword", required=True)
+    f.add_argument("--index", type=int, default=0, help="同名门店取第几个")
+    f.add_argument("--order-type", type=int, default=1, choices=[1, 2])
+    f.add_argument("--be-type", type=int, default=1, choices=[1, 2, 5, 6])
+    f.add_argument("--out", default=str(DEFAULT_STORE))
+    f.add_argument("--token", default=None)
+    f.set_defaults(func=cmd_fetch)
 
     t = sub.add_parser("tools", help="列出麦当劳 MCP 的全部工具")
     t.add_argument("--token", default=None, help="MCP Token，缺省读环境变量 MCD_MCP_TOKEN")
