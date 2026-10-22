@@ -355,8 +355,8 @@ def build_parser() -> argparse.ArgumentParser:
     cp.set_defaults(func=cmd_compare)
 
     sv = sub.add_parser("serve", help="起本地实时服务：静态页 + 现场抓取接口")
-    sv.add_argument("--host", default="127.0.0.1")
-    sv.add_argument("--port", type=int, default=8765)
+    sv.add_argument("--host", default=None, help="默认 127.0.0.1；设了 $PORT 则绑 0.0.0.0")
+    sv.add_argument("--port", type=int, default=None, help="默认 8765，或读环境变量 PORT")
     sv.set_defaults(func=cmd_serve)
     return parser
 

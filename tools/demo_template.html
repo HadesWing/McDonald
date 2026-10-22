@@ -104,6 +104,46 @@
   .pill.soon { background: var(--zero-bg); color: var(--mcd); }
   .pill.cl { background: var(--line-soft); color: var(--muted); }
 
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+  .chip {
+    font: inherit; font-size: 12px; padding: 3px 10px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--card); color: var(--muted);
+  }
+  .chip:hover { border-color: var(--mcd); color: var(--ink); }
+  .chip[aria-pressed="true"] { background: var(--mcd); border-color: var(--mcd); color: #fff; }
+
+  .card-store {
+    margin: 14px 0 0; padding: 14px 16px; border-radius: 12px;
+    background: var(--card); border: 1px solid var(--line);
+  }
+  .card-store .cs-name { font-size: 17px; font-weight: 650; letter-spacing: -.01em; }
+  .card-store .cs-row { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); margin-top: 7px; }
+  .card-store .cs-row b { color: var(--ink); font-weight: 600; }
+  .card-store .cs-note { font-size: 12px; color: var(--muted); margin: 8px 0 0; }
+
+  .cmp { border-top: 1px solid var(--line); margin-top: 4px; }
+  .cmp .ci {
+    display: grid; grid-template-columns: minmax(0, 1fr) 96px 88px; gap: 10px; align-items: center;
+    padding: 9px 2px; border-bottom: 1px solid var(--line-soft); font-size: 13.5px;
+  }
+  .cmp .ci.h { color: var(--muted); font-size: 11.5px; letter-spacing: .03em; padding-bottom: 6px; }
+  .cmp .ci .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .cmp .ci .nm small { color: var(--muted); font-size: 11.5px; margin-left: 6px; }
+  .cmp .ci .p { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+  .cmp .ci .p.lo { color: var(--save); }
+  .cmp .ci .p.hi { color: var(--mcd); }
+  .cmp .ci .d { text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); font-size: 12.5px; }
+  .cmp .ci.na .p { color: var(--muted); font-weight: 400; font-size: 12px; }
+  .cmp-note { font-size: 12.5px; color: var(--muted); margin: 10px 0 0; }
+  .cmp-note b { color: var(--mcd); }
+
+  .cmpbtn {
+    font: inherit; font-size: 12px; padding: 3px 12px; border-radius: 999px; cursor: pointer;
+    border: 1px solid var(--mcd); background: transparent; color: var(--mcd); margin-top: 8px;
+  }
+  .cmpbtn:hover { background: var(--mcd); color: #fff; }
+  .cmpbtn[disabled] { opacity: .55; cursor: default; }
+
   h2.sec { font-size: 19px; margin: 44px 0 6px; font-weight: 650; letter-spacing: -.01em; }
   .sub { font-size: 13px; color: var(--muted); margin: 0 0 14px; }
 
@@ -235,6 +275,16 @@
   <p class="snap" id="snap"></p>
   <div class="live" id="live" hidden></div>
 </header>
+
+<section id="pick-sec" hidden>
+  <div class="card-store" id="store-card" hidden></div>
+</section>
+
+<section id="cmp-sec" hidden>
+  <h2 class="sec" id="cmp-title">这个套餐，附近几家店各卖多少</h2>
+  <p class="sub" id="cmp-sub"></p>
+  <div class="cmp" id="cmp"></div>
+</section>
 
 <h2 class="sec">跨店比价：同一份套餐，你在哪家买</h2>
 <p class="sub" id="cross-sub"></p>
@@ -411,6 +461,10 @@
       var note = r.missing && r.missing.length
         ? '<br><span class="miss">不可比原因：' + esc(r.missing.join('；')) + '</span>' : '';
 
+      var cmpBtn = LIVE
+        ? '<button class="cmpbtn" data-code="' + esc(r.code) + '" data-name="' + esc(r.name) + '">看附近几家店各卖多少 →</button>'
+        : '';
+
       return '<div class="row" data-v="' + r.verdict + '" data-i="' + i + '">' +
         '<div class="name">' + esc(r.name) + '<span class="tag ' + t[0] + '">' + t[1] + '</span></div>' +
         '<div class="v c1 strong">' + yuan(r.combo) + '</div>' +
@@ -422,7 +476,7 @@
           '<div class="bar-line"><span class="k">单点</span><div class="track"><div class="fill single" style="width:' +
             ((r.single || 0) / max * 100).toFixed(2) + '%"></div></div></div>' +
         '</div>' +
-        '<div class="detail"><code>' + parts + '</code>' + note + '</div>' +
+        '<div class="detail"><code>' + parts + '</code>' + note + cmpBtn + '</div>' +
       '</div>';
     }
 
@@ -471,6 +525,12 @@
   });
 
   document.getElementById('rows').addEventListener('click', function (e) {
+    var b = e.target.closest('.cmpbtn');
+    if (b) {
+      e.stopPropagation();
+      openCompare(b.dataset.code, b.dataset.name);
+      return;
+    }
     var row = e.target.closest('.row');
     if (row) row.classList.toggle('open');
   });
@@ -493,6 +553,8 @@
   var CITY = '杭州';
   var PLACES_KEY = 'assassin.places.v1';
   var pendingGeo = null;
+  var lastStores = [];
+  var lastKeyword = '';
 
   function loadPlaces() {
     try { return JSON.parse(localStorage.getItem(PLACES_KEY) || '[]') || []; } catch (e) { return []; }
@@ -531,8 +593,75 @@
   function bindCands(city) {
     var kw = (document.getElementById('kw').value || '').trim();
     Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) {
-      b.addEventListener('click', function () { audit(b.dataset.code, city, kw); });
+      b.addEventListener('click', function () {
+        var obj = (lastStores || []).filter(function (s) { return String(s.storeCode) === b.dataset.code; })[0];
+        audit(b.dataset.code, city, kw, obj);
+      });
     });
+  }
+
+  /* 常用商圈快捷标签。MCP 没有「区列表」接口，这份表是 data/districts.json 预置的，
+     点一下等于替你填了关键词；也可以完全无视它，自己输入任意路名/店名。 */
+  function loadChips(city) {
+    var box = document.getElementById('chips');
+    if (!box) return;
+    fetch('/api/districts?city=' + encodeURIComponent(city), { cache: 'no-store' })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        var areas = (j && j.areas) || [];
+        if (!areas.length) { box.innerHTML = ''; return; }
+        box.innerHTML = '<span class="msg">常用商圈</span>' + areas.map(function (a) {
+          return '<button class="chip" data-area="' + esc(a) + '">' + esc(a) + '</button>';
+        }).join('');
+        Array.prototype.forEach.call(box.querySelectorAll('.chip'), function (c) {
+          c.addEventListener('click', function () {
+            Array.prototype.forEach.call(box.querySelectorAll('.chip'), function (x) {
+              x.setAttribute('aria-pressed', 'false');
+            });
+            c.setAttribute('aria-pressed', 'true');
+            document.getElementById('kw').value = c.dataset.area;
+            searchStores((document.getElementById('city').value || '杭州').trim() || '杭州', c.dataset.area);
+          });
+        });
+      })
+      .catch(function () { box.innerHTML = ''; });
+  }
+
+  /* 门店信息卡：选完店把它贴出来——地址、营业时间、现在开着没有。 */
+  function renderStoreCard(payload, obj) {
+    var sec = document.getElementById('pick-sec');
+    var card = document.getElementById('store-card');
+    if (!sec || !card) return;
+    obj = obj || {};
+    sec.hidden = false;
+    card.hidden = false;
+
+    var pill = '';
+    if (obj.open_now === true) {
+      pill = obj.closing_soon
+        ? '<span class="pill soon">还剩 ' + Math.round(obj.minutes_left) + ' 分钟关门</span>'
+        : '<span class="pill op">营业中</span>';
+    } else if (obj.open_now === false) {
+      pill = '<span class="pill cl">已打烊</span>';
+    }
+
+    var hours = obj.businessStartTime
+      ? '<span>' + esc(obj.businessStartTime) + '–' + esc(obj.businessEndTime || '') + ' ' + pill + '</span>'
+      : '';
+    var addr = obj.address || payload.meta.address || '';
+    var st = payload.stats;
+
+    card.innerHTML =
+      '<div class="cs-name">' + esc(payload.meta.store || obj.storeName || '') + '</div>' +
+      '<div class="cs-row">' + hours +
+        '<span>门店编码 <b>' + esc(payload.meta.store_code || '') + '</b></span>' +
+        (obj.reservation ? '<span>可预约</span>' : '') +
+        '<span>抓取于 ' + esc((payload.meta.fetched_at || '').replace('T', ' ').slice(11, 16) || '刚刚') + '</span>' +
+      '</div>' +
+      '<div class="cs-row"><span>' + esc(addr) + '</span></div>' +
+      '<p class="cs-note">本店 <b>' + st.total + '</b> 个套餐，其中 <b>' + st.comparable +
+        '</b> 个能逐项比价，<b>' + st.zero + '</b> 个的套餐价正好等于单品原价相加。' +
+        '点任意一行看它由哪几样拼成，行内再点「看附近几家店各卖多少」横向比价。</p>';
   }
 
   function showOnline() {
@@ -547,7 +676,7 @@
       '<input id="kw" class="kw" placeholder="商圈 / 路名，如 灵隐" aria-label="门店关键词">' +
       '<button id="go">找店</button>' +
       '<button id="geo" class="ghost">📍 定位我附近的店</button>' +
-      '</div><div class="cands" id="cands"></div>';
+      '</div><div class="chips" id="chips"></div><div class="cands" id="cands"></div>';
 
     var cityEl = document.getElementById('city');
     cityEl.value = CITY;
@@ -559,9 +688,12 @@
         if (j && j.location && j.location.city) {
           CITY = j.location.city;
           if (document.getElementById('city')) document.getElementById('city').value = CITY;
+          loadChips(CITY);
         }
       })
-      .catch(function () { });
+      .catch(function () { loadChips(CITY); });
+
+    loadChips(CITY);
 
     document.getElementById('go').addEventListener('click', function () {
       searchStores((document.getElementById('city').value || '杭州').trim() ||
@@ -574,6 +706,10 @@
       }
     });
     document.getElementById('geo').addEventListener('click', locateMe);
+    document.getElementById('city').addEventListener('change', function () {
+      var c = (this.value || '杭州').trim() || '杭州';
+      loadChips(c);
+    });
 
     /* 去过的店：直接从记忆里列出来，不用再输关键词 */
     var known = loadPlaces();
@@ -592,9 +728,17 @@
         });
       });
     }
+
+    /* ?auto=灵隐 —— 直接搜这个商圈并选第一家，方便分享与演示；
+       ?auto=灵隐&cmp=1 —— 再自动对第一个套餐做附近比价。 */
+    var autoKw = new URLSearchParams(location.search).get('auto');
+    if (autoKw) {
+      document.getElementById('kw').value = autoKw;
+      setTimeout(function () { searchStores(CITY, autoKw, true); }, 250);
+    }
   }
 
-  function searchStores(city, kw) {
+  function searchStores(city, kw, autoPick) {
     var msg = document.getElementById('live-msg');
     var box = document.getElementById('cands');
     if (!kw) {
@@ -614,6 +758,8 @@
         if (!res.ok) throw new Error(res.j.error || '搜索失败');
         var list = res.j.stores || [];
         if (!list.length) { msg.textContent = '没找到门店，换个关键词试试'; return; }
+        lastStores = list;
+        lastKeyword = kw;
         msg.innerHTML = '共 <b>' + list.length + '</b> 家，点一家开始审计';
         box.innerHTML = list.map(function (s) {
           return '<button class="cand" data-code="' + esc(s.storeCode) + '">' +
@@ -623,6 +769,10 @@
             '<span>' + esc(s.address || '') + '</span></span></button>';
         }).join('');
         bindCands(city);
+        if (autoPick) {
+          var first = document.querySelector('#cands .cand');
+          if (first) first.click();
+        }
       })
       .catch(function (e) {
         btn.disabled = false;
@@ -630,7 +780,7 @@
       });
   }
 
-  function audit(code, city, kw) {
+  function audit(code, city, kw, obj) {
     var msg = document.getElementById('live-msg');
     var t0 = Date.now();
     Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) { b.disabled = true; });
@@ -657,7 +807,18 @@
           esc(s.meta.store) + '</b>（' + esc(s.meta.store_code) + '），来源麦当劳官方 MCP。';
         msg.innerHTML = '已更新 <b>' + esc(s.label) + '</b> ｜ 套餐 ' + s.stats.total +
           ' 个，可比 ' + s.stats.comparable + ' 个，零折扣 ' + s.stats.zero + ' 个';
+        renderStoreCard(s, obj);
         rememberPlace({ storeCode: s.meta.store_code, label: s.label, keyword: kw || '', at: Date.now() });
+        if (new URLSearchParams(location.search).get('cmp') === '1') {
+          setTimeout(function () {
+            var row = document.querySelector('#rows .row');
+            if (row) {
+              row.classList.add('open');
+              var btn = row.querySelector('.cmpbtn');
+              if (btn) btn.click();
+            }
+          }, 250);
+        }
         Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) { b.disabled = false; });
         window.scrollTo({ top: 0, behavior: 'smooth' });
       })
@@ -666,6 +827,60 @@
         msg.textContent = '失败：' + e.message;
         Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) { b.disabled = false; });
       });
+  }
+
+  /* 选中套餐 → 附近几家店各卖多少。每家店只问一次官方报价，1 秒级出结果。 */
+  function openCompare(code, name) {
+    var sec = document.getElementById('cmp-sec');
+    var box = document.getElementById('cmp');
+    sec.hidden = false;
+    document.getElementById('cmp-title').textContent = '「' + name + '」附近几家店各卖多少';
+    document.getElementById('cmp-sub').textContent = '正在逐店询价…';
+    box.innerHTML = '';
+
+    fetch('/api/combo?code=' + encodeURIComponent(code) +
+      '&city=' + encodeURIComponent(CITY) +
+      '&keyword=' + encodeURIComponent(lastKeyword), { cache: 'no-store' })
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (!res.ok) throw new Error(res.j.error || '比价失败');
+        renderCompare(res.j, name);
+      })
+      .catch(function (e) {
+        document.getElementById('cmp-sub').textContent = '比价失败：' + e.message;
+      });
+    sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function renderCompare(d, name) {
+    var s = d.stats || {};
+    var rows = d.rows || [];
+    var sub = document.getElementById('cmp-sub');
+    if (!s.available) {
+      sub.textContent = '附近门店都没查到「' + name + '」的价格。';
+      document.getElementById('cmp').innerHTML = '';
+      return;
+    }
+    sub.innerHTML = '同一份套餐，<b>' + s.available + '</b> 家店可售' +
+      (s.max_diff > 0 ? '，最贵比最便宜贵 <b>' + yuan(s.max_diff) + ' 元</b>' : '，价格一致') +
+      '。询价 ' + (d.elapsed_ms || 0) + ' 毫秒，每家店一次官方 calculate-price。';
+
+    document.getElementById('cmp').innerHTML =
+      '<div class="ci h"><div class="nm">门店</div><div class="p">套餐价</div><div class="d">比最低</div></div>' +
+      rows.map(function (r) {
+        var cls = r.is_cheapest ? 'lo' : (r.is_dearest ? 'hi' : '');
+        var price = r.price_cents
+          ? '<div class="p ' + cls + '">' + yuan(r.price_cents) + '</div>'
+          : '<div class="p">不可售</div>';
+        var delta = r.delta_from_cheapest
+          ? '<div class="d">+' + yuan(r.delta_from_cheapest) + '</div>'
+          : '<div class="d">' + (r.price_cents ? '最低' : '—') + '</div>';
+        var pill = r.open_now === false ? ' <span class="pill cl">已打烊</span>'
+          : (r.closing_soon ? ' <span class="pill soon">快关门</span>' : '');
+        return '<div class="ci' + (r.price_cents ? '' : ' na') + '">' +
+          '<div class="nm">' + esc(r.storeName) + pill + '<br><small>' + esc(r.address || '') + '</small></div>' +
+          price + delta + '</div>';
+      }).join('');
   }
 
   function locateMe() {

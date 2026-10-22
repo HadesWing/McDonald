@@ -26,13 +26,24 @@ from urllib.parse import parse_qs, unquote, urlparse
 from .compare import store_payload
 from .fetch import fetch_snapshot
 from .geo import guess_city, search_stores
+from .mcp_client import load_local_secrets
+from .pricing import compare_combo
 
 ROOT = Path(__file__).resolve().parents[2]
 DOCS = ROOT / "docs"
+DISTRICTS = ROOT / "data" / "districts.json"
 
 _CACHE: dict[tuple[str, str, str], tuple[float, dict]] = {}
 _CACHE_TTL = 180.0
 _LOCK = threading.Lock()
+
+
+def districts() -> dict:
+    """预置的城市关键词候选。文件不存在就返回空表，前端自动退化成纯输入框。"""
+    try:
+        return json.loads(DISTRICTS.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
 
 
 def short_label(store_name: str) -> str:
@@ -83,6 +94,7 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Cache-Control", "no-store")
+        self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers()
         self.wfile.write(body)
 
@@ -115,6 +127,41 @@ class Handler(BaseHTTPRequestHandler):
         if route == "/api/geo":
             # 按出口 IP 猜城市，用于预填搜索框；拿不到就让前端留空，不编。
             self._json({"ok": True, "location": guess_city()})
+            return
+
+        if route == "/api/districts":
+            q = parse_qs(parsed.query)
+            city = (q.get("city") or [""])[0]
+            table = districts()
+            self._json({"ok": True, "cities": [k for k in table if not k.startswith("_")], "areas": table.get(city) or []})
+            return
+
+        if route == "/api/combo":
+            # 选中一个套餐，看附近几家店各卖多少钱。每家只询一次价，比抓整份菜单快两个数量级。
+            q = parse_qs(parsed.query)
+            code = (q.get("code") or [""])[0].strip()
+            city = (q.get("city") or ["杭州"])[0]
+            keyword = (q.get("keyword") or [""])[0].strip()
+            codes = [c for c in (q.get("stores") or [""])[0].split(",") if c.strip()]
+            if not code:
+                self._json({"error": "缺少套餐编码"}, 400)
+                return
+            if not os.environ.get("MCD_MCP_TOKEN"):
+                self._json({"error": "服务端没有配置 MCD_MCP_TOKEN"}, 503)
+                return
+            t0 = time.time()
+            try:
+                listed = search_stores(city, keyword) if keyword else []
+                known = {str(s["storeCode"]): s for s in listed}
+                picked = [known[c] for c in codes if c in known] or listed
+                if not picked:
+                    picked = [{"storeCode": c, "storeName": c} for c in codes]
+                result = compare_combo(code, picked)
+            except Exception as exc:  # noqa: BLE001
+                self._json({"error": f"{type(exc).__name__}: {str(exc)[:200]}"}, 500)
+                return
+            result["elapsed_ms"] = int((time.time() - t0) * 1000)
+            self._json({"ok": True, **result})
             return
 
         if route == "/api/stores":
@@ -165,14 +212,24 @@ class Handler(BaseHTTPRequestHandler):
         self._file(target)
 
 
-def serve(host: str = "127.0.0.1", port: int = 8765) -> None:
+def serve(host: str | None = None, port: int | None = None) -> None:
+    """本地跑：默认 127.0.0.1:8765；云端跑：读 $PORT 并绑 0.0.0.0。
+
+    两种场景共用同一个 Handler，所以线上演示看到的就是本地这版，不是另写一份。
+    """
+    load_local_secrets()
+    env_port = os.environ.get("PORT")
+    if port is None:
+        port = int(env_port or 8765)
+    if host is None:
+        host = os.environ.get("APP_HOST") or ("0.0.0.0" if env_port else "127.0.0.1")
+
     httpd = ThreadingHTTPServer((host, port), Handler)
-    url = f"http://{host}:{port}/"
-    print("套餐刺客 · 本地实时服务")
-    print(f"  打开 {url}")
-    print("  页面里会出现「实时抓取」按钮；Ctrl+C 停止")
+    shown = "127.0.0.1" if host in ("0.0.0.0", "::") else host
+    print("套餐刺客 · 服务已启动")
+    print(f"  {host}:{port}  →  http://{shown}:{port}/")
     if not os.environ.get("MCD_MCP_TOKEN"):
-        print("  ⚠️  没有设 MCD_MCP_TOKEN，只能看静态快照，实时抓取会失败")
+        print("  ⚠️  没有 MCD_MCP_TOKEN，实时抓取会失败（静态快照仍可看）")
     try:
         httpd.serve_forever()
     except KeyboardInterrupt:

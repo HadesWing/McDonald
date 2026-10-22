@@ -16,10 +16,37 @@ import os
 import time
 import urllib.error
 import urllib.request
+from pathlib import Path
 from typing import Any
 
 DEFAULT_ENDPOINT = "https://mcp.mcd.cn"
 PROTOCOL_VERSION = "2025-06-18"
+
+
+def load_local_secrets() -> None:
+    """环境变量里没有 token 时，从项目根的 `.env` / `server.env` 读进来。
+
+    这是给云端演示服务用的：部署沙箱只上传源码，没有在启动前注入环境变量的入口，
+    token 只能落在文件里。两个文件都在 .gitignore 里，不会进公开仓库。
+    本地开发照旧用环境变量，行为不变。
+    """
+    if os.environ.get("MCD_MCP_TOKEN"):
+        return
+    root = Path(__file__).resolve().parents[2]
+    for name in (".env", "server.env"):
+        path = root / name
+        if not path.is_file():
+            continue
+        for line in path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, val = line.partition("=")
+            key, val = key.strip(), val.strip().strip('"').strip("'")
+            if key and val and not os.environ.get(key):
+                os.environ[key] = val
+        if os.environ.get("MCD_MCP_TOKEN"):
+            return
 
 
 class MCPError(RuntimeError):
@@ -34,6 +61,9 @@ class MCDMCPClient:
         timeout: float = 30.0,
     ) -> None:
         token = token or os.environ.get("MCD_MCP_TOKEN", "")
+        if not token:
+            load_local_secrets()
+            token = os.environ.get("MCD_MCP_TOKEN", "")
         if not token:
             raise MCPError(
                 "缺少 MCP Token。请设置环境变量 MCD_MCP_TOKEN，"
