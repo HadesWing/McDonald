@@ -196,6 +196,105 @@ def audit_all(combos: Iterable[Combo], pool: Sequence[MenuItem]) -> list[ComboAu
     return out
 
 
+@dataclass
+class SlotStat:
+    """一个套餐的「配菜位」定价。
+
+    配菜位 = 套餐价 − 主食（第一个 round 的默认选项）单点价。
+    它把套餐拆成两段：主食你本来就买，配菜是套餐额外绑给你的。
+    如果配菜位等于配菜的单点合计，说明这个「套餐」只是打包，不是折扣。
+    """
+
+    name: str
+    combo_cents: int
+    main_name: str
+    main_cents: int
+    slot_cents: int
+    side_cents: int
+    side_desc: str
+
+    @property
+    def is_flat(self) -> bool:
+        """配菜位没有让价（分毫不差）。"""
+        return self.slot_cents == self.side_cents
+
+    @property
+    def give_cents(self) -> int:
+        """配菜位相对单点合计让了多少钱，正数才是真优惠。"""
+        return self.side_cents - self.slot_cents
+
+
+def slot_pricing(audits: Sequence[ComboAudit]) -> list[SlotStat]:
+    """把可比套餐换算成「主食 + 配菜位」两段定价，用于识别打包与折扣。"""
+    out: list[SlotStat] = []
+    for a in audits:
+        if not a.comparable or len(a.parts) < 2:
+            continue
+        main_name, main_cents = a.parts[0]
+        if main_cents is None:
+            continue
+        side = a.parts[1:]
+        if any(p is None for _, p in side):
+            continue
+        side_cents = sum(p for _, p in side if p is not None)
+        out.append(
+            SlotStat(
+                name=a.combo.name,
+                combo_cents=a.combo.price_cents,
+                main_name=main_name,
+                main_cents=main_cents,
+                slot_cents=a.combo.price_cents - main_cents,
+                side_cents=side_cents,
+                side_desc=" + ".join(f"{n} {yuan(p or 0)}" for n, p in side),
+            )
+        )
+    return out
+
+
+def explain_slots(stats: Sequence[SlotStat]) -> str:
+    """把配菜位定价的分布讲清楚：多数套餐的配菜位落在同一个价格锚点上。"""
+    if not stats:
+        return "没有可比的套餐。"
+
+    from collections import Counter
+
+    dist = Counter(s.slot_cents for s in stats)
+    anchor, hits = dist.most_common(1)[0]
+    flat = [s for s in stats if s.is_flat]
+    over = [s for s in stats if s.slot_cents > s.side_cents]
+    out = [
+        f"把 {len(stats)} 个可比套餐拆成「主食 + 配菜位」后：",
+        "",
+        f"· {hits} 个套餐的配菜位定价 = {yuan(anchor)} 元，占 {hits / len(stats) * 100:.0f}%",
+        f"· {len(flat)} 个套餐的配菜位与配菜单点合计完全相等（纯打包，零让价）",
+    ]
+    if over:
+        out.append(f"· {len(over)} 个套餐的配菜位甚至高于配菜单点合计")
+    best = max(stats, key=lambda s: s.give_cents)
+    if best.give_cents > 0:
+        out.append("")
+        out.append(
+            f"让价最多的「{best.name}」：配菜位 {yuan(best.slot_cents)} 元，"
+            f"配菜单点合计 {yuan(best.side_cents)} 元，让了 {yuan(best.give_cents)} 元"
+        )
+    return "\n".join(out)
+
+
+def render_slots(stats: Sequence[SlotStat]) -> str:
+    rows = sorted(stats, key=lambda s: s.slot_cents)
+    lines = [
+        f"{'套餐价':>8}  {'主食单价':>8}  {'配菜位':>7}  {'配菜单点':>8}  {'让价':>7}  套餐",
+        "-" * 76,
+    ]
+    for s in rows:
+        give = f"{s.give_cents / 100:+.2f}" if s.give_cents else "0.00"
+        lines.append(
+            f"{yuan(s.combo_cents):>8}  {yuan(s.main_cents):>8}  {yuan(s.slot_cents):>7}"
+            f"  {yuan(s.side_cents):>8}  {give:>7}  {s.name}"
+        )
+    return "\n".join(lines)
+
+
 def summarize(audits: Sequence[ComboAudit]) -> dict:
     comparable = [a for a in audits if a.comparable]
     zero = [a for a in comparable if a.verdict == "zero"]

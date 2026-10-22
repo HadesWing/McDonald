@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>麦当劳定价审计 · 套餐到底有没有折扣</title>
+<style>
+  :root {
+    --bg: #fbfaf7;
+    --card: #ffffff;
+    --ink: #1b1b19;
+    --muted: #6d6d64;
+    --line: rgba(0, 0, 0, .10);
+    --line-soft: rgba(0, 0, 0, .06);
+    --mcd: #da291c;
+    --mcd-deep: #a81c12;
+    --gray-bar: #b9b7ae;
+    --save: #1f7a4d;
+    --save-bg: rgba(31, 122, 77, .10);
+    --zero-bg: rgba(218, 41, 28, .08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #17171a;
+      --card: #1f1f23;
+      --ink: #f0efea;
+      --muted: #a3a29a;
+      --line: rgba(255, 255, 255, .14);
+      --line-soft: rgba(255, 255, 255, .08);
+      --mcd: #ff5a4d;
+      --mcd-deep: #ff8276;
+      --gray-bar: #5a5a55;
+      --save: #5ec98e;
+      --save-bg: rgba(94, 201, 142, .12);
+      --zero-bg: rgba(255, 90, 77, .12);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px 80px; }
+
+  header { padding: 56px 0 32px; border-bottom: 1px solid var(--line); }
+  .kicker {
+    font-size: 12px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--mcd); font-weight: 600; margin-bottom: 14px;
+  }
+  h1 { font-size: 38px; line-height: 1.22; margin: 0 0 16px; font-weight: 700; letter-spacing: -.02em; }
+  h1 em { font-style: normal; color: var(--mcd); }
+  .lede { font-size: 16px; color: var(--muted); margin: 0; max-width: 62ch; }
+  .lede b { color: var(--ink); font-weight: 600; }
+
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0 8px; }
+  .stat { background: var(--card); border: 1px solid var(--line-soft); border-radius: 12px; padding: 16px 18px; }
+  .stat .num { font-size: 30px; font-weight: 700; line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .stat .num small { font-size: 15px; font-weight: 500; color: var(--muted); margin-left: 2px; }
+  .stat .lab { font-size: 12.5px; color: var(--muted); margin-top: 6px; }
+  .stat.hot .num { color: var(--mcd); }
+  .stat.good .num { color: var(--save); }
+
+  .toolbar { display: flex; gap: 8px; flex-wrap: wrap; margin: 32px 0 14px; align-items: center; }
+  .toolbar .hint { font-size: 12.5px; color: var(--muted); margin-left: auto; }
+  button.f {
+    font: inherit; font-size: 13px; padding: 6px 14px; border-radius: 999px;
+    border: 1px solid var(--line); background: transparent; color: var(--muted);
+    cursor: pointer; transition: .15s;
+  }
+  button.f:hover { border-color: var(--mcd); color: var(--mcd); }
+  button.f[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+
+  .head, .row { display: grid; grid-template-columns: minmax(0, 1fr) 78px 78px 84px; gap: 10px; align-items: center; }
+  .head {
+    font-size: 11.5px; color: var(--muted); letter-spacing: .04em;
+    padding: 0 4px 8px; border-bottom: 1px solid var(--line);
+  }
+  .head span:not(:first-child) { text-align: right; }
+
+  .row {
+    padding: 13px 4px 11px; border-bottom: 1px solid var(--line-soft);
+    cursor: pointer; position: relative;
+  }
+  .row:hover { background: var(--card); }
+  .row .name { font-size: 14.5px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .row .name .tag {
+    display: inline-block; font-size: 11px; font-weight: 500; padding: 1px 7px;
+    border-radius: 4px; margin-left: 8px; vertical-align: 1px; white-space: nowrap;
+  }
+  .tag.zero { color: var(--mcd); background: var(--zero-bg); }
+  .tag.real { color: var(--save); background: var(--save-bg); }
+  .tag.reverse { color: #fff; background: var(--mcd); }
+  .row .v { font-size: 13.5px; text-align: right; font-variant-numeric: tabular-nums; color: var(--muted); }
+  .row .v.strong { color: var(--ink); font-weight: 600; }
+  .row .v.neg { color: var(--save); font-weight: 600; }
+  .row .v.pos { color: var(--mcd); font-weight: 600; }
+
+  .bars { grid-column: 1 / -1; margin-top: 9px; display: grid; gap: 3px; }
+  .bar-line { display: grid; grid-template-columns: 34px minmax(0, 1fr); align-items: center; gap: 8px; }
+  .bar-line .k { font-size: 10.5px; color: var(--muted); letter-spacing: .02em; }
+  .track { height: 9px; border-radius: 2px; background: var(--line-soft); overflow: hidden; }
+  .fill { height: 100%; border-radius: 2px; transition: width .35s cubic-bezier(.2,.8,.3,1); }
+  .fill.combo { background: var(--mcd); }
+  .fill.single { background: var(--gray-bar); }
+
+  .detail { grid-column: 1 / -1; font-size: 12.5px; color: var(--muted); padding-top: 8px; display: none; }
+  .row.open .detail { display: block; }
+  .detail code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--ink); }
+  .detail .miss { color: var(--mcd); }
+
+  .legend { display: flex; gap: 18px; flex-wrap: wrap; font-size: 12px; color: var(--muted); margin: 14px 0 0; }
+  .legend i { display: inline-block; width: 18px; height: 9px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
+
+  footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 13px; color: var(--muted); }
+  footer h2 { font-size: 15px; color: var(--ink); margin: 0 0 10px; font-weight: 600; }
+  footer ol { margin: 0 0 16px; padding-left: 20px; }
+  footer li { margin-bottom: 6px; }
+  footer code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12.5px; }
+  footer code { background: var(--card); border: 1px solid var(--line-soft); border-radius: 4px; padding: 1px 6px; color: var(--ink); }
+  .cta {
+    display: inline-flex; align-items: center; gap: 8px; margin-top: 8px;
+    background: var(--ink); color: var(--bg); text-decoration: none;
+    padding: 9px 18px; border-radius: 8px; font-size: 13.5px; font-weight: 500;
+  }
+  .cta:hover { background: var(--mcd); }
+
+  @media (max-width: 640px) {
+    header { padding: 36px 0 24px; }
+    h1 { font-size: 27px; }
+    .lede { font-size: 14.5px; }
+    .stats { grid-template-columns: 1fr; gap: 8px; }
+    .stat { display: flex; align-items: baseline; gap: 12px; padding: 12px 16px; }
+    .stat .num { font-size: 24px; }
+    .stat .lab { margin-top: 0; }
+    .head { display: none; }
+    .row { grid-template-columns: 1fr auto; row-gap: 6px; }
+    .row .name { grid-column: 1 / -1; white-space: normal; }
+    .row .v { text-align: left; }
+    .row .v::before { color: var(--muted); font-size: 11px; }
+    .row .v.c1::before { content: "套餐 "; }
+    .row .v.c2::before { content: "单点 "; }
+    .row .v.c3::before { content: "差 "; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">McDonald's pricing audit · 实测数据</div>
+  <h1>你以为套餐是折扣，<br><em id="h1-fig">其实六成套餐一分没省。</em></h1>
+  <p class="lede" id="lede"></p>
+</header>
+
+<section class="stats" id="stats"></section>
+
+<div class="toolbar">
+  <button class="f" data-filter="all" aria-pressed="true">全部</button>
+  <button class="f" data-filter="zero" aria-pressed="false">零折扣</button>
+  <button class="f" data-filter="real" aria-pressed="false">真有折扣</button>
+  <button class="f" data-filter="unknown" aria-pressed="false">不可比</button>
+  <span class="hint">点任意一行看它由哪几样单品拼成</span>
+</div>
+
+<div class="head">
+  <span>套餐</span><span>套餐价</span><span>单点合计</span><span>差价</span>
+</div>
+<div id="rows"></div>
+
+<div class="legend">
+  <span><i style="background:var(--mcd)"></i>套餐价</span>
+  <span><i style="background:var(--gray-bar)"></i>同样内容单独点</span>
+  <span>两根条一样长 = 套餐没有便宜</span>
+</div>
+
+<footer>
+  <h2>这个数字是怎么来的</h2>
+  <ol>
+    <li>通过麦当劳官方 MCP 拉取门店菜单、每个套餐的组成结构与可换选项。</li>
+    <li>用官方 <span class="mono">calculate-price</span> 分别对「套餐编码」和「套餐内各单品编码」询价，两边都是官方实付金额。</li>
+    <li>相减得到差价。<b>没有估算、没有按菜单标价推算。</b></li>
+    <li>套餐里有商品在该门店无法单点（很多套餐专属饮料就是这样），该套餐直接判为「不可比」并列出缺哪一项，不填估值凑数。</li>
+  </ol>
+  <p>你也可以自己复核：<code>python mcd.py audit --verify 5</code> 会重新调官方接口比对前 5 个结论。</p>
+  <a class="cta" href="https://github.com/HadesWing/McDonald">在 GitHub 上看源码与完整数据 →</a>
+</footer>
+
+</div>
+
+<script id="AUDIT" type="application/json">__AUDIT_DATA__</script>
+<script>
+(function () {
+  var D = JSON.parse(document.getElementById('AUDIT').textContent);
+  var S = D.stats;
+
+  function yuan(c) { return (c / 100).toFixed(2); }
+
+  document.getElementById('h1-fig').textContent =
+    '其实 ' + S.zero_ratio + '% 的套餐一分没省。';
+
+  document.getElementById('lede').innerHTML =
+    '我们拿官方计价接口，把 <b>' + (D.meta.store || '这家门店') + '</b> 的 <b>' + S.total +
+    ' 个套餐</b>逐个拆开，和「同样的东西单独点一遍」比价。' +
+    '其中 <b>' + S.comparable + ' 个</b>能逐项对上，结果是 <b>' + S.zero +
+    ' 个套餐的价格与单品原价合计完全相等</b> —— 一分钱都没便宜。' +
+    (S.reverse ? '还有 <b>' + S.reverse + ' 个套餐反而比单点更贵</b>。' : '') +
+    '真正便宜的只有 ' + S.real + ' 个。';
+
+  var cards = [
+    { num: S.zero + '/' + S.comparable, lab: '套餐价 = 单品原价相加（零折扣）', cls: 'hot' },
+    { num: S.zero_ratio + '<small>%</small>', lab: '可比套餐里的零折扣占比', cls: 'hot' },
+    { num: S.real, lab: '真打折的套餐，合计最多省 ' + yuan(S.savings) + ' 元', cls: 'good' }
+  ];
+  document.getElementById('stats').innerHTML = cards.map(function (c) {
+    return '<div class="stat ' + c.cls + '"><div class="num">' + c.num +
+      '</div><div class="lab">' + c.lab + '</div></div>';
+  }).join('');
+
+  var max = 0;
+  D.rows.forEach(function (r) {
+    max = Math.max(max, r.combo, r.single || 0);
+  });
+  max = max || 1;
+
+  var TAG = {
+    zero: ['zero', '零折扣'],
+    real: ['real', '真有折扣'],
+    reverse: ['reverse', '反向溢价'],
+    unknown: ['zero', '不可比']
+  };
+
+  function rowHtml(r, i) {
+    var t = TAG[r.verdict];
+    var single = r.single == null ? '—' : yuan(r.single);
+    var diff, diffCls;
+    if (r.diff == null) { diff = '—'; diffCls = ''; }
+    else if (r.diff === 0) { diff = '0.00'; diffCls = 'strong'; }
+    else if (r.diff < 0) { diff = '−' + yuan(-r.diff); diffCls = 'neg'; }
+    else { diff = '+' + yuan(r.diff); diffCls = 'pos'; }
+
+    var parts = r.parts.map(function (p) {
+      return p[1] == null
+        ? '<span class="miss">' + p[0] + '（门店不可单点）</span>'
+        : p[0] + ' ' + yuan(p[1]);
+    }).join(' + ');
+
+    var note = r.missing && r.missing.length
+      ? '<br><span class="miss">不可比原因：' + r.missing.join('；') + '</span>' : '';
+
+    return '<div class="row" data-v="' + r.verdict + '" data-i="' + i + '">' +
+      '<div class="name">' + r.name + '<span class="tag ' + t[0] + '">' + t[1] + '</span></div>' +
+      '<div class="v c1 strong">' + yuan(r.combo) + '</div>' +
+      '<div class="v c2">' + single + '</div>' +
+      '<div class="v c3 ' + diffCls + '">' + diff + '</div>' +
+      '<div class="bars">' +
+        '<div class="bar-line"><span class="k">套餐</span><div class="track"><div class="fill combo" style="width:' +
+          (r.combo / max * 100).toFixed(2) + '%"></div></div></div>' +
+        '<div class="bar-line"><span class="k">单点</span><div class="track"><div class="fill single" style="width:' +
+          ((r.single || 0) / max * 100).toFixed(2) + '%"></div></div></div>' +
+      '</div>' +
+      '<div class="detail"><code>' + parts + '</code>' + note + '</div>' +
+    '</div>';
+  }
+
+  var rowsEl = document.getElementById('rows');
+  rowsEl.innerHTML = D.rows.map(rowHtml).join('');
+
+  rowsEl.addEventListener('click', function (e) {
+    var row = e.target.closest('.row');
+    if (row) row.classList.toggle('open');
+  });
+
+  document.querySelectorAll('button.f').forEach(function (b) {
+    b.addEventListener('click', function () {
+      document.querySelectorAll('button.f').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+      b.setAttribute('aria-pressed', 'true');
+      var f = b.dataset.filter;
+      document.querySelectorAll('.row').forEach(function (r) {
+        r.style.display = (f === 'all' || r.dataset.v === f) ? '' : 'none';
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

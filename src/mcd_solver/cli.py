@@ -165,6 +165,26 @@ def _verify_online(snapshot: dict, audits: list, limit: int) -> None:
     print(f"  一致性：{ok}/{checked}")
 
 
+def cmd_slot(args: argparse.Namespace) -> int:
+    """把套餐拆成「主食 + 配菜位」，看配菜到底被定了多少钱。"""
+    from .audit import audit_all, explain_slots, render_slots, slot_pricing
+    from .decompiler import load_combos
+
+    snapshot = load_snapshot(args.data)
+    combos, _ = load_combos(snapshot)
+    stats = slot_pricing(audit_all(combos, snapshot["items"]))
+
+    meta = snapshot["meta"]
+    print("=" * 76)
+    print(f"门店：{meta.get('store', '')}")
+    print(explain_slots(stats))
+    print("=" * 76)
+    print(render_slots(stats))
+    print("=" * 76)
+    print("配菜位 = 套餐价 − 主食单点价；配菜单点 = 配菜各单品在门店单点合计。")
+    return 0
+
+
 def cmd_fetch(args: argparse.Namespace) -> int:
     """从麦当劳 MCP 拉取真实门店快照。"""
     from .fetch import fetch_snapshot, save_snapshot
@@ -205,6 +225,10 @@ def build_parser() -> argparse.ArgumentParser:
     a.add_argument("--all", action="store_true", help="连不可比的套餐一起列出")
     a.add_argument("--verify", type=int, default=0, metavar="N", help="用官方接口现场复核前 N 个结论")
     a.set_defaults(func=cmd_audit)
+
+    s = sub.add_parser("slot", help="拆解配菜位定价：套餐价 − 主食单价 = 配菜花了多少钱")
+    s.add_argument("--data", default=str(DEFAULT_STORE), help="门店快照 JSON 路径")
+    s.set_defaults(func=cmd_slot)
 
     f = sub.add_parser("fetch", help="从麦当劳 MCP 拉取真实门店快照")
     f.add_argument("--city", required=True)
