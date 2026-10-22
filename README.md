@@ -4,6 +4,8 @@
 
 **把套餐拆开算一遍，看它到底刺没刺你。**
 
+**[▶ 在线试玩](https://combo-assassin.app.workbuddy.host/?sharecode=S2XRGV6W7V)**｜不用装任何东西，打开就能点
+
 麦当劳的套餐不是折扣，是打包。
 
 我把「麦当劳杭州灵隐景区餐厅」的 36 个套餐逐个拆开，用官方计价接口分别给「套餐」和「同样的东西单点一遍」报价，然后相减。
@@ -21,7 +23,7 @@
 
 ![零折扣套餐：套餐价与单点合计条形完全等长](docs/preview-zero.png)
 
-*「零折扣」筛选视图。红色条 = 套餐价，灰色条 = 同样的东西单点一遍。两根条一样长，就是一分没省。**[在线体验 →](https://hadeswing.github.io/McDonald/)**（也可下载仓库后双击 `docs/index.html` 离线打开）*
+*「零折扣」筛选视图。红色条 = 套餐价，灰色条 = 同样的东西单点一遍。两根条一样长，就是一分没省。**[在线试玩 →](https://combo-assassin.app.workbuddy.host/?sharecode=S2XRGV6W7V)**（也可下载仓库后双击 `docs/index.html` 离线打开）*
 
 ---
 
