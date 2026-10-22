@@ -56,6 +56,8 @@
   h1 em { font-style: normal; color: var(--mcd); }
   .lede { font-size: 16px; color: var(--muted); margin: 0; max-width: 62ch; }
   .lede b { color: var(--ink); font-weight: 600; }
+  .snap { font-size: 12px; color: var(--muted); margin: 14px 0 0; }
+  .snap b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
 
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 28px 0 8px; }
   .stat { background: var(--card); border: 1px solid var(--line-soft); border-radius: 12px; padding: 16px 18px; }
@@ -155,6 +157,7 @@
   <div class="kicker">Combo Assassin · 套餐刺客</div>
   <h1><span id="h1-total">36</span> 个套餐，<br><em><span id="h1-zero">11</span> 个在刺你。</em></h1>
   <p class="lede" id="lede"></p>
+  <p class="snap" id="snap"></p>
 </header>
 
 <section class="stats" id="stats"></section>
@@ -210,6 +213,13 @@
     ' 个套餐的价格与单品原价合计完全相等</b> —— 一分钱都没便宜。' +
     (S.reverse ? '还有 <b>' + S.reverse + ' 个套餐反而比单点更贵</b>。' : '') +
     '真正便宜的只有 ' + S.real + ' 个。';
+
+  var at = (D.meta.fetched_at || '').replace('T', ' ').slice(0, 16);
+  document.getElementById('snap').innerHTML =
+    '数据快照：<b>' + (at || '未知时间') + '</b> 抓取，门店编码 <b>' +
+    (D.meta.store_code || '—') + '</b>，来源麦当劳官方 MCP。' +
+    '本页展示的就是这份快照，打开时不发起任何数据请求、也不实时刷新——' +
+    '要让数字变新，得重新抓一次再生成页面。';
 
   var cards = [
     { num: S.zero + '/' + S.comparable, lab: '套餐价 = 单品原价相加（零折扣）', cls: 'hot' },
