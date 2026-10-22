@@ -1,0 +1,64 @@
+{
+  "meta": {
+    "store": "示例门店（杭州）",
+    "store_code": "SAMPLE",
+    "fetched_at": "2026-10-22T11:05:00+08:00",
+    "source": "manual-sample",
+    "note": "无 Token 时可用的内置示例快照。真实菜单请用 mcd-solver fetch 从麦当劳 MCP 拉取后覆盖本文件。"
+  },
+  "delivery": {
+    "fee_cents": 900,
+    "free_threshold_cents": 3000
+  },
+  "coupons": [
+    {
+      "coupon_id": "S30-5",
+      "name": "满 30 减 5",
+      "threshold_cents": 3000,
+      "discount_cents": 500,
+      "scope": "all"
+    },
+    {
+      "coupon_id": "S40-10",
+      "name": "满 40 减 10",
+      "threshold_cents": 4000,
+      "discount_cents": 1000,
+      "scope": "all"
+    },
+    {
+      "coupon_id": "S60-18",
+      "name": "满 60 减 18",
+      "threshold_cents": 6000,
+      "discount_cents": 1800,
+      "scope": "all"
+    }
+  ],
+  "items": [
+    {"code": "1001", "name": "巨无霸", "price_cents": 2450, "category": "汉堡", "kcal": 550},
+    {"code": "1002", "name": "麦辣鸡腿汉堡", "price_cents": 2100, "category": "汉堡", "kcal": 560},
+    {"code": "1003", "name": "板烧鸡腿堡", "price_cents": 2200, "category": "汉堡", "kcal": 480},
+    {"code": "1004", "name": "吉士汉堡", "price_cents": 1250, "category": "汉堡", "kcal": 300},
+    {"code": "1005", "name": "双层吉士汉堡", "price_cents": 1850, "category": "汉堡", "kcal": 440},
+    {"code": "1006", "name": "麦香鸡", "price_cents": 1200, "category": "汉堡", "kcal": 380},
+    {"code": "1007", "name": "吉士蛋麦满分", "price_cents": 1100, "category": "汉堡", "kcal": 300},
+    {"code": "2001", "name": "小薯条", "price_cents": 1000, "category": "小食", "kcal": 230},
+    {"code": "2002", "name": "中薯条", "price_cents": 1250, "category": "小食", "kcal": 340},
+    {"code": "2003", "name": "大薯条", "price_cents": 1450, "category": "小食", "kcal": 480},
+    {"code": "2004", "name": "麦乐鸡 5 块", "price_cents": 1350, "category": "小食", "kcal": 240},
+    {"code": "2005", "name": "麦乐鸡 10 块", "price_cents": 2500, "category": "小食", "kcal": 480},
+    {"code": "2006", "name": "苹果派", "price_cents": 800, "category": "小食", "kcal": 250},
+    {"code": "2007", "name": "香芋派", "price_cents": 800, "category": "小食", "kcal": 230},
+    {"code": "2008", "name": "玉米杯", "price_cents": 900, "category": "小食", "kcal": 90},
+    {"code": "2009", "name": "麦辣鸡翅 2 块", "price_cents": 1200, "category": "小食", "kcal": 190},
+    {"code": "3001", "name": "可口可乐 小", "price_cents": 800, "category": "饮料", "kcal": 150},
+    {"code": "3002", "name": "可口可乐 中", "price_cents": 1000, "category": "饮料", "kcal": 210},
+    {"code": "3003", "name": "雪碧 中", "price_cents": 1000, "category": "饮料", "kcal": 200},
+    {"code": "3004", "name": "芬达 中", "price_cents": 1000, "category": "饮料", "kcal": 200},
+    {"code": "3005", "name": "鲜煮咖啡 小", "price_cents": 900, "category": "饮料", "kcal": 5},
+    {"code": "3006", "name": "拿铁 中", "price_cents": 1500, "category": "饮料", "kcal": 130},
+    {"code": "3007", "name": "橙汁", "price_cents": 1200, "category": "饮料", "kcal": 160},
+    {"code": "4001", "name": "原味圣代", "price_cents": 950, "category": "甜品", "kcal": 250},
+    {"code": "4002", "name": "奥利奥麦旋风", "price_cents": 1300, "category": "甜品", "kcal": 330},
+    {"code": "4003", "name": "甜筒", "price_cents": 400, "category": "甜品", "kcal": 160}
+  ]
+}
