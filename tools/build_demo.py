@@ -74,7 +74,7 @@ def build_payload(snapshot: dict) -> dict:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="编译离线审计页面")
     parser.add_argument("--data", default=str(ROOT / "data" / "store_hangzhou.json"))
-    parser.add_argument("--out", default=str(ROOT / "demo" / "index.html"))
+    parser.add_argument("--out", default=str(ROOT / "docs" / "index.html"))
     args = parser.parse_args(argv)
 
     snapshot = load_snapshot(args.data)

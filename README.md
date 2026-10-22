@@ -21,7 +21,7 @@
 
 ![零折扣套餐：套餐价与单点合计条形完全等长](docs/preview-zero.png)
 
-*「零折扣」筛选视图。红色条 = 套餐价，灰色条 = 同样的东西单点一遍。两根条一样长，就是一分没省。可离线打开 `demo/index.html` 交互查看。*
+*「零折扣」筛选视图。红色条 = 套餐价，灰色条 = 同样的东西单点一遍。两根条一样长，就是一分没省。**[在线体验 →](https://hadeswing.github.io/McDonald/)**（也可下载仓库后双击 `docs/index.html` 离线打开）*
 
 ---
 
@@ -130,7 +130,7 @@ src/mcd_solver/
   catalog.py models.py    数据模型与快照加载
 data/store_hangzhou.json  真实门店快照（89 SKU / 43 套餐 / 53 条营养），离线可跑
 tools/build_demo.py       把审计结果编译成单文件 HTML
-demo/index.html           离线可玩的审计页面，双击即开
+docs/index.html           在线体验页（GitHub Pages），也是离线双击即开的同一份文件
 tests/                    单元测试
 ```
 
