@@ -1,10 +1,32 @@
 # 套餐刺客 · Combo Assassin
 
+> 把套餐拆开算一遍，看它到底刺没刺你。
+> 用官方计价接口，分别给「套餐」和「同样的东西单点一遍」报价，然后相减。
+
+麦当劳程序员节创意开发大赛参赛作品 · 非麦当劳官方产品。
+
+[![在线试玩](https://img.shields.io/badge/%F0%9F%8E%AE%20%E5%9C%A8%E7%BA%BF%E8%AF%95%E7%8E%A9-%E6%89%93%E5%BC%80%E5%8D%B3%E7%8E%A9-success)](https://combo-assassin.app.workbuddy.host/?sharecode=S2XRGV6W7V)
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB) ![零依赖](https://img.shields.io/badge/dependencies-0-success) ![License](https://img.shields.io/badge/license-MIT-black)
 
-**把套餐拆开算一遍，看它到底刺没刺你。**
+---
 
-**[▶ 在线试玩](https://combo-assassin.app.workbuddy.host/?sharecode=S2XRGV6W7V)**｜不用装任何东西，打开就能点
+## 🎮 在线试玩
+
+**<https://combo-assassin.app.workbuddy.host/?sharecode=S2XRGV6W7V>**
+
+点开就能玩：不需要登录、不需要 Token、不需要装任何东西，手机也能用。
+
+- 点上方「零折扣」筛选 —— 红条（套餐价）和灰条（同样内容单点一遍）会**完全等长**，那就是一分没省；
+- 点任意一行 —— 展开看这个套餐由哪几样单品拼成、每样单点各多少钱。
+
+🖼️ 不想开网页：直接看 [`docs/preview-zero.png`](docs/preview-zero.png)
+💻 想完全离线：下载仓库后双击 [`docs/index.html`](docs/index.html)，同一份页面，数据全部内嵌
+
+![零折扣套餐：套餐价与单点合计条形完全等长](docs/preview-zero.png)
+
+---
+
+## 结论
 
 麦当劳的套餐不是折扣，是打包。
 
@@ -18,12 +40,6 @@
 > 也就是中薯条 14.50 + 可乐 11.00，分毫不差。
 
 也就是说：**套餐价 = 汉堡单点价 + 25.50。** 它没有让价，只是把两样东西按原价绑在了汉堡上。
-
----
-
-![零折扣套餐：套餐价与单点合计条形完全等长](docs/preview-zero.png)
-
-*「零折扣」筛选视图。红色条 = 套餐价，灰色条 = 同样的东西单点一遍。两根条一样长，就是一分没省。**[在线试玩 →](https://combo-assassin.app.workbuddy.host/?sharecode=S2XRGV6W7V)**（也可下载仓库后双击 `docs/index.html` 离线打开）*
 
 ---
 
@@ -47,6 +63,8 @@
 ---
 
 ## 三个可以自己跑出来的结论
+
+> 不想敲命令？[**在线试玩版**](https://combo-assassin.app.workbuddy.host/?sharecode=S2XRGV6W7V) 已经把这三条结论做成可点的条形图。
 
 ```bash
 git clone https://github.com/HadesWing/McDonald.git && cd McDonald
@@ -132,7 +150,8 @@ src/mcd_solver/
   catalog.py models.py    数据模型与快照加载
 data/store_hangzhou.json  真实门店快照（89 SKU / 43 套餐 / 53 条营养），离线可跑
 tools/build_demo.py       把审计结果编译成单文件 HTML
-docs/index.html           在线体验页（GitHub Pages），也是离线双击即开的同一份文件
+docs/index.html           在线试玩页（WorkBuddy Sites 托管），也是离线双击即开的同一份文件
+docs/preview-zero.png     README 首图：零折扣筛选视图截图
 tests/                    单元测试
 ```
 
@@ -154,5 +173,7 @@ tests/                    单元测试
 本项目参加**麦当劳程序员节创意开发大赛**，基于麦当劳官方 MCP Server 开发，非麦当劳官方产品。详细声明见 [CONTEST_DECLARATION.md](CONTEST_DECLARATION.md)，MCP 对接说明见 [docs/MCP_INTEGRATION.md](docs/MCP_INTEGRATION.md)。
 
 餐品信息、价格与供应状态以麦当劳官方渠道实时结果为准。
+
+🎮 试玩：<https://combo-assassin.app.workbuddy.host/?sharecode=S2XRGV6W7V>
 
 如果这个结论对你有用，star 一下，让更多人看一眼自己的账单。
