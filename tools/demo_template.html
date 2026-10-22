@@ -337,6 +337,8 @@
   var stores = D.stores || [];
   var CR = D.cross || { rows: [], stats: {} };
   var cur = 0, filter = 'all', crossOpen = false, LIVE = false;
+  /* 用户一旦自己动手（选店 / 搜店 / 定位），后台那个自动刷新就别再抢画面了。 */
+  var userActed = false;
 
   function yuan(c) { return (c / 100).toFixed(2); }
 
@@ -602,6 +604,7 @@
     var kw = (document.getElementById('kw').value || '').trim();
     Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) {
       b.addEventListener('click', function () {
+        userActed = true;
         var obj = (lastStores || []).filter(function (s) { return String(s.storeCode) === b.dataset.code; })[0];
         audit(b.dataset.code, city, kw, obj);
       });
@@ -737,6 +740,20 @@
       });
     }
 
+    /* 打开就换成本刻的价：上次来过的店带着关键词记忆，可以直接精确重抓——这条不用问用户。
+       第一次来没记忆就不猜门店了（猜错等于编数据），首屏继续显示构建时的快照，
+       等用户点商圈/定位再实时。 */
+    var autoLive = function () {
+      if (new URLSearchParams(location.search).get('auto')) return;
+      if (userActed) return;
+      var known = loadPlaces();
+      if (!known.length) return;
+      var p = known[0];
+      var c = (document.getElementById('city').value || '杭州').trim() || '杭州';
+      audit(p.storeCode, c, p.keyword || '', null, true);
+    };
+    setTimeout(autoLive, 300);
+
     /* ?auto=灵隐 —— 直接搜这个商圈并选第一家，方便分享与演示；
        ?auto=灵隐&cmp=1 —— 再自动对第一个套餐做附近比价。 */
     var autoKw = new URLSearchParams(location.search).get('auto');
@@ -747,6 +764,7 @@
   }
 
   function searchStores(city, kw, autoPick) {
+    if (!autoPick) userActed = true;
     var msg = document.getElementById('live-msg');
     var box = document.getElementById('cands');
     if (!kw) {
@@ -788,12 +806,25 @@
       });
   }
 
-  function audit(code, city, kw, obj) {
+  /* silent = true：打开页面时后台自己刷一次。不抢按钮、不滚屏、不动引导语，
+     只把顶部那行「这是几点抓的快照」换成「已换成现在这一刻」。 */
+  function audit(code, city, kw, obj, silent) {
     var msg = document.getElementById('live-msg');
+    var snapEl = document.getElementById('snap');
+    var snapPrev = snapEl ? snapEl.innerHTML : '';
     var t0 = Date.now();
-    Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) { b.disabled = true; });
-    msg.textContent = '正在抓这家的整份菜单，已用 0 秒…';
+    if (silent) {
+      if (snapEl) snapEl.innerHTML = '<b>正在取现在这一刻的价格…</b>（先显示的是构建时抓的快照）';
+    } else {
+      Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) { b.disabled = true; });
+      msg.textContent = '正在抓这家的整份菜单，已用 0 秒…';
+    }
     var timer = setInterval(function () {
+      if (silent) {
+        if (snapEl) snapEl.innerHTML = '<b>正在取现在这一刻的价格…</b>已用 ' +
+          Math.round((Date.now() - t0) / 1000) + ' 秒';
+        return;
+      }
       msg.textContent = '正在抓这家的整份菜单，已用 ' + Math.round((Date.now() - t0) / 1000) + ' 秒…';
     }, 1000);
 
@@ -806,15 +837,22 @@
         if (!res.ok || !res.j.store) throw new Error(res.j.error || '抓取失败');
         var s = res.j.store;
         s.live = true;
+        if (silent && userActed) {  // 用户已经在看别的店了，这份结果悄悄丢掉
+          if (snapEl) snapEl.innerHTML = snapPrev;
+          return;
+        }
         var at = stores.findIndex(function (x) { return x.meta.store_code === s.meta.store_code; });
         if (at >= 0) stores[at] = s; else stores.push(s);
         filter = 'all';
         render(stores.indexOf(s));
         document.getElementById('snap').innerHTML =
-          '<b>刚刚实时抓取</b>（' + new Date().toLocaleTimeString('zh-CN') + '），门店 <b>' +
+          '<b>' + (silent ? '已换成现在这一刻的价格' : '刚刚实时抓取') + '</b>（' +
+          new Date().toLocaleTimeString('zh-CN') + '），门店 <b>' +
           esc(s.meta.store) + '</b>（' + esc(s.meta.store_code) + '），来源麦当劳官方 MCP。';
-        msg.innerHTML = '已更新 <b>' + esc(s.label) + '</b> ｜ 套餐 ' + s.stats.total +
-          ' 个，可比 ' + s.stats.comparable + ' 个，零折扣 ' + s.stats.zero + ' 个';
+        if (!silent) {
+          msg.innerHTML = '已更新 <b>' + esc(s.label) + '</b> ｜ 套餐 ' + s.stats.total +
+            ' 个，可比 ' + s.stats.comparable + ' 个，零折扣 ' + s.stats.zero + ' 个';
+        }
         renderStoreCard(s, obj);
         rememberPlace({ storeCode: s.meta.store_code, label: s.label, keyword: kw || '', at: Date.now() });
         if (new URLSearchParams(location.search).get('cmp') === '1') {
@@ -828,10 +866,14 @@
           }, 250);
         }
         Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) { b.disabled = false; });
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (!silent) window.scrollTo({ top: 0, behavior: 'smooth' });
       })
       .catch(function (e) {
         clearInterval(timer);
+        if (silent) {  // 自动刷新失败就当没发生，别把首屏弄成报错页
+          if (snapEl) snapEl.innerHTML = snapPrev;
+          return;
+        }
         msg.textContent = '失败：' + e.message;
         Array.prototype.forEach.call(document.querySelectorAll('.cand'), function (b) { b.disabled = false; });
       });
@@ -892,6 +934,7 @@
   }
 
   function locateMe() {
+    userActed = true;
     var msg = document.getElementById('live-msg');
     var box = document.getElementById('cands');
     if (!navigator.geolocation) { msg.textContent = '这台浏览器不支持定位'; return; }
