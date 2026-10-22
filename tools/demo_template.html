@@ -285,6 +285,12 @@
       });
     });
   });
+
+  var want = new URLSearchParams(location.search).get('filter');
+  if (want) {
+    var btn = document.querySelector('button.f[data-filter="' + want + '"]');
+    if (btn) btn.click();
+  }
 })();
 </script>
 </body>
