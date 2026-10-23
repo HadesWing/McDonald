@@ -8,6 +8,8 @@
 [![在线试玩](https://img.shields.io/badge/%F0%9F%8E%AE%20%E5%9C%A8%E7%BA%BF%E8%AF%95%E7%8E%A9-%E6%89%93%E5%BC%80%E5%8D%B3%E7%8E%A9-success)](https://combo-assassin.app.workbuddy.host/?sharecode=S2XRGV6W7V)
 ![Python](https://img.shields.io/badge/python-3.10%2B-3776AB) ![零依赖](https://img.shields.io/badge/dependencies-0-success) ![License](https://img.shields.io/badge/license-MIT-black)
 
+⭐ 觉得这个审计有意思的话，右上角点个 **Star**——赛事按 Star 数排名，你的一个星就是我的排名。
+
 ---
 
 ## 🎮 在线试玩
